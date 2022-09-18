@@ -63,7 +63,6 @@ function HomeAnimeEvents() {
 function HomeFilmEvents() { }
 
 function DetailsAnimeEvents(paramURL, itemID) {
-    debugger
     window.addEventListener("load", async () => {
         switch (paramURL) {
             case "anime":
@@ -123,34 +122,45 @@ function SearchFieldEvents(pageType) {
         }
     })
 
-    objHeaderDom.iconSearchHeader.addEventListener("click", () => objHeaderDom.divSearchResults.classList.toggle("max"))
+    objHeaderDom.iconSearchHeader.addEventListener("click", () => objHeaderDom.divSearchBox.classList.toggle("max"))
 
     objHeaderDom.inputSearch.addEventListener("input", () => {
         objHeaderDom.inputSearch.value.length > 0
             ? objHeaderDom.divTimesWrapper.classList.add("visible")
             : objHeaderDom.divTimesWrapper.classList.remove("visible")
         
-        objHeaderDom.inputSearch.value.length < 0
+        objHeaderDom.inputSearch.value.length === 0
             ? objHeaderDom.divSearchResults.classList.remove("max")
             : ""
     })
 
     objHeaderDom.formSearch.addEventListener("submit", async e => {
-        pageType === "anime"
-            ? await oRequests.GetAnimeSearch(query)
-            : await oRequests.GetMangaSearch(query)
-
-        objHeaderDom.divSearchResults.classList.add("max")
         e.preventDefault()
-    })
+        
+        let query = objHeaderDom.inputSearch.value
 
-    objHeaderDom.iconSearch.addEventListener("click", async e => {
         pageType === "anime"
             ? await oRequests.GetAnimeSearch(query)
             : await oRequests.GetMangaSearch(query)
         
         objHeaderDom.divSearchResults.classList.add("max")
+    })
+
+    objHeaderDom.iconSearch.addEventListener("click", async e => {
         e.preventDefault()
+        
+        let query = objHeaderDom.inputSearch.value
+
+        pageType === "anime"
+            ? await oRequests.GetAnimeSearch(query)
+            : await oRequests.GetMangaSearch(query)
+        
+        objHeaderDom.divSearchResults.classList.add("max")
+    })
+
+    objHeaderDom.iconTimesSearch.addEventListener("click", () => {
+        objHeaderDom.divSearchResults.classList.toggle("max")
+        objHeaderDom.inputSearch.value = ""
     })
 }
 
