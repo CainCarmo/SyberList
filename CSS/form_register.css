@@ -1,0 +1,205 @@
+/* --- Fonte --- */
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300&family=Poppins:wght@100;200;300;400;500&family=Righteous&display=swap');
+
+/* --- Reset --- */
+
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    outline: none;
+    color: #FFF;
+}
+
+/* === Variables === */
+
+:root {
+    --title-font: Righteous;
+    --normal-font-1: Nunito;
+    --normal-font-2: Poppins;
+}
+
+/* === Components === */
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--title-font), sans-serif;
+}
+
+span, p, li, small {
+    font-family: var(--normal-font-1), sans-serif;
+}
+
+button {
+    font-family: var(--normal-font-2), sans-serif;
+    cursor: pointer;
+}
+
+i {
+    color: #000;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+/* === Scroll Bar === */
+
+::-webkit-scrollbar {
+    width: 10px;
+    height: 7px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #5C6664;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    background-color: #000;
+}
+
+/* --- Background --- */
+
+#register--background {
+    height: 100vh;
+    width: 100%;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    perspective: 1000px;
+    perspective-origin: 50% 50%;
+    background: url("https://images.unsplash.com/photo-1465146633011-14f8e0781093?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3450&q=80"), #101010;
+    animation: scroll 70s linear infinite;
+}
+
+/* --- Link to Home --- */
+
+#return {
+    position: absolute;
+    top: 40px;
+    left: 40px;
+    transition: .3s;
+    z-index: 999;
+}
+
+#return:hover {
+    padding: .5rem;
+    border-radius: 50%;
+    background-color: #808080;
+}
+
+/* --- Form --- */
+
+#register {
+    height: 80vh;
+    width: 75%;
+    position: relative;
+    display: flex;
+    overflow: hidden;
+    border-radius: 15px;
+    background-color: #EDEDED;
+}
+
+/* === Register Left === */
+
+#register__left {
+    height: 100%;
+    width: 45%;
+    overflow: hidden;
+}
+
+#register__left > video {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+/* === Register Curves === */
+
+#register__curves {
+    position: absolute;
+    left: -221px;
+    transform: rotate(-90deg);
+    z-index: 998;
+}
+
+/* === Register Right === */
+
+#register__right {
+    height: 100%;
+    width: 55%;
+    display: grid;
+    grid-template-rows: 1fr 2fr 1fr;
+    padding: 1.5rem;
+    overflow: hidden;
+    z-index: 999;
+}
+
+#register__header, #register__footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.form__logo {
+    height: 100px;
+}
+
+#register__fields {
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-areas: "NAME SURNAME" "NICKNAME NICKNAME" "EMAIL EMAIL " "PASSWORD PASSWORD " "DATE GENDER ";
+    gap: 15px;
+    padding: 1.5rem;
+}
+
+#form__photo--wrapper {
+    height: 100px;
+    width: 100px;
+    position: absolute;
+    top: 10px;
+    right: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #D3AD7F;
+    border-radius: 50%;
+    background-color: #5C6664;
+}
+
+#form__photo--wrapper > label { 
+    font-size: .8em; 
+    cursor: pointer;
+}
+
+/* --- Grid Areas --- */
+
+#field__username { grid-area: NAME; }
+#field__surname { grid-area: SURNAME; }
+#field__nickname { grid-area: NICKNAME; }
+#field__email { grid-area: EMAIL; }
+#field__password { grid-area: PASSWORD; }
+#field__birth { grid-area: DATE; }
+#field__gender { grid-area: GENDER; }
+
+/* --- Animation --- */
+
+@keyframes scroll {
+    100% {
+        background-position: 0px -3000px;
+    }
+}
+
+/* --- Icons --- */
+
+.fa-arrow-left {
+    font-size: 1.5em;
+    color: #EDEDED;
+    cursor: pointer;
+}

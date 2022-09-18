@@ -1,0 +1,31 @@
+/* --- Banner Genres --- */
+
+#banner__genres {
+    height: auto;
+    width: 100%;
+    display: flex;
+    padding: .5rem 0;
+    overflow-x: auto;
+}
+
+.banner__genre {
+    height: 36px;
+    width: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    transition: .3s;
+    padding: .5rem;
+    margin-right: 10px;
+    border: 1px solid #FFF;
+    border-radius: 15px;
+}
+
+.banner__genre:hover {
+    text-shadow: 0 0 15px #EDEDED;
+}
+
+.banner__genre > span {
+    letter-spacing: 1.5px;
+}

@@ -1,0 +1,111 @@
+/* --- Underline --- */
+
+.underline::before {
+    height: 2px;
+    width: 100%;
+    content: '';
+    position: absolute;
+    top: 35px;
+    left: 0;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, .7);
+}
+
+.underline::after {
+    height: 2px;
+    width: 100%;
+    content: '';
+    position: absolute;
+    top: 35px;
+    left: 0;
+    border-radius: 10px;
+    transform: scaleX(0);
+    background-color: #D3AD7F;
+}
+
+/* --- Form Fields --- */
+
+.form__field {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.form__icon--wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form__input--wrapper {
+    height: 100%;
+    width: 100%;
+    
+}
+
+.form__input {
+    height: 100%;
+    width: 100%;
+    font-size: 1em;
+    padding: 0.5rem;
+    background-color: transparent;
+    color: #000;
+}
+
+.form__input:focus ~ .underline::after {
+    transition: .5s;
+    transform: scaleX(1);
+}
+
+/* --- Password Field --- */
+
+#login__password, #register__password { width: 90%; }
+
+#password__icon--wrapper {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+
+#password__line {
+    height: 3px;
+    width: 30px;
+    position: absolute;
+    top: 8px;
+    left: -5px;
+    transition: .3s;
+    transform: rotate(-40deg) scaleX(1);
+    border-radius: 15px;
+    background-color: #000;
+}
+
+#password__line.visible { transform: rotate(-40deg) scaleX(0); }
+
+/* === Icon === */
+
+.fa-eye { 
+    position: relative;
+    font-size: 1.2em; 
+    cursor: pointer;
+    z-index: 999;
+}
+
+/* --- Button Field --- */
+
+.form__submit {
+    width: 90%;
+    font-size: 1.2em;
+    padding: .5rem;
+    transition: .3s ease-in-out;
+    border: 1px solid #000;
+    border-radius: 15px;
+    background-color: transparent;
+    color: #000;
+}
+
+.form__submit:hover {
+    letter-spacing: 1px;
+    background-color: #000;
+    color: #FFF;
+}

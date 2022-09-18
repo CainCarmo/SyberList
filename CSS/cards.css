@@ -1,0 +1,164 @@
+/* --- Ranking --- */
+
+.section__item {
+    display: grid;
+    grid-template-columns: 1fr 8fr 1fr;
+    gap: 2px;
+    transition: .5s;
+    transform: scale(.9);
+    overflow: hidden;
+    border-radius: 15px;
+    background-color: #101010;
+}
+
+.section__item:hover {
+    transition: .5s;
+    transform: scale(.95);
+}
+
+/* === Ranking Left === */
+
+.item__rank--wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #393E46;
+}
+
+.item__rank { font-size: 2.5em; }
+
+/* === Ranking Center === */
+
+.item__description {
+    display: flex;
+    padding: .5rem;
+    background-color: #808080;
+}
+
+.item__description > img {
+    height: 140px;
+    width: 110px;
+    margin: 0 2rem;
+    border-radius: 15px;
+}
+
+.item__information {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.item__title--wrapper { letter-spacing: 1px; }
+
+.item__title > a:hover { border-bottom: 2px solid #FFF; }
+
+.item__extra--wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+/* === Ranking Right === */
+
+.item__score {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    background-color: #393E46;
+}
+
+.item__avaliation {
+    font-size: 1.5em;
+    font-weight: 500;
+}
+
+/* --- Sliders --- */
+
+.section__slider {
+    min-height: 100%;
+    width: auto;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.section__card {
+    position: relative;
+    transform: scale(.9);
+    transition: .3s ease-in-out;
+    border-radius: 15px;
+    box-shadow: 10px 10px 10px #101010;
+}
+
+.section__card:hover {
+    transform: scale(.95);
+    box-shadow: 3px 3px 5px #808080;
+}
+
+.section__card > img {
+    height: 100%;
+    width: 100%;
+    border-radius: 15px;
+}
+
+.card__information {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+    padding: .5rem;
+    opacity: 0;
+    border-radius: 15px;
+}
+
+.section__card:hover > .card__information {
+    transition: .5s ease-in-out;
+    opacity: 1;
+    background-color: rgba(25, 25, 25, .7);
+}
+
+.card__button {
+    font-size: 1em;
+    padding: .5rem;
+    transition: .2s;
+    border: 1px solid #FFF;
+    border-radius: 15px;
+    background-color: rgba(0, 0, 0, .6);
+    color: #FFF;
+    cursor: pointer;
+}
+
+.card__button:hover { letter-spacing: 1px; }
+
+/* --- Grid List --- */
+
+
+
+/* --- Icons --- */
+
+.fa-circle-chevron-left, .fa-circle-chevron-right { cursor: pointer; }
+
+.fa-star {
+    font-size: 2em;
+    text-shadow: 0 0 2px #C40;
+    margin-bottom: 10px;
+    color: #FFEA00;
+}
+
+.fa-circle-chevron-left, .fa-circle-chevron-right {
+    font-size: 2em;
+    margin-left: 1rem;
+    transition: .5s;
+}
+
+.fa-circle-chevron-left:hover, .fa-circle-chevron-right:hover {
+    transform: translateY(-3px);
+    color: #808080
+}

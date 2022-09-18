@@ -1,0 +1,419 @@
+/* --- Fonte --- */
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300&family=Poppins:wght@100;200;300;400;500&family=Righteous&display=swap');
+
+/* --- Reset --- */
+
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    outline: none;
+    color: #FFF;
+}
+
+/* === Variables === */
+
+:root {
+    --title-font: Righteous;
+    --normal-font-1: Nunito;
+    --normal-font-2: Poppins;
+}
+
+/* === Components === */
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--title-font), sans-serif;
+}
+
+span, p, li, small {
+    font-family: var(--normal-font-1), sans-serif;
+}
+
+button {
+    font-family: var(--normal-font-2), sans-serif;
+    cursor: pointer;
+}
+
+i {
+    color: #000;
+}
+
+/* === Scroll Bar === */
+
+::-webkit-scrollbar {
+    width: 10px;
+    height: 7px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #5C6664;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    background-color: #000;
+}
+
+/* --- Header --- */
+
+#header__page {
+    height: 15vh;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+    align-items: center;
+    padding: 0 100px;
+    transition: .3s;
+    background-color: rgba(0, 0, 0, .7);
+}
+
+#header__left, #header__right {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+/* === Header Left === */
+
+#header__left { justify-content: flex-start; }
+
+.logo__image {
+    height: 100px;
+}
+
+/* === Header Links === */
+
+#header__links {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+}
+
+.header__link {
+    position: relative;
+    margin: 0 2rem;
+    letter-spacing: 1px;
+}
+
+.header__link::before {
+    height: 3px;
+    width: 0;
+    position: absolute;
+    content: '';
+    left: 0;
+    bottom: -1px;
+    border-radius: 10px;
+    transition: .5s ease;
+    background-color: #D3AD7F;
+}
+
+.header__link:hover::before {
+    width: 100%;
+}
+
+.header__link a:hover {
+    transition: .5s ease;
+    color: #D3AD7F;
+}
+
+/* === Header Right === */
+
+#header__right { justify-content: flex-end; }
+
+#header__button {
+    width: 45%;
+    padding: .5rem;
+    font-size: 1em;
+    font-weight: 600;
+    transition: .5s;
+    border: 1px solid #000;
+    border-radius: 15px;
+    background-color: transparent;
+    color: #000;
+}
+
+#header__button:hover {
+    letter-spacing: 1px;
+    transform: translateY(-5px);
+    background-color: #000;
+    color: #FFF;
+}
+
+/* Area de Usuario - (Faltando) */
+
+/* --- Search Section --- */
+
+#search {
+    height: 0;
+    width: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transition: .3s ease;
+    background-color: rgba(0, 0, 0, .7);
+}
+
+#search__form {
+    width: 45rem;
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 5fr 1fr;
+    border-radius: 15px;
+}
+
+/* === Search Box Left === */
+
+#search__select {
+    font-size: 1em;
+    padding: .5rem;
+    border-radius: 15px 0 0 15px;
+    background-color: #393E46;
+    cursor: pointer;
+}
+
+/* === Search Box Center === */
+
+#search__input {
+    font-size: 1.2em;
+    padding: .4rem;
+    background-color: #FFF;
+    color: #101010;
+}
+
+/* === Search Box Right === */
+
+#search__controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border-radius: 0 15px 15px 0;
+    background-color: #e7e3e3;
+}
+
+#search__clear--hidden {
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+#search__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+}
+
+/* === Search Results === */
+
+#search__results {
+    max-height: 0;
+    width: 45rem;
+    position: absolute;
+    top: 55px;
+    transition: .4s;
+    overflow-y: auto;
+    border-radius: 15px;
+    background-color: rgba(0, 0, 0, .7);
+    z-index: 999;
+}
+
+.search__item {
+    margin: 0.5rem;
+    overflow: hidden;
+    border-radius: 15px;
+    background-color: transparent;
+}
+
+/* --- Banner Section --- */
+
+#banner {
+    height: 85vh;
+    width: 100%;
+    padding: 50px 100px;
+    overflow: hidden;
+    transition: .3s;
+    background-color: rgba(0, 0, 0, .7);
+    z-index: 3;
+}
+
+/* === Banner Video === */
+
+#banner > video {
+    height: 100vh;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+    z-index: -1;
+}
+
+/* === Banner Info === */
+
+#banner__info--wrapper { display: flex; }
+
+#banner__info {
+    height: 100%;
+    width: 70%;
+}
+
+#banner__title {
+    font-size: 2em;
+    letter-spacing: 1px;
+    margin-bottom: 30px;
+}
+
+#banner__description {
+    max-height: 245px;
+    height: auto;
+    margin-bottom: 30px;
+    overflow-y: auto;
+}
+
+#banner__button {
+    font-size: 1.1em;
+    font-weight: 600;
+    padding: .5rem 1rem;
+    border-radius: 10px;
+    transition: .5s ease;
+    background-color: #00ADB5;
+}
+
+#banner__button:hover { letter-spacing: 1px; }
+
+/* === Banner Card === */
+
+#banner__card { margin-left: 125px; }
+
+#banner__card img {
+    max-height: 300px;
+    min-height: 300px;
+    max-width: 225px;
+    min-width: 225px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+}
+
+/* --- Main --- */
+
+#container {
+    padding: 50px 100px;
+    background-color: #222831;
+}
+
+/* === Section Header === */
+
+.section__header {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    letter-spacing: 1px;
+    padding: .5rem;
+    margin: 2rem .5rem;
+    border-bottom: 2px solid #101010;
+}
+
+.section__title { font-weight: 500; }
+
+.section__button {
+    letter-spacing: 1px;
+    padding: .5rem;
+    transition: .5s;
+    border-radius: 5px;
+    background-color: #1A53FF;
+}
+
+.section__button:hover {
+    transform: translateY(-5px);
+    background-color: #0830a8;
+    box-shadow: inset 0 0 10px #FFF, 0 0 10px #FFF;
+}
+
+.section__arrow { background-color: transparent; }
+
+/* --- Footer --- */
+
+#footer__page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    padding: 2rem;
+    background-color: #222831;
+    box-shadow: 0 -16px 20px rgba(0, 0, 0, .2);
+}
+
+#footer__logo {
+    height: 100px;
+}
+
+#footer__line {
+    height: 6px;
+    width: 5%;
+    margin-bottom: 2rem;
+    border-radius: 10px;
+    background-color: #5C6664;
+}
+
+/* --- Icons --- */
+
+#header__right > .fa-search {
+    position: absolute;
+    right: 290px;
+    font-size: 1.2em;
+    color: #FFF;
+    cursor: pointer;
+}
+
+.fa-arrow-trend-up { color: #FFF; }
+
+.fa-times {
+    color: #C40;
+    cursor: pointer;
+}
+
+#search__button > .fa-search {
+    font-size: 1.3em;
+    margin: 0 .5rem;
+}
+
+/* --- Animation --- */
+
+@keyframes form-down {
+    0% {
+        transform: translateY(-600px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+/* --- JS Events --- */
+
+#search.max {
+    height: 10vh;
+    overflow: visible;
+}
+
+#search.max ~ #banner { height: 75vh; }
+
+#search__results.max { max-height: 335px; }
+
+#login--hidden.visible { display: flex; }
+
+#login.down { animation: form-down 1s; }
+
+#search__clear--hidden.visible { display: flex; }
+
+/* --- Glider JS --- */
+
+.glider-dot { background-color: #EEEEEE }
+
+.glider-dot.active { background-color: #00ADB5; }

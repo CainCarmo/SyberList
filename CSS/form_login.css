@@ -1,0 +1,107 @@
+/* --- Background --- */
+
+.form--hidden {
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, .8);
+    z-index: 999;
+}
+
+/* --- Form --- */
+
+#login {
+    height: 80vh;
+    width: 30%;
+    position: relative;
+    display: grid;
+    grid-template-rows: 1fr 2fr 1fr;
+    padding: 1.5rem;
+    overflow: hidden;
+    border-radius: 15px;
+    background-color: #FFF;
+}
+
+/* === Form Header === */
+
+#login__header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#login__header > img {
+    height: 100px;
+    position: relative;
+}
+
+#login__error { position: absolute; }
+
+/* === Form Main === */
+
+#login__fields {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 0 20px;
+}
+
+/* === Form Footer === */
+
+#login__footer {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+#login__alt {
+    letter-spacing: 1px;
+    font-size: .7em;
+    color: rgba(0, 0, 0, .9);
+}
+
+#login__footer > span > a {
+    position: relative;
+    font-size: .9em;
+    color: rgba(0, 0, 0, .9);
+    transition: .5s;
+}
+
+
+#login__footer > span > a:hover {
+    transition: .3s ease;
+    color: #D3AD7F;
+}
+
+#login__footer > span > a::before {
+    height: 3px;
+    width: 0;
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    content: '';
+    transition: .3s ease;
+    border-radius: 8px;
+    background-color: #D3AD7F;
+}
+
+#login__footer > span > a:hover::before { width: 100%; }
+
+/* --- Icons --- */
+
+.form__times {
+    position: absolute;
+    top: 20px;
+    right: 10px;
+    font-size: 1.3em;
+    margin-right: 20px;
+}

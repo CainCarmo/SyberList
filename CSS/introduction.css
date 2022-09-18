@@ -1,0 +1,105 @@
+/* --- Box --- */
+
+#box {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+
+    background-color: #000;
+    z-index: -1;
+}
+
+/* === Box Sides === */
+
+#box__left, #box__right {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: .4s all;
+    overflow: hidden;
+    opacity: .3;
+}
+
+/* === Box Videos === */
+
+#box__left > video, #box__right > video {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    z-index: 0;
+}
+
+/* === Box Inforamtion === */
+
+.box__information {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    z-index: 1;
+}
+
+.box__information > h1 {
+    letter-spacing: 2px;
+    font-size: 2.5em;
+    font-weight: 400;
+    color: #FFF;
+}
+
+/* === Box Buttons === */
+
+.box__button {
+    height: 3rem;
+    width: 15rem;
+    letter-spacing: 1px;
+    font-size: 1em;
+    text-transform: uppercase;
+    transition: .4s all;
+    padding: .5rem;
+    border: 2px solid #FFF;
+    border-radius: 15px;
+    background-color: rgba(0, 0, 0, .5);
+}
+
+.box__button:hover {
+    transform: scale(1.1);
+    box-shadow: inset 0 0 2em #FFF, 1px 1px 3.5em #FFF;
+}
+
+.box__button > a {
+    height: 100%;
+    width: 100%;
+    color: #FFF;
+}
+
+/* --- JS Events --- */
+
+#box__left.hover, #box__right.hover {
+    opacity: 1;
+    box-shadow: inset 0 0 2em #FFF, 1px 1px 3.5em #FFF;
+}
+
+/* === Expand Left Section === */
+
+#box__left.hover {
+    width: 110%;
+}
+
+#box__left.hover + #box__right {
+    width: 90%;
+}
+
+/* === Expand Right Section === */
+
+#box__right.hover {
+    width: 120%;
+}
+
+#box__right.hover + #box__left  {
+    width: 80%;
+}
