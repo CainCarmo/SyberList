@@ -1,3 +1,49 @@
+<?php
+
+use App\Model\Entity\User;
+use App\Model\Enums\EnumsUser;
+use App\Control\Errors\Login_Errors;
+use App\Control\Session\Login;
+
+$oUserLogged = Login::GetUserLogged();
+
+$hiddenBtn = $oUserLogged ? "class='hidden'" : "";
+$visibleIcon = $oUserLogged ? "class='visible'" : "";
+$errorLogin = "";
+
+if (isset($_POST["enviar"])) {
+    $oUser = User::GetUserByEmail($_POST["login__email"]);
+    
+    is_object($oUser)
+        ? $passwordField = $oUser->UserPass
+        : $passwordField = "";
+
+    $passwordField === ""
+        ? $passwordDB = ""
+        : $passwordDB = $oUser->USER_PASS;
+
+    $oVerifyLogin = Login_Errors::VerifyLogin(oUser: $oUser, credentials: [$passwordField, $passwordDB]);
+
+    if ($oVerifyLogin[0]) {
+
+        $oUser->Username   = $oUser->USERNAME;
+        $oUser->Surname    = $oUser->SURNAME;
+        $oUser->Nickname   = $oUser->NICKNAME;
+        $oUser->UserEmail  = $oUser->USER_EMAIL;
+        $oUser->UserGender = EnumsUser::ToggleGender("GET", $oUser->FK_GENDER_ID);
+        $oUser->UserRole   = EnumsUser::ToggleRole($oUser->FK_ROLE_ID);
+        $oUser->UserStatus = EnumsUser::ToggleStatus($oUser->FK_STATUS_ID);
+        $oUser->BirthDate  = $oUser->BIRTH_DATE;
+        $oUser->RegisDate  = $oUser->REGISTER_DATE;
+
+        Login::Login($oUser);
+    }
+    else
+        $errorLogin = $oVerifyLogin[1];
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
@@ -44,7 +90,7 @@
             </nav>
             <div id="header__right">
                 <i class="fas fa-search"></i>
-                <button type="button" id="header__button">Login</button>
+                <button type="button" id="header__button" <?=$hiddenBtn?>>Login</button>
             </div>
         </header>
         

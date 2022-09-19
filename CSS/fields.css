@@ -3,7 +3,7 @@
 .underline::before {
     height: 2px;
     width: 100%;
-    content: '';
+    content: "";
     position: absolute;
     top: 35px;
     left: 0;
@@ -14,7 +14,7 @@
 .underline::after {
     height: 2px;
     width: 100%;
-    content: '';
+    content: "";
     position: absolute;
     top: 35px;
     left: 0;

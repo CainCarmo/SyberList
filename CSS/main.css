@@ -1,6 +1,6 @@
 /* --- Fonte --- */
 
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300&family=Poppins:wght@100;200;300;400;500&family=Righteous&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@200;300&family=Poppins:wght@100;200;300;400;500&family=Righteous&display=swap");
 
 /* --- Reset --- */
 
@@ -103,7 +103,7 @@ i {
     height: 3px;
     width: 0;
     position: absolute;
-    content: '';
+    content: "";
     left: 0;
     bottom: -1px;
     border-radius: 10px;

@@ -16,5 +16,5 @@ export const objHeaderDom = {
     // -> Icon
     iconSearchHeader: document.querySelectorAll(".fa-search")[0],
     iconSearch: document.querySelectorAll(".fa-search")[1],
-    iconTimesSearch: document.querySelectorAll(".fa-times")[0],
+    iconTimesSearch: document.querySelectorAll(".fa-times")[0]
 }

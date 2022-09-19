@@ -3,8 +3,6 @@ import { RequestsJikan }  from "./JikanAPI/requests.js"
 import { FactoryDom }     from "./DOM/factoryDom.js"
 import { objIntroDom }    from "./Collections/introCollection.js"
 import { objHeaderDom }   from "./Collections/headerCollection.js"
-import { objHomeDom }     from "./Collections/homeCollection.js"
-import { objDetailsDom }  from "./Collections/detailsCollection.js"
 import { objLoginDom }    from "./Collections/loginCollection.js"
 import { objRegisterDom } from "./Collections/registerCollection.js"
 import { objURL }         from "./Collections/urlCollection.js"
@@ -92,15 +90,19 @@ function RegisterEvents() {
  */
 
 function LoginFormEvents() {
-    objHeaderDom.buttonLogin.addEventListener("click", () => {
-        objLoginDom.backgroundFormLogin.classList.add("visible")
-        objLoginDom.formLogin.classList.add("down")
-    })
-    
-    objHeaderDom.iconTimesSearch.addEventListener("click", () => {
-        objLoginDom.backgroundFormLogin.classList.remove("visible")
-        objLoginDom.formLogin.classList.remove("down")
-    })
+    if (objLoginDom.formLogin != null) {
+
+        objHeaderDom.buttonLogin.addEventListener("click", () => {
+            objLoginDom.backgroundFormLogin.classList.add("visible")
+            objLoginDom.formLogin.classList.add("down")
+        })
+        
+        objLoginDom.iconTimesLogin.addEventListener("click", () => {
+            objLoginDom.backgroundFormLogin.classList.remove("visible")
+            objLoginDom.formLogin.classList.remove("down")
+        })
+
+    }
 }
 
 /**
@@ -169,18 +171,22 @@ function PasswordFieldEvents(atualPage) {
         case objURL.homePage:
         case objURL.detailsPage:
             
-            objLoginDom.iconEyeLogin.addEventListener("click", () => {
-                objLoginDom.divLineEyeLogin.classList.toggle("visible")
+            if (objLoginDom.iconTimesLogin != null) {
 
-                objLoginDom.divLineEyeLogin.classList[0]
-                    ? objLoginDom.inputPasswordLogin.type = "text"
-                    : objLoginDom.inputPasswordLogin.type = "password"
-            })
+                objLoginDom.iconEyeLogin.addEventListener("click", () => {
+                    objLoginDom.divLineEyeLogin.classList.toggle("visible")
+    
+                    objLoginDom.divLineEyeLogin.classList[0]
+                        ? objLoginDom.inputPasswordLogin.type = "text"
+                        : objLoginDom.inputPasswordLogin.type = "password"
+                })
+
+            }
 
             break
     
         case objURL.registerPage:
-
+            
             objRegisterDom.iconEyeLogin.addEventListener("click", () => {
                 objRegisterDom.divLineEyeLogin.classList.toggle("visible")
 
@@ -239,6 +245,7 @@ function VerifyPage() {
 
         case objURL.registerPage:
             RegisterEvents()
+            PasswordFieldEvents(objURL.atualPage)
             break
     }
 }

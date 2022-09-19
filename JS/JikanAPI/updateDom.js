@@ -175,11 +175,11 @@ export class updateDomJikan {
         new Glider(sectionSlider, {
             slidesToShow: 5,
             slidesToScroll: 5,
-            dots: '#slider__seasonRRA--dots',
+            dots: "#slider__seasonRRA--dots",
             draggable: true,
             arrows: {
-                prev: '#arrow__backRRA',
-                next: '#arrow__nextRRA'
+                prev: "#arrow__backRRA",
+                next: "#arrow__nextRRA"
             }
         })
     }
@@ -231,11 +231,11 @@ export class updateDomJikan {
         new Glider(sectionSlider, {
             slidesToShow: 5,
             slidesToScroll: 5,
-            dots: '#slider__seasonRRM--dots',
+            dots: "#slider__seasonRRM--dots",
             draggable: true,
             arrows: {
-                prev: '#arrow__backRRM',
-                next: '#arrow__nextRRM'
+                prev: "#arrow__backRRM",
+                next: "#arrow__nextRRM"
             }
         })
     }
@@ -318,11 +318,11 @@ export class updateDomJikan {
         new Glider(sectionSlider, {
             slidesToShow: 5,
             slidesToScroll: 5,
-            dots: '#slider__seasonCH--dots',
+            dots: "#slider__seasonCH--dots",
             draggable: true,
             arrows: {
-                prev: '#arrow__backCH',
-                next: '#arrow__nextCH'
+                prev: "#arrow__backCH",
+                next: "#arrow__nextCH"
             }
         })
     }
@@ -378,11 +378,11 @@ export class updateDomJikan {
         new Glider(sectionSlider, {
             slidesToShow: 5,
             slidesToScroll: 5,
-            dots: '#slider__seasonRE--dots',
+            dots: "#slider__seasonRE--dots",
             draggable: true,
             arrows: {
-                prev: '#arrow__backRE',
-                next: '#arrow__nextRE'
+                prev: "#arrow__backRE",
+                next: "#arrow__nextRE"
             }
         })
     }
@@ -569,11 +569,11 @@ export class updateDomJikan {
         new Glider(sectionSlider, {
             slidesToShow: 5,
             slidesToScroll: 5,
-            dots: '#slider__seasonSN--dots',
+            dots: "#slider__seasonSN--dots",
             draggable: true,
             arrows: {
-                prev: '#arrow__backSN',
-                next: '#arrow__nextSN'
+                prev: "#arrow__backSN",
+                next: "#arrow__nextSN"
             }
         })
     }
@@ -634,11 +634,11 @@ export class updateDomJikan {
         new Glider(sectionSlider, {
             slidesToShow: 5,
             slidesToScroll: 5,
-            dots: '#slider__seasonSU--dots',
+            dots: "#slider__seasonSU--dots",
             draggable: true,
             arrows: {
-                prev: '#arrow__backSU',
-                next: '#arrow__nextSU'
+                prev: "#arrow__backSU",
+                next: "#arrow__nextSU"
             }
         })
     }
