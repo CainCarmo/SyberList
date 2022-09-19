@@ -10,6 +10,9 @@
         <link rel="stylesheet" href="./CSS/form_register.css">
         <link rel="stylesheet" href="./CSS/fields.css">
 
+        <!-- Script -->
+        <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+
         <!-- Icons -->
         <script src="https://kit.fontawesome.com/a39dd60c9e.js" crossorigin="anonymous"></script>
 
