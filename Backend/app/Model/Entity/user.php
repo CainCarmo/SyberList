@@ -5,6 +5,7 @@ namespace App\Model\Entity {
     use \App\Model\Data\QueryBuilder;
 
     class User {
+        
         public int    $ID;
         public string $Username;
         public string $Surname;
@@ -43,7 +44,7 @@ namespace App\Model\Entity {
         }
 
         public static function GetUserByEmail(string $email) {
-            return (new QueryBuilder(table: "USER"))->Select("USER_EMAIL = '". $email ."'")->fetchObject(self::class);
+            return (new QueryBuilder(table: "USER"))->Select(where: "USER_EMAIL = '". $email ."'")->fetchObject(self::class);
         }
     }
 }

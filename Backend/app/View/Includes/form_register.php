@@ -123,7 +123,7 @@
                                 <select id="register__gender" name="register__gender" class="form__input">
                                     <option value="" selected disabled>Escolha o gênero:</option>
                                     <option value="M">Masculino</option>
-                                    <option value="F">Femino</option>
+                                    <option value="F">Feminino</option>
                                 </select>
                                 <div class="underline"></div>
                             </div>

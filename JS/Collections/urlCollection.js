@@ -3,5 +3,6 @@ export const objURL = {
     indexPage: "index.php",
     homePage: "home.php",
     detailsPage: "details.php",
-    registerPage: "register.php"
+    registerPage: "register.php",
+    listsPage: "lists.php"
 }

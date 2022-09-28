@@ -1,6 +1,6 @@
         <!-- Rodapé da Página -->
         <footer id="footer__page">
-            <img id="footer__logo" src="https://cdn.discordapp.com/attachments/1000527265303642194/1006613565182054470/Logo-image.png" alt="Imagem da Logo">
+            <img id="footer__logo" src="https://cdn.discordapp.com/attachments/1000527265303642194/1022134680864182325/image-removebg-preview.png" alt="Imagem da Logo">
             <div id="footer__line"></div>
             <span>SyberList&copy; 2022 - All Rights Reserved - <cite>by SyberGroup&trade;</cite></span>
         </footer>

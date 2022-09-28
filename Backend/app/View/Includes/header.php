@@ -1,46 +1,54 @@
 <?php
 
-use App\Model\Entity\User;
-use App\Model\Enums\EnumsUser;
-use App\Control\Errors\Login_Errors;
-use App\Control\Session\Login;
+    use App\Model\Entity\User;
+    use App\Model\Enums\EnumsUser;
+    use App\Control\Session\Login;
+    use App\Control\Errors\Login_Errors;
 
-$oUserLogged = Login::GetUserLogged();
+    $oUserLogged = Login::GetUserLogged();
+    $pageType    = explode("=", $_SERVER["QUERY_STRING"])[1];
 
-$hiddenBtn = $oUserLogged ? "class='hidden'" : "";
-$visibleIcon = $oUserLogged ? "class='visible'" : "";
-$errorLogin = "";
+    $hiddenBtn   = $oUserLogged ? "class='hidden'" : "";
+    $visibleIcon = $oUserLogged ? "class='visible'" : "";
 
-if (isset($_POST["enviar"])) {
-    $oUser = User::GetUserByEmail($_POST["login__email"]);
-    
-    is_object($oUser)
-        ? $passwordField = $oUser->UserPass
-        : $passwordField = "";
+    $errorLogin   = "";
+    $userListsCSS = "";
 
-    $passwordField === ""
-        ? $passwordDB = ""
-        : $passwordDB = $oUser->USER_PASS;
+    $_SERVER["PHP_SELF"] === "/lists.php"
+        ? $userListsCSS = '<link rel="stylesheet" href="./CSS/user_lists.css">'
+        : $userListsCSS = null;
 
-    $oVerifyLogin = Login_Errors::VerifyLogin(oUser: $oUser, credentials: [$passwordField, $passwordDB]);
+    if (isset($_POST["enviar"])) {
+        $oUser = User::GetUserByEmail(email: $_POST["login__email"]);
 
-    if ($oVerifyLogin[0]) {
+        $passwordField = $_POST["login__password"];
 
-        $oUser->Username   = $oUser->USERNAME;
-        $oUser->Surname    = $oUser->SURNAME;
-        $oUser->Nickname   = $oUser->NICKNAME;
-        $oUser->UserEmail  = $oUser->USER_EMAIL;
-        $oUser->UserGender = EnumsUser::ToggleGender("GET", $oUser->FK_GENDER_ID);
-        $oUser->UserRole   = EnumsUser::ToggleRole($oUser->FK_ROLE_ID);
-        $oUser->UserStatus = EnumsUser::ToggleStatus($oUser->FK_STATUS_ID);
-        $oUser->BirthDate  = $oUser->BIRTH_DATE;
-        $oUser->RegisDate  = $oUser->REGISTER_DATE;
+        is_object($oUser)
+            ? $passwordDB = $oUser->USER_PASS
+            : $passwordDB = "";
 
-        Login::Login($oUser);
+        $oVerifyLogin = Login_Errors::VerifyLogin(oUser: $oUser, credentials: [$passwordField, $passwordDB]);
+
+        if ($oVerifyLogin[0]) {
+
+            $oUser->Username   = $oUser->USERNAME;
+            $oUser->Surname    = $oUser->SURNAME;
+            $oUser->Nickname   = $oUser->NICKNAME;
+            $oUser->UserEmail  = $oUser->USER_EMAIL;
+            $oUser->UserGender = EnumsUser::ToggleGender("GET", $oUser->FK_GENDER_ID);
+            $oUser->UserRole   = EnumsUser::ToggleRole($oUser->FK_ROLE_ID);
+            $oUser->UserStatus = EnumsUser::ToggleStatus($oUser->FK_STATUS_ID);
+            $oUser->BirthDate  = $oUser->BIRTH_DATE;
+            $oUser->RegisDate  = $oUser->REGISTER_DATE;
+
+            Login::Login(oUser: $oUser, pageType: $pageType);
+        }
+        else {
+            $errorLogin = $oVerifyLogin[1];
+            header("location: home.php?type=anime");
+            exit;
+        }
     }
-    else
-        $errorLogin = $oVerifyLogin[1];
-}
 
 ?>
 
@@ -55,6 +63,7 @@ if (isset($_POST["enviar"])) {
         <!-- CSS -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glider-js@1/glider.min.css">
         <link rel="stylesheet" href="./CSS/main.css">
+        <?=$userListsCSS?>
         <link rel="stylesheet" href="./CSS/cards.css">
         <link rel="stylesheet" href="./CSS/details.css">
         <link rel="stylesheet" href="./CSS/form_login.css">
@@ -72,7 +81,7 @@ if (isset($_POST["enviar"])) {
         <!-- Topo da Página -->
         <header id="header__page">
             <div id="header__left">
-                <img class="logo__image" src="https://cdn.discordapp.com/attachments/1000527265303642194/1006613565182054470/Logo-image.png" alt="Logo do Site">
+                <img class="logo__image" src="https://cdn.discordapp.com/attachments/1000527265303642194/1022134680864182325/image-removebg-preview.png" alt="Logo do Site">
             </div>
             <nav id="header__links">
                 <li class="header__link">
@@ -85,15 +94,17 @@ if (isset($_POST["enviar"])) {
                     <a href="./build.php">Filmes</a>
                 </li>
                 <li class="header__link">
-                    <a href="./build.php">Contato</a>
-                </li>
-                <li class="header__link">
                     <a href="./build.php">Nosso Blog</a>
                 </li>
             </nav>
             <div id="header__right">
                 <i class="fas fa-search"></i>
                 <button type="button" id="header__button" <?=$hiddenBtn?>>Login</button>
+                <div id="header__user--hidden" <?=$visibleIcon?>>
+                    <a href="./lists.php">
+                        <img id="header__icon" src="./Resources/Image/perfil.jpg" alt="Ícone do Usuário">
+                    </a>
+                </div>
             </div>
         </header>
         

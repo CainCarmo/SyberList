@@ -5,6 +5,7 @@ namespace App\Control\Errors {
     use App\Model\Entity\User;
 
     class Login_Errors {
+        
         public static function VerifyLogin(mixed $oUser, array $credentials) {
 
             if (!$oUser)

@@ -1,10 +1,10 @@
 export class FactoryDom {
 
     constructor() {
-        this.defaultClass = []
-        this.defaultID = []
-        this.defaultRole = []
-        this.defaultValue = ""
+        this.defaultID        = []
+        this.defaultRole      = []
+        this.defaultClass     = []
+        this.defaultValue     = ""
         this.defaultInnerHTML = ""
     }
 

@@ -22,6 +22,7 @@ namespace App\Model\Enums {
     class EnumsUser {
         
         public static function ToggleGender(string $method, mixed $gender) {
+            
             if ($method === "GET") {
                 switch ($gender) {
                     case 1:
@@ -46,6 +47,7 @@ namespace App\Model\Enums {
         }
 
         public static function ToggleRole(mixed $role) {
+            
             switch ($role) {
                 case 1:
                     return Role::from(1)->name;
@@ -57,6 +59,7 @@ namespace App\Model\Enums {
         }
 
         public static function ToggleStatus(mixed $status) {
+            
             switch ($status) {
                 case 1:
                     return Status::from(1)->name;

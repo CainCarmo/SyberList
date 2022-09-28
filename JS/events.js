@@ -5,6 +5,7 @@ import { objIntroDom }    from "./Collections/introCollection.js"
 import { objHeaderDom }   from "./Collections/headerCollection.js"
 import { objLoginDom }    from "./Collections/loginCollection.js"
 import { objRegisterDom } from "./Collections/registerCollection.js"
+import { objListsDom }    from "./Collections/listsCollection.js"
 import { objURL }         from "./Collections/urlCollection.js"
 
 /**
@@ -68,21 +69,74 @@ function DetailsAnimeEvents(paramURL, itemID) {
                 await oRequests.GetAnimeFullByID(itemID)
                 await oRequests.GetAnimeCharacters(itemID)
                 await oRequests.GetAnimeRecommendations(itemID)
-
+                
                 break
             
             case "manga":
 
+                await oRequests.GetMangaFullByID(itemID)
+                await oRequests.GetMangaCharacters(itemID)
+                await oRequests.GetMangaPictures(itemID)
+
+                setTimeout(async () => {
+                    await oRequests.GetMangaRecommendations(itemID)
+                }, 3100)
+
                 break
 
         }
+        
+        ButtonFavorite()
     })
 }
 
 function DetailsFilmEvents() {  }
 
-function RegisterEvents() { 
-    objRegisterDom.iconArrowReturn.addEventListener("click", () => history.back())
+function RegisterEvents() { objRegisterDom.iconArrowReturn.addEventListener("click", () => history.back()) }
+
+function ListsEvents() {
+    function ChangeState() {
+        objListsDom.buttonsAnime.forEach(e => {
+            e.classList.remove("selected")
+        })
+
+        objListsDom.divListsAnime.forEach((e, i) => {
+            e.classList.remove("expand")
+        })
+    }
+
+    window.addEventListener("load", () => {
+        objListsDom.buttonWatch.classList.add("selected")
+        objListsDom.divListAnimeWatch.classList.add("expand")
+    })
+
+    objListsDom.buttonWatch.addEventListener("click", () => {
+        ChangeState()
+
+        objListsDom.buttonWatch.classList.add("selected")
+        objListsDom.divListAnimeWatch.classList.add("expand")
+    })
+
+    objListsDom.buttonWatching.addEventListener("click", () => {
+        ChangeState()
+
+        objListsDom.buttonWatching.classList.add("selected")
+        objListsDom.divListAnimeWatching.classList.add("expand")
+    })
+
+    objListsDom.buttonWatched.addEventListener("click", () => {
+        ChangeState()
+
+        objListsDom.buttonWatched.classList.add("selected")
+        objListsDom.divListAnimeWatched.classList.add("expand")
+    })
+
+    objListsDom.buttonDrop.addEventListener("click", () => {
+        ChangeState()
+
+        objListsDom.buttonDrop.classList.add("selected")
+        objListsDom.divListAnimeWatchDrop.classList.add("expand")
+    })
 }
 
 /**
@@ -101,7 +155,6 @@ function LoginFormEvents() {
             objLoginDom.backgroundFormLogin.classList.remove("visible")
             objLoginDom.formLogin.classList.remove("down")
         })
-
     }
 }
 
@@ -113,6 +166,7 @@ function SearchFieldEvents(pageType) {
     window.addEventListener("load", () => {
         switch(pageType) {
             case "anime":
+            case "manga":
                 objHeaderDom.selectSearch.appendChild(oFactoryDom.CreateSelectOption("anime", "Anime"))
                 objHeaderDom.selectSearch.appendChild(oFactoryDom.CreateSelectOption("manga", "Mangá"))
                 break
@@ -138,10 +192,12 @@ function SearchFieldEvents(pageType) {
 
     objHeaderDom.formSearch.addEventListener("submit", async e => {
         e.preventDefault()
+
+        objHeaderDom.divSearchResults.innerHTML = null
         
         let query = objHeaderDom.inputSearch.value
 
-        pageType === "anime"
+        objHeaderDom.selectSearch.value === "anime"
             ? await oRequests.GetAnimeSearch(query)
             : await oRequests.GetMangaSearch(query)
         
@@ -151,6 +207,8 @@ function SearchFieldEvents(pageType) {
     objHeaderDom.iconSearch.addEventListener("click", async e => {
         e.preventDefault()
         
+        objHeaderDom.divSearchResults.innerHTML = null
+
         let query = objHeaderDom.inputSearch.value
 
         pageType === "anime"
@@ -199,6 +257,31 @@ function PasswordFieldEvents(atualPage) {
     }
 }
 
+function ButtonFavorite() {
+    const button = document.querySelector("#form__submit")
+    const star   = document.querySelector("#star-details")
+
+    button.addEventListener("click", () => {
+        star.classList.remove("fa-regular")
+        star.classList.add("fa-solid")
+        star.classList.add("fa-checked")
+    })
+
+    star.addEventListener("mouseenter", () => {
+        if (star.classList.contains("fa-regular")) {
+            star.classList.remove("fa-regular")
+            star.classList.add("fa-solid")
+        }
+    })
+
+    star.addEventListener("mouseleave", () => {
+        if (star.classList.contains("fa-solid") && !star.classList.contains("fa-checked")) {
+            star.classList.remove("fa-solid")
+            star.classList.add("fa-regular")
+        }
+    })
+}
+
 /*
  *  -> Verify page URL and Add Events
  */
@@ -211,7 +294,8 @@ function VerifyPage() {
         paramURL = document.location.href.split("/")[3].split("=")[1].split("&")[0]
         itemID   = document.location.href.split("/")[3].split("=")[2]
 
-        objHeaderDom.linkHome.href = "home.php?q=" + paramURL
+        objHeaderDom.linkHome.href = `${objURL.homePage}?type=${paramURL}`
+        objHeaderDom.linkList.href = `${objURL.listsPage}?type=${paramURL}`
     }
 
     switch (objURL.atualPage) {
@@ -220,7 +304,7 @@ function VerifyPage() {
             break
 
         case objURL.homePage:
-            if (paramURL === "anime")
+            if (paramURL === "anime" || paramURL === "manga")
                 HomeAnimeEvents()
             else
                 HomeFilmEvents()
@@ -246,6 +330,15 @@ function VerifyPage() {
         case objURL.registerPage:
             RegisterEvents()
             PasswordFieldEvents(objURL.atualPage)
+            break
+
+        case objURL.listsPage:
+
+            ListsEvents()
+            LoginFormEvents()
+            SearchFieldEvents(paramURL)
+            PasswordFieldEvents(objURL.atualPage)
+
             break
     }
 }

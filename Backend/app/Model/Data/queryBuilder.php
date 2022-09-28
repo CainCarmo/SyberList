@@ -5,6 +5,7 @@ namespace App\Model\Data {
     use PDOException;
 
     class QueryBuilder extends ConfigDB {
+        
         private string $_table;
 
         public function __construct(string $table) {

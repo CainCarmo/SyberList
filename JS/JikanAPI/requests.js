@@ -115,7 +115,7 @@ export class RequestsJikan {
     async GetMangaCharacters(ID) {
         await fetch(`${this.BaseURL}/manga/${ID}/characters`)
                 .then(res => res.json())
-                .then(data => SetMangaCharacters(data))
+                .then(data => this.oUpdateDomJikan.SetMangaCharacters(data))
                 .catch(err => console.warn(err.message))
     }
 

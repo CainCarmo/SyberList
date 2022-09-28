@@ -2,5 +2,5 @@ export const objHomeDom = {
     // -> Section
     sectionBanner: document.querySelector("#banner"),
     // -> Main
-    mainPage: document.querySelector("#container")
+    mainPage: document.querySelector("#container__home")
 }

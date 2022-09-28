@@ -4,4 +4,4 @@
         </section>
 
         <!-- Corpo da Página -->
-        <main id="container"></main>
+        <main class="container" id="container__home"></main>

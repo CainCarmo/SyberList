@@ -6,6 +6,7 @@ namespace App\Model\Data {
     use PDOException;
 
     class ConfigDB {
+        
         const Host     = "localhost";
         const Name     = "SyberList";
         const DataUser = "root";

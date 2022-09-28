@@ -37,7 +37,7 @@
                     <button type="submit" name="enviar" value="login" class="form__submit">Enviar</button>
                     <small id="login__alt">Ou crie sua conta</small>
                     <span>
-                        <a href="register.php">Registre-se aqui</a>
+                        <a href="register.php?type=<?=$pageType?>">Registre-se aqui</a>
                     </span>
                 </footer>
             </form>
