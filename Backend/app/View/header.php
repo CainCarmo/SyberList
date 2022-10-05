@@ -1,11 +1,10 @@
 <?php
 
     use App\Model\Entity\User;
-    use App\Model\Entity\Jikan;
     use App\Model\Enums\EnumsUser;
     use App\Control\Session\Login;
     use App\Control\Errors\LoginErrors;
-    
+
     $oUserLogged = Login::GetUserLogged();
 
     $pageType    = explode("=", $_SERVER["QUERY_STRING"])[1];

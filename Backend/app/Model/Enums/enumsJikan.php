@@ -46,25 +46,25 @@ namespace App\Model\Enums {
             if ($method === "POST") {
                 
                 switch($type) {
-                    case 1:
+                    case "TV":
                         return JikanType::from(1)->value;
                         break;
-                    case 2:
+                    case "OVA":
                         return JikanType::from(2)->value;
                         break;
-                    case 3:
+                    case "Movie":
                         return JikanType::from(3)->value;
                         break;
-                    case 4:
+                    case "Manga":
                         return JikanType::from(4)->value;
                         break;
-                    case 5:
+                    case "Manhwa":
                         return JikanType::from(5)->value;
                         break;
-                    case 6:
+                    case "Manhua":
                         return JikanType::from(6)->value;
                         break;
-                    case 7:
+                    case "Webtoons":
                         return JikanType::from(7)->value;
                         break;
                 }

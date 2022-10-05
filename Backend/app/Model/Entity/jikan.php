@@ -34,7 +34,7 @@ namespace App\Model\Entity {
             ]);
         }
 
-        public function GetAnimeByID(string $type, int $ID): mixed {
+        public function SearchAnimeByID(string $type, int $ID): mixed {
 
             $baseURL = "https://api.jikan.moe/v4/";
 

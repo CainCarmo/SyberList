@@ -5,8 +5,7 @@ export class FavoriteEvents {
         const button = document.querySelector("#form__submit")
         const star   = document.querySelector("#star-details")
 
-        button.addEventListener("click", e => {
-            e.preventDefault()
+        button.addEventListener("click", () => {
 
             star.classList.remove("fa-regular")
             star.classList.add("fa-solid")

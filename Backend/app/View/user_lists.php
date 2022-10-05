@@ -1,27 +1,6 @@
 <?php
 
-    // use App\Model\Entity\Tmdb;
-    // use App\Model\Entity\Jikan;
-    // use App\Control\Session\Login;
-
-    // Login::RequireLogin($pageType);
-
-    // $cards = Jikan::GetAllAnimes($_SESSION["User"]["ID"]);
-    // $response  = ""; 
-
-    // foreach ($cards as $card) {
-        
-    //     $response .=    '<div class="section__card">
-    //                         <img src="'.$cards->COVER.'" alt="Card Image">
-    //                         <div class="card__information">
-    //                             <h3 class="card__title">'.$cards->TITLE.'</h3>
-    //                             <button type="button" class="card__button">
-    //                                 <a href="./details.php?type=anime&id='.$cards->ID_JIKAN.'">Saiba Mais</a>
-    //                             </button>
-    //                             <span class="card__extra"></span>
-    //                         </div>
-    //                     </div>';
-    // }
+    
 
 ?>
         
