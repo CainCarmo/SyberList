@@ -1,5 +1,6 @@
 export const  objListsDom = {
     // -> Button
+    buttonsArrowsAnime: document.querySelectorAll(".section__arrowLA"),
     buttonsAnime: document.querySelectorAll(".lists__tab"),
     buttonWatch: document.querySelector("#button__watch"),
     buttonWatching: document.querySelector("#button__watching"),

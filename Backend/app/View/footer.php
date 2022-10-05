@@ -7,6 +7,6 @@
 
         <!-- Scripts -->
         <script src="https://cdn.jsdelivr.net/npm/glider-js@1/glider.min.js"></script>
-        <script type="module" src="./JS/events.js"></script>
+        <script type="module" src="./JS/scripts.js"></script>
     </body>
 </html>

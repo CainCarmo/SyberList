@@ -7,10 +7,10 @@ namespace App\Model\Data {
 
     class ConfigDB {
         
-        const Host     = "localhost";
-        const Name     = "SyberList";
-        const DataUser = "root";
-        const DataPass = "77000520Ccos+";
+        private const Host     = "localhost";
+        private const Name     = "SyberList";
+        private const DataUser = "root";
+        private const DataPass = "77000520Ccos+";
 
         protected PDO $_connection;
 

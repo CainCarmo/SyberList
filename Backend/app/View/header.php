@@ -1,11 +1,13 @@
 <?php
 
     use App\Model\Entity\User;
+    use App\Model\Entity\Jikan;
     use App\Model\Enums\EnumsUser;
     use App\Control\Session\Login;
-    use App\Control\Errors\Login_Errors;
-
+    use App\Control\Errors\LoginErrors;
+    
     $oUserLogged = Login::GetUserLogged();
+
     $pageType    = explode("=", $_SERVER["QUERY_STRING"])[1];
 
     $hiddenBtn   = $oUserLogged ? "class='hidden'" : "";
@@ -27,7 +29,7 @@
             ? $passwordDB = $oUser->USER_PASS
             : $passwordDB = "";
 
-        $oVerifyLogin = Login_Errors::VerifyLogin(oUser: $oUser, credentials: [$passwordField, $passwordDB]);
+        $oVerifyLogin = LoginErrors::VerifyLogin(oUser: $oUser, credentials: [$passwordField, $passwordDB]);
 
         if ($oVerifyLogin[0]) {
 
@@ -44,6 +46,7 @@
             Login::Login(oUser: $oUser, pageType: $pageType);
         }
         else {
+            
             $errorLogin = $oVerifyLogin[1];
             header("location: home.php?type=anime");
             exit;

@@ -3,17 +3,18 @@
 namespace App\Model\Data {
 
     use PDOException;
+    use PDOStatement;
 
     class QueryBuilder extends ConfigDB {
         
         private string $_table;
 
         public function __construct(string $table) {
-            $this->_table = $table;
             $this->SetConnection();
+            $this->_table = $table;
         }
 
-        public function Execute(string $query, array $params = []) {
+        public function Execute(string $query, array $params = []): PDOStatement|bool {
             try {
                 $statement = $this->_connection->prepare($query);
                 $statement->execute($params);
@@ -25,7 +26,7 @@ namespace App\Model\Data {
             }
         }
 
-        public function Insert(array $values) {
+        public function Insert(array $values): string|bool {
             $fields = array_keys($values);
             $binds  = array_pad([], count($fields), "?");
 
@@ -36,7 +37,7 @@ namespace App\Model\Data {
             return $this->_connection->lastInsertId();
         }
 
-        public function Select(string $where = "", string $order = "", string $limit = "", string  $fields = "*") {
+        public function Select(string $where = "", string $order = "", string $limit = "", string  $fields = "*"): PDOStatement|bool {
             $where = strlen($where) ? "WHERE " .$where : "";
             $order = strlen($order) ? "ORDER BY " .$order : "";
             $limit = strlen($limit) ? "LIMIT  " .$limit : "";
@@ -46,7 +47,7 @@ namespace App\Model\Data {
             return $this->Execute($query);
         }
 
-        public function Update(string $where, array $values) {
+        public function Update(string $where, array $values): bool {
             $fields = array_keys($values);
 
             $query = "UPDATE ". $this->_table ." SET ". implode("=?,", $fields) ."=? WHERE ". $where;
@@ -56,7 +57,7 @@ namespace App\Model\Data {
             return true;
         }
 
-        public function Delete(string $where) {
+        public function Delete(string $where): bool {
             $query = "DELETE FROM ".$this->_table." WHERE ".$where;
         
             $this->Execute($query);

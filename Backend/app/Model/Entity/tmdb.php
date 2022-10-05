@@ -4,10 +4,10 @@ namespace App\Model\Entity {
 
     use App\Model\Data\QueryBuilder;
 
-    class Jikan {
+    class Tmdb {
 
         public int    $ID;
-        public string $ID_Jikan;
+        public string $ID_Tmdb;
         public int    $FK_USER_ID;
         public string $Title;
         public string $Description;
@@ -32,17 +32,6 @@ namespace App\Model\Entity {
                 "FK_SITUATION_ID" => $this->FK_SITUATION_ID,
                 "ADD_DATE"        => $this->Add_Time
             ]);
-        }
-
-        public function GetAnimeByID(string $type, int $ID): mixed {
-
-            $baseURL = "https://api.jikan.moe/v4/";
-
-            $response = file_get_contents($baseURL . $type . "/" . $ID);
-
-            $teste = json_decode($response)->data;
-
-            return $teste;
         }
     }
 }

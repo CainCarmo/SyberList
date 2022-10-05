@@ -1,8 +1,8 @@
 <?php
 
 namespace App\Model\Enums {
-    
-    enum Type :int {
+
+    enum JikanType :int {
         case TV       = 1;
         case OVA      = 2;
         case Movie    = 3;
@@ -14,30 +14,31 @@ namespace App\Model\Enums {
 
     class EnumsJikan {
 
-        public static function ToggleType(string $method, mixed $type) {
+        public static function ToggleType(string $method, mixed $type): string|int {
+            
             if ($method === "GET") {
                 
                 switch($type) {
                     case 1:
-                        return Type::from(1)->name;
+                        return JikanType::from(1)->name;
                         break;
                     case 2:
-                        return Type::from(2)->name;
+                        return JikanType::from(2)->name;
                         break;
                     case 3:
-                        return Type::from(3)->name;
+                        return JikanType::from(3)->name;
                         break;
                     case 4:
-                        return Type::from(4)->name;
+                        return JikanType::from(4)->name;
                         break;
                     case 5:
-                        return Type::from(5)->name;
+                        return JikanType::from(5)->name;
                         break;
                     case 6:
-                        return Type::from(6)->name;
+                        return JikanType::from(6)->name;
                         break;
                     case 7:
-                        return Type::from(7)->name;
+                        return JikanType::from(7)->name;
                         break;
                 }
             }
@@ -46,25 +47,25 @@ namespace App\Model\Enums {
                 
                 switch($type) {
                     case 1:
-                        return Type::from(1)->value;
+                        return JikanType::from(1)->value;
                         break;
                     case 2:
-                        return Type::from(2)->value;
+                        return JikanType::from(2)->value;
                         break;
                     case 3:
-                        return Type::from(3)->value;
+                        return JikanType::from(3)->value;
                         break;
                     case 4:
-                        return Type::from(4)->value;
+                        return JikanType::from(4)->value;
                         break;
                     case 5:
-                        return Type::from(5)->value;
+                        return JikanType::from(5)->value;
                         break;
                     case 6:
-                        return Type::from(6)->value;
+                        return JikanType::from(6)->value;
                         break;
                     case 7:
-                        return Type::from(7)->value;
+                        return JikanType::from(7)->value;
                         break;
                 }
             }

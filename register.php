@@ -1,11 +1,11 @@
 <?php
-
+    
     require __DIR__."/Backend/vendor/autoload.php";
 
     use App\Model\Entity\User;
     use App\Control\Session\Login;
     use App\Model\Enums\EnumsUser;
-    use App\Control\Errors\Register_Errors;
+    use App\Control\Errors\RegisterErrors;
 
     $pageType      = explode("=", $_SERVER["QUERY_STRING"])[1];
     $errorRegister = "";
@@ -14,7 +14,7 @@
 
     if (isset($_POST["enviar"])) {
         $oUser            = new User();
-        $oVerifyReigister = Register_Errors::VerifyRegister($_POST["register__email"]);
+        $oVerifyReigister = RegisterErrors::VerifyRegister($_POST["register__email"]);
 
         if ($oVerifyReigister[0]) {
 
@@ -34,4 +34,4 @@
             $errorRegister = $oVerifyReigister[1];
     }
 
-    include __DIR__."/Backend/app/View/Includes/form_register.php";
+    include __DIR__."/Backend/app/View/form_register.php";

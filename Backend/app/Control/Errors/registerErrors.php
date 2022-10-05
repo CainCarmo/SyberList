@@ -4,9 +4,10 @@ namespace App\Control\Errors {
 
     use App\Model\Entity\User;
 
-    class Register_Errors {
+    class RegisterErrors {
 
-        public static function VerifyRegister(string $email) {
+        public static function VerifyRegister(string $email): array {
+            
             $isUser = User::GetUserByEmail($email);
 
             if ($isUser)

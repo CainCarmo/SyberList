@@ -9,6 +9,7 @@ export class FactoryDom {
     }
 
     CreateBlockElement(Element, Class = this.defaultClass, ID = this.defaultID, Role = this.defaultRole) {
+        
         const element = document.createElement(Element)
 
         if (Class !== this.defaultClass)
@@ -23,6 +24,7 @@ export class FactoryDom {
     
 
     CreateSelectOption(Value = this.defaultValue, InnerHTML = this.defaultInnerHTML) {
+        
         const option = document.createElement("option")
 
         if (Value !== this.defaultValue)

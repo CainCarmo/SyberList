@@ -40,13 +40,13 @@
                     <h1>Seção Filmes/Séries</h1>
                     <!-- Botão de Escolha -->
                     <button class="box__button">
-                        <a href="./home.php?type=film">Selecionar</a>
+                        <a href="./home.php?type=movie">Selecionar</a>
                     </button>
                     <!--  -->
                     <p></p>
                 </div>
             </section>
         </div>
-        <script type="module" src="./JS/events.js"></script>
+        <script type="module" src="./JS/scripts.js"></script>
     </body>
 </html>

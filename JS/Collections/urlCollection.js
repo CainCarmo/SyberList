@@ -4,5 +4,5 @@ export const objURL = {
     homePage: "home.php",
     detailsPage: "details.php",
     registerPage: "register.php",
-    listsPage: "lists.php"
+    listPage: "lists.php"
 }

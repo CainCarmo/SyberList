@@ -137,6 +137,6 @@
 
         </section>
         <!-- Script -->
-        <script type="module" src="./JS/events.js"></script>
+        <script type="module" src="./JS/scripts.js"></script>
     </body>
 </html>
