@@ -7,7 +7,7 @@
 
     $oUserLogged = Login::GetUserLogged();
 
-    $pageType    = explode("=", $_SERVER["QUERY_STRING"])[1];
+    $pageType    = explode("&", explode("=", $_SERVER["QUERY_STRING"])[1])[0];
 
     $hiddenBtn   = $oUserLogged ? "class='hidden'" : "";
     $visibleIcon = $oUserLogged ? "class='visible'" : "";

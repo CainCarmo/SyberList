@@ -3,6 +3,8 @@
 namespace App\Model\Entity {
 
     use App\Model\Data\QueryBuilder;
+    use App\Model\Enums\EnumsTmdb;
+    use PDO;
 
     class Tmdb {
 
@@ -16,7 +18,7 @@ namespace App\Model\Entity {
         public int    $FK_SITUATION_ID;
         public string $Add_Time;
 
-        public function Register() {
+        public function Register(): void {
 
             $this->Add_Time = date("Y-m-d H:i:s");
 
@@ -32,6 +34,29 @@ namespace App\Model\Entity {
                 "FK_SITUATION_ID" => $this->FK_SITUATION_ID,
                 "ADD_DATE"        => $this->Add_Time
             ]);
+        }
+
+        public function SearchItemByID(string $type, int $ID): void {
+
+            $baseURL      = "https://api.themoviedb.org/3";
+            $apiKey       = "32a48ac8387366ff3d957d772176624f";
+            $baseImageURL = "https://image.tmdb.org/t/p/w500";
+
+            $response = file_get_contents($baseURL . "/" . $type . "/" . $ID . "?api_key=" . $apiKey);
+
+            $responseParsed = json_decode($response);
+
+            $this->ID_Jikan        = $responseParsed->id;
+            $this->FK_USER_ID      = $_SESSION["User"]["ID"];
+            $this->Title           = $responseParsed->title;
+            $this->Description     = str_replace("'", "\'", $responseParsed->overview);
+            $this->FK_TYPE_ID      = EnumsTmdb::ToggleType(method: "POST", type: $type);
+            $this->Cover           = $baseImageURL . $responseParsed->poster_path;
+            $this->FK_SITUATION_ID = 1;
+        }
+
+        public function GetItemsByUser(User $oUserID) {
+            return (new QueryBuilder(table: "TMDB"))->Select(where: "FK_USER_ID = '". $oUserID ."'")->fetchAll(PDO::FETCH_CLASS, self::class);
         }
     }
 }

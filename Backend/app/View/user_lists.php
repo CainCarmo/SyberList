@@ -1,6 +1,36 @@
 <?php
 
+    use App\Model\Entity\Jikan;
+    use App\Model\Enums\EnumsJikan;
+
+    $oJikan = new Jikan();
+    $cards= "";
+    $responses = $oJikan->GetItemsByUser($_SESSION["User"]["ID"]);
+
+    echo '<pre style="color: #000">';
+
+    foreach ($responses as $response) {
+        $type = EnumsJikan::ToggleType("GET", $response->FK_TYPE_ID);
+
+        $cards .= '
+            <div class="section__card">
+                <img src="'. $response->COVER .'" alt="Card Image">
+                <div class="card__information">
+                    <h3 class="card__title">'. $response->TITLE .'</h3>
+                    <button type="button" class="card__button">
+                        <a href="./details.php?type=anime&id='. $response->ID_JIKAN .'">Saiba Mais</a>
+                    </button>
+                    <span class="card__extra">
+                        '. $type .'
+                    </span>
+                </div>
+            </div>
+        ';
+    }
     
+    print_r($cards);
+
+    echo '</pre>'; exit;
 
 ?>
         

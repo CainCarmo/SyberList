@@ -11,25 +11,23 @@
 
     if (isset($_POST["salvar"])) {
 
-        $jikanItem = $oJikan->SearchAnimeByID(type: explode("&", $pageType)[0], ID: $itemID);
+        switch ($pageType) {
 
-        if ($pageType === "anime&id" || $pageType === "manga&id") {
+            case "anime":
+            case "manga":
 
-            $oJikan->ID_Jikan        = $jikanItem->mal_id;
-            $oJikan->FK_USER_ID      = $_SESSION["User"]["ID"];
-            $oJikan->Title           = $jikanItem->title;
-            $oJikan->Description     = str_replace("'", "\'", $jikanItem->synopsis);
-            $oJikan->FK_TYPE_ID      = EnumsJikan::ToggleType(method: "POST", type: $jikanItem->type);
-            $oJikan->Cover           = $jikanItem->images->webp->large_image_url;
-            $oJikan->FK_SITUATION_ID = 1;
+                $oJikan->SearchItemByID(type: $pageType, ID: $itemID);
 
-            echo '<pre style="color: #000">';
-            print_r($oJikan);
-            echo '</pre>'; exit;
-        }
-        else {
+                $oJikan->Register();
+                break;
 
+            case "movie":
+            case "serie":
 
+                $oTmdb->SearchItemByID(type: $pageType, ID: $itemID);
+
+                $oTmdb->Register();
+                break;
         }
     }
 

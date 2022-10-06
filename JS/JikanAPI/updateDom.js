@@ -324,12 +324,10 @@ export class updateDomJikan {
 
         bannerInfoWrapper.innerHTML = `
             <div id="banner__info">
-                <form method="POST">
-                    <form method="POST" id="banner__form">
-                        <button id="form__submit" name="salvar" type="submit">
-                            <i class="fa-star fa-regular" id="star-details"></i>
-                        </button>
-                    </form>
+                <form method="POST" id="banner__form">
+                    <button id="form__submit" name="salvar" type="submit">
+                        <i class="fa-star fa-regular" id="star-details"></i>
+                    </button>
                 </form>
                 <h1 id="banner__title">${informationAnime.title}</h1>
                 <p id="banner__description">
@@ -641,8 +639,8 @@ export class updateDomJikan {
 
         bannerInfoWrapper.innerHTML = `
             <div id="banner__info">
-                <form id="form__details" name="form__details" action="details.php" method="POST" enctype="application/x-www-form-urlencoded">
-                    <button id="form__submit" name="salvar" type="button">
+                <form method="POST" id="banner__form">
+                    <button id="form__submit" name="salvar" type="submit">
                         <i class="fa-star fa-regular" id="star-details"></i>
                     </button>
                 </form>
