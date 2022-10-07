@@ -110,7 +110,7 @@ export class UpdateDomTmdb {
 
     SetMoviesLatest(data) {}
 
-    SetMoviesLatest(data) {}
+    SetMoviesUpComing(data) {}
 
     SetMoviesByID(data) {}
 

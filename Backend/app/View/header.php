@@ -19,6 +19,10 @@
         ? $userListsCSS = '<link rel="stylesheet" href="./CSS/user_lists.css">'
         : $userListsCSS = null;
 
+    $_SERVER["PHP_SELF"] === "/search.php"
+        ? $userListsCSS = '<link rel="stylesheet" href="./CSS/browse.css">'
+        : $userListsCSS = null;
+
     if (isset($_POST["enviar"])) {
         $oUser = User::GetUserByEmail(email: $_POST["login__email"]);
 
@@ -47,7 +51,7 @@
         else {
             
             $errorLogin = $oVerifyLogin[1];
-            header("location: home.php?type=anime");
+            header("location: home.php?type=". $pageType);
             exit;
         }
     }

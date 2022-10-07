@@ -36,7 +36,7 @@ export class RequestsTmdb {
                 .catch(err => console.warn(err.message))
     }
 
-    async GetMoviesLatest() {
+    async GetMoviesUpComing() {
         await fetch(`${this.BaseURL}/movie/upcoming?api_key=${this.API_KEY}&language=pt-BR`)
                 .then(res => res.json())
                 .then(data => console.log(data))

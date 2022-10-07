@@ -411,7 +411,7 @@ export class updateDomJikan {
             </div>
         `
 
-        sectionSlider.innerHTML = informationAnime.slice(0, 30).map(char => {
+        sectionSlider.innerHTML = informationAnime.map(char => {
             return `
                 <div class="section__card">
                     <!-- Imagem do Card -->
@@ -441,7 +441,61 @@ export class updateDomJikan {
         })
     }
 
-    SetAnimeStaff(data) {}
+    SetAnimeStaff(data) {
+        const sectionSliders   = this.oFactoryDom.CreateBlockElement("section", ["section__sliders"])
+        const sectionHeader    = this.oFactoryDom.CreateBlockElement("header", ["section__header"])
+        const sectionSlider    = this.oFactoryDom.CreateBlockElement("div", ["section__slider"], ["slider__seasonSF"])
+        const sectionDots      = this.oFactoryDom.CreateBlockElement("div", ["dots"], ["slider__seasonSF--dots"], ["tablist"])
+        const informationAnime = data.data
+
+        sectionHeader.innerHTML = `
+            <!-- Título da Sessão -->
+            <h2 class="section__title">
+                <i class="fa-solid fa-mug-saucer"></i> - Personagens
+            </h2>
+            <div class="section__arrows">
+                <button type="button" class="section__arrow" id="arrow__backSF">
+                    <i class="fa-solid fa-circle-chevron-left"></i>
+                </button>
+                <button type="button" class="section__arrow" id="arrow__nextSF">
+                    <i class="fa-solid fa-circle-chevron-right"></i>
+                </button>
+            </div>
+        `
+
+        sectionSlider.innerHTML = informationAnime.slice(0, 10).map(staff => {
+            return `
+                <div class="section__card">
+                    <!-- Imagem do Card -->
+                    <img src="${staff.person.images.jpg.image_url}" alt="Card Image">
+                    <!-- Informações do Card -->
+                    <div class="card__information">
+                        <h3 class="card__title">${staff.person.name}</h3>
+                        
+                        <span class="card__extra">
+                            ${staff.positions[0]} <br /> ${staff.positions[1]}
+                        </span>
+                    </div>
+                </div>   
+            `
+        }).join("")
+
+        sectionSliders.appendChild(sectionHeader)
+        sectionSliders.appendChild(sectionSlider)
+        sectionSliders.appendChild(sectionDots)
+        objDetailsDom.mainDetails.appendChild(sectionSliders)
+
+        new Glider(sectionSlider, {
+            slidesToShow: 5,
+            slidesToScroll: 5,
+            dots: "#slider__seasonSF--dots",
+            draggable: true,
+            arrows: {
+                prev: "#arrow__backSF",
+                next: "#arrow__nextSF"
+            }
+        })
+    }
 
     SetAnimeEpisodes(data) {}
 

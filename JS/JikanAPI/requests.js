@@ -87,7 +87,7 @@ export class RequestsJikan {
     async GetAnimeThemes(ID) {
         await fetch(`${this.BaseURL}/anime/${ID}/themes`)
                 .then(res => res.json())
-                .then(data => this.oUpdateDomJikan.SetAnimeThemes(data))
+                .then(data => console.log(data))
                 .catch(err => console.warn(err.message))
     }
 

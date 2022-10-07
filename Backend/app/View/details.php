@@ -2,7 +2,6 @@
 
     use App\Model\Entity\Tmdb;
     use App\Model\Entity\Jikan;
-    use App\Model\Enums\EnumsJikan;
 
     $oTmdb  = new Tmdb();
     $oJikan = new Jikan();

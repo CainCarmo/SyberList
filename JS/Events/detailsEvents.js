@@ -15,7 +15,13 @@ export class DetailsEvents {
 
                 await this.oRequestsJikan.GetAnimeFullByID(itemID)
                 await this.oRequestsJikan.GetAnimeCharacters(itemID)
-                await this.oRequestsJikan.GetAnimeRecommendations(itemID)
+                await this.oRequestsJikan.GetAnimeStaff(itemID)
+                
+
+                setTimeout(async () => {
+                    await this.oRequestsJikan.GetAnimeRecommendations(itemID)    
+                    await this.oRequestsJikan.GetAnimeThemes(itemID)
+                }, 3100)
                 
                 break
             
@@ -36,6 +42,15 @@ export class DetailsEvents {
 
     async DetailsFilm(itemType, itemID) {
 
+        switch (itemType) {
+            case "movie":
 
+                await this.oRequestsTmdb
+                break
+
+            case "tv":
+
+                break
+        }
     }
 }
