@@ -17,11 +17,12 @@
 
                 $oJikan->SearchItemByID(type: $pageType, ID: $itemID);
 
+                
                 $oJikan->Register();
                 break;
 
             case "movie":
-            case "serie":
+            case "tv":
 
                 $oTmdb->SearchItemByID(type: $pageType, ID: $itemID);
 

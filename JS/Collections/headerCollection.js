@@ -6,7 +6,7 @@ export const objHeaderDom = {
     divTimesWrapper: document.querySelector("#search__clear--hidden"),
     divSearchResults: document.querySelector("#search__results"),
     // -> Link (a)
-    linkHome: document.querySelectorAll(".header__link > a")[0],
+    linkHome: document.querySelectorAll(".header__link > a")[1],
     linkList: document.querySelector("#header__user--hidden > a"),
     // -> Button
     buttonLogin: document.querySelector("#header__button"),

@@ -67,6 +67,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <!-- CSS -->
+        <link rel="icon"       href="./Resources/Image/Icons/icone_syber.png">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glider-js@1/glider.min.css">
         <link rel="stylesheet" href="./CSS/main.css">
         <?=$userListsCSS?>
@@ -91,13 +92,16 @@
             </div>
             <nav id="header__links">
                 <li class="header__link">
+                    <a href="index.php">Início</a>
+                </li>
+                <li class="header__link">
                     <a href="home.php">Home</a>
                 </li>
                 <li class="header__link">
-                    <a href="./build.php">Anime</a>
+                    <a href="search.php?type=anime">Anime</a>
                 </li>
                 <li class="header__link">
-                    <a href="./build.php">Filmes</a>
+                    <a href="search.php?type=movie">Filmes</a>
                 </li>
                 <li class="header__link">
                     <a href="./build.php">Nosso Blog</a>

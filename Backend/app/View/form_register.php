@@ -70,7 +70,7 @@
                 <section id="register__left">
                     <video src="./Resources/Video/mylivewallpapers.com-Sasuke-Studying.mp4" autoplay muted loop></video>
                 </section>
-                <!--  -->
+                <!-- Curva do Formulário -->
                 <svg id="register__curves" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
                     <path fill="#ededed" viewbox="0 0 512 512" d="M0,32L60,42.7C120,53,240,75,360,117.3C480,160,600,224,720,224C840,224,960,160,1080,160C1200,160,1320,224,1380,256L1440,288L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path>
                 </svg>
@@ -167,6 +167,7 @@
                             </div>
                         </div>
                     </main>
+                    <!-- Rodapé do Formulário -->
                     <footer id="register__footer">
                         <button type="submit" name="enviar" value="login" class="form__submit">Enviar</button>
                     </footer>

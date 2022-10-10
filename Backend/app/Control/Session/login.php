@@ -6,7 +6,7 @@ namespace App\Control\Session {
 
     class Login {
 
-        public static function Init() {
+        public static function Init(): void {
             if (session_status() !== PHP_SESSION_ACTIVE) {
                 session_start();
             }

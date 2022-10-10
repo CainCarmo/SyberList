@@ -14,7 +14,7 @@ namespace App\Model\Data {
 
         protected PDO $_connection;
 
-        public function SetConnection() {
+        public function SetConnection(): void {
             try {
                 $this->_connection = new PDO("mysql:host=". self::Host. ";dbname=". self::Name, self::DataUser, self::DataPass);
                 $this->_connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

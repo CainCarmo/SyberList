@@ -53,7 +53,7 @@ namespace App\Model\Entity {
             $this->FK_SITUATION_ID = 1;
         }
 
-        public function GetItemsByUser(int $oUserID) {
+        public function GetItemsByUser(int $oUserID): array|bool {
             return (new QueryBuilder(table: "JIKAN"))->Select(where: "FK_USER_ID = '". $oUserID ."'")->fetchAll(PDO::FETCH_CLASS, self::class);
         }
     }

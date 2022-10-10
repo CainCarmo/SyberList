@@ -32,6 +32,13 @@ export class HomeEvents {
         window.addEventListener("load", async () => {
             await this.oRequestsTmdb.GetTvBanner(414906)
             await this.oRequestsTmdb.GetMoviesTop()
+            await this.oRequestsTmdb.GetMoviesPopular()
+
+            setTimeout(async () => {
+                await this.oRequestsTmdb.GetMoviesUpComing()
+                await this.oRequestsTmdb.GetTvTop()
+                await this.oRequestsTmdb.GetTvPopular()
+            })
         })
     }
 }

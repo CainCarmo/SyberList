@@ -2,6 +2,7 @@ import { FactoryDom }    from "../DOM/factoryDom.js"
 import { objHeaderDom }  from "../Collections/headerCollection.js"
 import { objHomeDom }    from "../Collections/homeCollection.js"
 import { objDetailsDom } from "../Collections/detailsCollection.js"
+import { objBrowse }     from "../Collections/browseCollection.js"
 import { VanillaTilt }   from "../Vanilla-Tilt/vanilla-tilt.js"
 
 export class updateDomJikan {
@@ -12,9 +13,9 @@ export class updateDomJikan {
 
     SetAnimeSearch(data) {
         const divAnimeItemsWrapper = this.oFactoryDom.CreateBlockElement("div", [], ["search__items--wrapper"])
-        const informationAnime     = data.data
+        const informationAnimes    = data.data
 
-        divAnimeItemsWrapper.innerHTML = informationAnime.map(anime => {
+        divAnimeItemsWrapper.innerHTML = informationAnimes.map(anime => {
             return `
             <div class="search__item">
                 <div class="item__description">
@@ -22,7 +23,7 @@ export class updateDomJikan {
                     <div class="item__information">
                         <div class="item__title--wrapper">
                             <h3 class="item__title">
-                                <a href="./details.php?type=anime&id=${anime.mal_id}">${anime.titles[0].title}</a>
+                                <a href="./details.php?type=anime&id=${anime.mal_id}">${anime.title}</a>
                             </h3>
                         </div>
                         <div class="item__extra--wrapper">
@@ -41,21 +42,51 @@ export class updateDomJikan {
         const animeType     = divAnimeItemsWrapper.querySelectorAll(".item__type")
 
         animeEpisodes.forEach((e, i) => {
-            if (informationAnime[i].episodes === null)
+            if (informationAnimes[i].episodes === null)
                 e.innerHTML = null
         })
 
         animeYear.forEach((e, i) => {
-            if (informationAnime[i].year === null)
+            if (informationAnimes[i].year === null)
                 e.innerHTML = null
         })
 
         animeType.forEach((e, i) => {
-            if (informationAnime[i].type === null)
+            if (informationAnimes[i].type === null)
                 e.innerHTML = null
         })
 
         objHeaderDom.divSearchResults.appendChild(divAnimeItemsWrapper)
+    }
+
+    SetAnimeBrowse(data) {
+        const informationAnimes = data.data
+        console.log(informationAnimes)
+        objBrowse.mainResults.innerHTML = informationAnimes.map(anime => {
+            return `
+                <div class="section__card">
+                    <!-- Imagem do Card -->
+                    <img src="${anime.images.webp.large_image_url}" alt="Card Image">
+                    <!-- Informações do Card -->
+                    <div class="card__information">
+                        <h3 class="card__title">${anime.title}</h3>
+                        <button type="button" class="card__button">
+                            <a href="./details.php?type=movie&id=${anime.mal_id}">Saiba Mais</a>
+                        </button>
+                        <span class="card__extra">
+                            ${anime.type} <br /> ${anime.year}
+                        </span>
+                    </div>
+                </div>   
+            `
+        }).join("")
+
+        const itemYear = document.querySelectorAll(".card__extra")
+
+        itemYear.forEach((e, i) => {
+            if (informationAnimes[i].year === null)
+                e.innerHTML = informationAnimes[i].type
+        })
     }
 
     SetAnimeBanner(data) {
@@ -64,7 +95,7 @@ export class updateDomJikan {
         
         bannerInfoWrapper.innerHTML = `
             <div id="banner__info">
-                <h1 id="banner__title">${informationAnime.titles[0].title}</h1>
+                <h1 id="banner__title">${informationAnime.title}</h1>
                 <p id="banner__description">
                     ${informationAnime.synopsis}
                 </p>
@@ -89,10 +120,10 @@ export class updateDomJikan {
     }
 
     SetRankingAnime(data) {
-        const sectionRank      = this.oFactoryDom.CreateBlockElement("section", ["section__ranking"])
-        const sectionHeader    = this.oFactoryDom.CreateBlockElement("section", ["section__header"])
-        const sectionRankList  = this.oFactoryDom.CreateBlockElement("section", ["section__list"])
-        const informationAnime = data.data
+        const sectionRank       = this.oFactoryDom.CreateBlockElement("section", ["section__ranking"])
+        const sectionHeader     = this.oFactoryDom.CreateBlockElement("section", ["section__header"])
+        const sectionRankList   = this.oFactoryDom.CreateBlockElement("section", ["section__list"])
+        const informationAnimes = data.data
 
         sectionHeader.innerHTML = `
             <!-- Título da Sessão -->
@@ -102,7 +133,7 @@ export class updateDomJikan {
             <button type="button" class="section__button">Veja Mais</button>
         `
 
-        sectionRankList.innerHTML = informationAnime.slice(0, 5).map(anime => {
+        sectionRankList.innerHTML = informationAnimes.slice(0, 5).map(anime => {
             return `
                 <div class="section__item">
                     <!-- Rank Index -->
@@ -115,7 +146,7 @@ export class updateDomJikan {
                         <div class="item__information">
                             <div class="item__title--wrapper">
                                 <h3 class="item__title">
-                                    <a href="./details.php?type=anime&id=${anime.mal_id}">${anime.titles[0].title}</a>
+                                    <a href="./details.php?type=anime&id=${anime.mal_id}">${anime.title}</a>
                                 </h3>
                             </div>
                             <div class="item__extra--wrapper">
@@ -140,11 +171,11 @@ export class updateDomJikan {
     }
 
     SetSeasonNow(data) {
-        const sectionSliders   = this.oFactoryDom.CreateBlockElement("section", ["section__sliders"])
-        const sectionHeader    = this.oFactoryDom.CreateBlockElement("header", ["section__header"])
-        const sectionSlider    = this.oFactoryDom.CreateBlockElement("div", ["section__slider"], ["slider__seasonSN"])
-        const sectionDots      = this.oFactoryDom.CreateBlockElement("div", ["dots"], ["slider__seasonSN--dots"], ["tablist"])
-        const informationAnime = data.data
+        const sectionSliders    = this.oFactoryDom.CreateBlockElement("section", ["section__sliders"])
+        const sectionHeader     = this.oFactoryDom.CreateBlockElement("header", ["section__header"])
+        const sectionSlider     = this.oFactoryDom.CreateBlockElement("div", ["section__slider"], ["slider__seasonSN"])
+        const sectionDots       = this.oFactoryDom.CreateBlockElement("div", ["dots"], ["slider__seasonSN--dots"], ["tablist"])
+        const informationAnimes = data.data
 
         sectionHeader.innerHTML = `
             <!-- Título da Sessão -->
@@ -161,14 +192,14 @@ export class updateDomJikan {
             </div>
         `
 
-        sectionSlider.innerHTML = informationAnime.map(anime => {
+        sectionSlider.innerHTML = informationAnimes.map(anime => {
             return `
                 <div class="section__card">
                     <!-- Imagem do Card -->
                     <img src="${anime.images.webp.large_image_url}" alt="Card Image">
                     <!-- Informações do Card -->
                     <div class="card__information">
-                        <h3 class="card__title">${anime.titles[0].title}</h3>
+                        <h3 class="card__title">${anime.title}</h3>
                         <button type="button" class="card__button">
                             <a href="./details.php?type=anime&id=${anime.mal_id}">Saiba Mais</a>
                         </button>
@@ -188,7 +219,7 @@ export class updateDomJikan {
         new Glider(sectionSlider, {
             slidesToShow: 5,
             slidesToScroll: 5,
-            dots: "#slider__seasonSN--dots",
+            dots: `#${sectionDots.id}`,
             draggable: true,
             arrows: {
                 prev: "#arrow__backSN",
@@ -198,11 +229,11 @@ export class updateDomJikan {
     }
 
     SetSeasonUpComming(data) {
-        const sectionSliders   = this.oFactoryDom.CreateBlockElement("section", ["section__sliders"])
-        const sectionHeader    = this.oFactoryDom.CreateBlockElement("header", ["section__header"])
-        const sectionSlider    = this.oFactoryDom.CreateBlockElement("div", ["section__slider"], ["slider__seasonSU"])
-        const sectionDots      = this.oFactoryDom.CreateBlockElement("div", ["dots"], ["slider__seasonSU--dots"], ["tablist"])
-        const informationAnime = data.data
+        const sectionSliders    = this.oFactoryDom.CreateBlockElement("section", ["section__sliders"])
+        const sectionHeader     = this.oFactoryDom.CreateBlockElement("header", ["section__header"])
+        const sectionSlider     = this.oFactoryDom.CreateBlockElement("div", ["section__slider"], ["slider__seasonSU"])
+        const sectionDots       = this.oFactoryDom.CreateBlockElement("div", ["dots"], ["slider__seasonSU--dots"], ["tablist"])
+        const informationAnimes = data.data
 
         sectionHeader.innerHTML = `
             <!-- Título da Sessão -->
@@ -219,14 +250,14 @@ export class updateDomJikan {
             </div>
         `
 
-        sectionSlider.innerHTML = informationAnime.map(anime => {
+        sectionSlider.innerHTML = informationAnimes.map(anime => {
             return `
                 <div class="section__card">
                     <!-- Imagem do Card -->
                     <img src="${anime.images.webp.large_image_url}" alt="Card Image">
                     <!-- Informações do Card -->
                     <div class="card__information">
-                        <h3 class="card__title">${anime.titles[0].title}</h3>
+                        <h3 class="card__title">${anime.title}</h3>
                         <button type="button" class="card__button">
                             <a href="#">Saiba Mais</a>
                         </button>
@@ -241,8 +272,8 @@ export class updateDomJikan {
         const itemYear = sectionSlider.querySelectorAll(".card__extra")
 
         itemYear.forEach((e, i) => {
-            if (informationAnime[i].year === null)
-                e.innerHTML = informationAnime[i].type
+            if (informationAnimes[i].year === null)
+                e.innerHTML = informationAnimes[i].type
         })
 
         sectionSliders.appendChild(sectionHeader)
@@ -253,7 +284,7 @@ export class updateDomJikan {
         new Glider(sectionSlider, {
             slidesToShow: 5,
             slidesToScroll: 5,
-            dots: "#slider__seasonSU--dots",
+            dots: `#${sectionDots.id}`,
             draggable: true,
             arrows: {
                 prev: "#arrow__backSU",
@@ -263,11 +294,11 @@ export class updateDomJikan {
     }
 
     SetRecentAnimeRecommendations(data) {
-        const sectionSliders   = this.oFactoryDom.CreateBlockElement("section", ["section__sliders"])
-        const sectionHeader    = this.oFactoryDom.CreateBlockElement("header", ["section__header"])
-        const sectionSlider    = this.oFactoryDom.CreateBlockElement("div", ["section__slider"], ["slider__seasonRRA"])
-        const sectionDots      = this.oFactoryDom.CreateBlockElement("div", ["dots"], ["slider__seasonRRA--dots"], ["tablist"])
-        const informationAnime = data.data
+        const sectionSliders    = this.oFactoryDom.CreateBlockElement("section", ["section__sliders"])
+        const sectionHeader     = this.oFactoryDom.CreateBlockElement("header", ["section__header"])
+        const sectionSlider     = this.oFactoryDom.CreateBlockElement("div", ["section__slider"], ["slider__seasonRA"])
+        const sectionDots       = this.oFactoryDom.CreateBlockElement("div", ["dots"], ["slider__seasonRA--dots"], ["tablist"])
+        const informationAnimes = data.data
 
         sectionHeader.innerHTML = `
             <!-- Título da Sessão -->
@@ -275,16 +306,16 @@ export class updateDomJikan {
                 <i class="fa-solid fa-mug-saucer"></i> - Recomendações Anime
             </h2>
             <div class="section__arrows">
-                <button type="button" class="section__arrow" id="arrow__backRRA">
+                <button type="button" class="section__arrow" id="arrow__backRA">
                     <i class="fa-solid fa-circle-chevron-left"></i>
                 </button>
-                <button type="button" class="section__arrow" id="arrow__nextRRA">
+                <button type="button" class="section__arrow" id="arrow__nextRA">
                     <i class="fa-solid fa-circle-chevron-right"></i>
                 </button>
             </div>
         `
         
-        sectionSlider.innerHTML = informationAnime.slice(0, 20).map(anime => {
+        sectionSlider.innerHTML = informationAnimes.slice(0, 20).map(anime => {
             return `
                 <div class="section__card">
                     <!-- Imagem do Card -->
@@ -309,11 +340,11 @@ export class updateDomJikan {
         new Glider(sectionSlider, {
             slidesToShow: 5,
             slidesToScroll: 5,
-            dots: "#slider__seasonRRA--dots",
+            dots: `#${sectionDots.id}`,
             draggable: true,
             arrows: {
-                prev: "#arrow__backRRA",
-                next: "#arrow__nextRRA"
+                prev: "#arrow__backRA",
+                next: "#arrow__nextRA"
             }
         })
     }
@@ -381,6 +412,7 @@ export class updateDomJikan {
         `
 
         objHeaderDom.title.innerHTML = `${informationAnime.title} | SyberList`
+
         sectionTrailer.appendChild(sectionHeader)
         sectionTrailer.appendChild(trailerVideoWrapper)
         
@@ -390,11 +422,11 @@ export class updateDomJikan {
     }
 
     SetAnimeCharacters(data) {
-        const sectionSliders   = this.oFactoryDom.CreateBlockElement("section", ["section__sliders"])
-        const sectionHeader    = this.oFactoryDom.CreateBlockElement("header", ["section__header"])
-        const sectionSlider    = this.oFactoryDom.CreateBlockElement("div", ["section__slider"], ["slider__seasonCH"])
-        const sectionDots      = this.oFactoryDom.CreateBlockElement("div", ["dots"], ["slider__seasonCH--dots"], ["tablist"])
-        const informationAnime = data.data
+        const sectionSliders        = this.oFactoryDom.CreateBlockElement("section", ["section__sliders"])
+        const sectionHeader         = this.oFactoryDom.CreateBlockElement("header", ["section__header"])
+        const sectionSlider         = this.oFactoryDom.CreateBlockElement("div", ["section__slider"], ["slider__seasonCH"])
+        const sectionDots           = this.oFactoryDom.CreateBlockElement("div", ["dots"], ["slider__seasonCH--dots"], ["tablist"])
+        const informationCharacters = data.data
 
         sectionHeader.innerHTML = `
             <!-- Título da Sessão -->
@@ -411,7 +443,7 @@ export class updateDomJikan {
             </div>
         `
 
-        sectionSlider.innerHTML = informationAnime.map(char => {
+        sectionSlider.innerHTML = informationCharacters.map(char => {
             return `
                 <div class="section__card">
                     <!-- Imagem do Card -->
@@ -432,7 +464,7 @@ export class updateDomJikan {
         new Glider(sectionSlider, {
             slidesToShow: 5,
             slidesToScroll: 5,
-            dots: "#slider__seasonCH--dots",
+            dots: `#${sectionDots.id}`,
             draggable: true,
             arrows: {
                 prev: "#arrow__backCH",
@@ -451,7 +483,7 @@ export class updateDomJikan {
         sectionHeader.innerHTML = `
             <!-- Título da Sessão -->
             <h2 class="section__title">
-                <i class="fa-solid fa-mug-saucer"></i> - Personagens
+                <i class="fa-solid fa-mug-saucer"></i> - Staff
             </h2>
             <div class="section__arrows">
                 <button type="button" class="section__arrow" id="arrow__backSF">
@@ -488,7 +520,7 @@ export class updateDomJikan {
         new Glider(sectionSlider, {
             slidesToShow: 5,
             slidesToScroll: 5,
-            dots: "#slider__seasonSF--dots",
+            dots: `#${sectionDots.id}`,
             draggable: true,
             arrows: {
                 prev: "#arrow__backSF",
@@ -500,11 +532,11 @@ export class updateDomJikan {
     SetAnimeEpisodes(data) {}
 
     SetAnimeRecommendations(data) {
-        const sectionSliders   = this.oFactoryDom.CreateBlockElement("section", ["section__sliders"])
-        const sectionHeader    = this.oFactoryDom.CreateBlockElement("header", ["section__header"])
-        const sectionSlider    = this.oFactoryDom.CreateBlockElement("div", ["section__slider"], ["slider__seasonRE"])
-        const sectionDots      = this.oFactoryDom.CreateBlockElement("div", ["dots"], ["slider__seasonRE--dots"], ["tablist"])
-        const informationAnime = data.data
+        const sectionSliders    = this.oFactoryDom.CreateBlockElement("section", ["section__sliders"])
+        const sectionHeader     = this.oFactoryDom.CreateBlockElement("header", ["section__header"])
+        const sectionSlider     = this.oFactoryDom.CreateBlockElement("div", ["section__slider"], ["slider__seasonRE"])
+        const sectionDots       = this.oFactoryDom.CreateBlockElement("div", ["dots"], ["slider__seasonRE--dots"], ["tablist"])
+        const informationAnimes = data.data
 
         sectionHeader.innerHTML = `
             <!-- Título da Sessão -->
@@ -521,7 +553,7 @@ export class updateDomJikan {
             </div>
         `
 
-        sectionSlider.innerHTML = informationAnime.slice(0, 30).map(anime => {
+        sectionSlider.innerHTML = informationAnimes.slice(0, 30).map(anime => {
             return `
                 <div class="section__card">
                     <!-- Imagem do Card -->
@@ -546,7 +578,7 @@ export class updateDomJikan {
         new Glider(sectionSlider, {
             slidesToShow: 5,
             slidesToScroll: 5,
-            dots: "#slider__seasonRE--dots",
+            dots: `#${sectionDots.id}`,
             draggable: true,
             arrows: {
                 prev: "#arrow__backRE",
@@ -561,11 +593,15 @@ export class updateDomJikan {
 
     SetAnimeGenres(data) {}
 
+    SetMangaBrowse(data) {
+        
+    }
+
     SetRankingManga(data) {
-        const sectionRank      = this.oFactoryDom.CreateBlockElement("section", ["section__ranking"])
-        const sectionHeader    = this.oFactoryDom.CreateBlockElement("section", ["section__header"])
-        const sectionRankList  = this.oFactoryDom.CreateBlockElement("section", ["section__list"])
-        const informationManga = data.data
+        const sectionRank       = this.oFactoryDom.CreateBlockElement("section", ["section__ranking"])
+        const sectionHeader     = this.oFactoryDom.CreateBlockElement("section", ["section__header"])
+        const sectionRankList   = this.oFactoryDom.CreateBlockElement("section", ["section__list"])
+        const informationMangas = data.data
 
         sectionHeader.innerHTML = `
             <!-- Título da Sessão -->
@@ -575,7 +611,7 @@ export class updateDomJikan {
             <button type="button" class="section__button">Veja Mais</button>
         `
 
-        sectionRankList.innerHTML = informationManga.slice(0, 5).map(manga => {
+        sectionRankList.innerHTML = informationMangas.slice(0, 5).map(manga => {
             return `
                 <div class="section__item">
                     <!-- Rank Index -->
@@ -588,7 +624,7 @@ export class updateDomJikan {
                         <div class="item__information">
                             <div class="item__title--wrapper">
                                 <h3 class="item__title">
-                                    <a href="./details.php?type=manga&id=${manga.mal_id}">${manga.titles[0].title}</a>
+                                    <a href="./details.php?type=manga&id=${manga.mal_id}">${manga.title}</a>
                                 </h3>
                             </div>
                             <div class="item__extra--wrapper">
@@ -612,17 +648,17 @@ export class updateDomJikan {
         const itemType     = sectionRankList.querySelectorAll(".item__type.item__manga")
         
         itemChapters.forEach((e, i) => {
-            if (informationManga[i].chapters === null)
+            if (informationMangas[i].chapters === null)
                 e.innerHTML = null
         })
 
         itemYear.forEach((e, i) => {
-            if (informationManga[i].published.prop.from.year === null)
+            if (informationMangas[i].published.prop.from.year === null)
                 e.innerHTML = null
         })
 
         itemType.forEach((e, i) => {
-            if (informationManga[i].type === null)
+            if (informationMangas[i].type === null)
                 e.innerHTML = null
         })
 
@@ -632,11 +668,11 @@ export class updateDomJikan {
     }
 
     SetRecentMangaRecommendations(data) {
-        const sectionSliders   = this.oFactoryDom.CreateBlockElement("section", ["section__sliders"])
-        const sectionHeader    = this.oFactoryDom.CreateBlockElement("header", ["section__header"])
-        const sectionSlider    = this.oFactoryDom.CreateBlockElement("div", ["section__slider"], ["slider__seasonRRM"])
-        const sectionDots      = this.oFactoryDom.CreateBlockElement("div", ["dots"], ["slider__seasonRRM--dots"], ["tablist"])
-        const informationManga = data.data
+        const sectionSliders    = this.oFactoryDom.CreateBlockElement("section", ["section__sliders"])
+        const sectionHeader     = this.oFactoryDom.CreateBlockElement("header", ["section__header"])
+        const sectionSlider     = this.oFactoryDom.CreateBlockElement("div", ["section__slider"], ["slider__seasonRM"])
+        const sectionDots       = this.oFactoryDom.CreateBlockElement("div", ["dots"], ["slider__seasonRM--dots"], ["tablist"])
+        const informationMangas = data.data
 
         sectionHeader.innerHTML = `
             <!-- Título da Sessão -->
@@ -644,16 +680,16 @@ export class updateDomJikan {
                 <i class="fa-solid fa-mug-saucer"></i> - Recomendações Mangá
             </h2>
             <div class="section__arrows">
-                <button type="button" class="section__arrow" id="arrow__backRRM">
+                <button type="button" class="section__arrow" id="arrow__backRM">
                     <i class="fa-solid fa-circle-chevron-left"></i>
                 </button>
-                <button type="button" class="section__arrow" id="arrow__nextRRM">
+                <button type="button" class="section__arrow" id="arrow__nextRM">
                     <i class="fa-solid fa-circle-chevron-right"></i>
                 </button>
             </div>
         `
         
-        sectionSlider.innerHTML = informationManga.slice(0, 15).map(manga => {
+        sectionSlider.innerHTML = informationMangas.slice(0, 15).map(manga => {
             return `
                 <div class="section__card">
                     <!-- Imagem do Card -->
@@ -678,7 +714,7 @@ export class updateDomJikan {
         new Glider(sectionSlider, {
             slidesToShow: 5,
             slidesToScroll: 5,
-            dots: "#slider__seasonRRM--dots",
+            dots: `#${sectionDots.id}`,
             draggable: true,
             arrows: {
                 prev: "#arrow__backRRM",
@@ -778,7 +814,7 @@ export class updateDomJikan {
         new Glider(sectionSlider, {
             slidesToShow: 5,
             slidesToScroll: 5,
-            dots: "#slider__seasonCH--dots",
+            dots: `#${sectionDots.id}`,
             draggable: true,
             arrows: {
                 prev: "#arrow__backCH",
@@ -788,11 +824,11 @@ export class updateDomJikan {
     }
 
     SetMangaPictures(data) {
-        const sectionSliders   = this.oFactoryDom.CreateBlockElement("section", ["section__sliders"])
-        const sectionHeader    = this.oFactoryDom.CreateBlockElement("header", ["section__header"])
-        const sectionSlider    = this.oFactoryDom.CreateBlockElement("div", ["section__slider"], ["slider__seasonPC"])
-        const sectionDots      = this.oFactoryDom.CreateBlockElement("div", ["dots"], ["slider__seasonPC--dots"], ["tablist"])
-        const informationManga = data.data
+        const sectionSliders      = this.oFactoryDom.CreateBlockElement("section", ["section__sliders"])
+        const sectionHeader       = this.oFactoryDom.CreateBlockElement("header", ["section__header"])
+        const sectionSlider       = this.oFactoryDom.CreateBlockElement("div", ["section__slider"], ["slider__seasonPC"])
+        const sectionDots         = this.oFactoryDom.CreateBlockElement("div", ["dots"], ["slider__seasonPC--dots"], ["tablist"])
+        const informationPictures = data.data
 
         sectionHeader.innerHTML = `
             <!-- Título da Sessão -->
@@ -809,7 +845,7 @@ export class updateDomJikan {
             </div>
         `
 
-        sectionSlider.innerHTML = informationManga.slice(0, 30).map(picture => {
+        sectionSlider.innerHTML = informationPictures.slice(0, 30).map(picture => {
             return `
                 <div class="section__card">
                     <!-- Imagem do Card -->
@@ -826,7 +862,7 @@ export class updateDomJikan {
         new Glider(sectionSlider, {
             slidesToShow: 5,
             slidesToScroll: 5,
-            dots: "#slider__seasonPC--dots",
+            dots: `#${sectionDots.id}`,
             draggable: true,
             arrows: {
                 prev: "#arrow__backPC",
@@ -836,11 +872,11 @@ export class updateDomJikan {
     }
 
     SetMangaRecommendations(data) {
-        const sectionSliders   = this.oFactoryDom.CreateBlockElement("section", ["section__sliders"])
-        const sectionHeader    = this.oFactoryDom.CreateBlockElement("header", ["section__header"])
-        const sectionSlider    = this.oFactoryDom.CreateBlockElement("div", ["section__slider"], ["slider__seasonRE"])
-        const sectionDots      = this.oFactoryDom.CreateBlockElement("div", ["dots"], ["slider__seasonRE--dots"], ["tablist"])
-        const informationManga = data.data
+        const sectionSliders    = this.oFactoryDom.CreateBlockElement("section", ["section__sliders"])
+        const sectionHeader     = this.oFactoryDom.CreateBlockElement("header", ["section__header"])
+        const sectionSlider     = this.oFactoryDom.CreateBlockElement("div", ["section__slider"], ["slider__seasonRE"])
+        const sectionDots       = this.oFactoryDom.CreateBlockElement("div", ["dots"], ["slider__seasonRE--dots"], ["tablist"])
+        const informationMangas = data.data
 
         sectionHeader.innerHTML = `
             <!-- Título da Sessão -->
@@ -857,7 +893,7 @@ export class updateDomJikan {
             </div>
         `
 
-        sectionSlider.innerHTML = informationManga.slice(0, 30).map(anime => {
+        sectionSlider.innerHTML = informationMangas.slice(0, 30).map(anime => {
             return `
                 <div class="section__card">
                     <!-- Imagem do Card -->
@@ -882,7 +918,7 @@ export class updateDomJikan {
         new Glider(sectionSlider, {
             slidesToShow: 5,
             slidesToScroll: 5,
-            dots: "#slider__seasonRE--dots",
+            dots: `#${sectionDots.id}`,
             draggable: true,
             arrows: {
                 prev: "#arrow__backRE",

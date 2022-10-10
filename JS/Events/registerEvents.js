@@ -5,6 +5,5 @@ export class RegisterEvents {
     Register() {
 
         objRegisterDom.iconArrowReturn.addEventListener("click", () => history.back())
-        
     }
 }

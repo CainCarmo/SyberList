@@ -28,8 +28,6 @@
                     <button class="box__button">
                         <a href="./home.php?type=anime">Selecionar</a>
                     </button>
-                    <!--  -->
-                    <p></p>
                 </div>
             </section>
             <!-- Lado Direto (Filme/Série) -->
@@ -42,11 +40,10 @@
                     <button class="box__button">
                         <a href="./home.php?type=movie">Selecionar</a>
                     </button>
-                    <!--  -->
-                    <p></p>
                 </div>
             </section>
         </div>
+        <!-- Scripts -->
         <script type="module" src="./JS/scripts.js"></script>
     </body>
 </html>

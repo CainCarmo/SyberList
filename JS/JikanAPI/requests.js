@@ -9,11 +9,18 @@ export class RequestsJikan {
 
     async GetAnimeSearch(query) {
         await fetch(`${this.BaseURL}/anime?q=${query}`)
+        .then(res => res.json())
+        .then(data => this.oUpdateDomJikan.SetAnimeSearch(data))
+        .catch(err => console.warn(err.message))
+    }
+    
+    async GetAnimeBrowse(query) {
+        await fetch(`${this.BaseURL}/anime?q=${query}`)
                 .then(res => res.json())
-                .then(data => this.oUpdateDomJikan.SetAnimeSearch(data))
+                .then(data => this.oUpdateDomJikan.SetAnimeBrowse(data))
                 .catch(err => console.warn(err.message))
     }
-
+    
     async GetAnimeBanner(ID) {
         await fetch(`${this.BaseURL}/anime/${ID}/full`)
                 .then(res => res.json())
@@ -102,6 +109,20 @@ export class RequestsJikan {
         await fetch(`${this.BaseURL}/genres/anime`)
                 .then(res => res.json())
                 .then(data => this.oUpdateDomJikan.SetAnimeGenres(data))
+                .catch(err => console.warn(err.message))
+    }
+
+    async GetMangaSearch(query) {
+        await fetch(`${this.BaseURL}/manga?q=${query}`)
+                .then(res => res.json())
+                .then(data => this.oUpdateDomJikan.SetMangaSearch(data))
+                .catch(err => console.warn(err.message))
+    }
+
+    async GetMangaBrowse(query) {
+        await fetch(`${this.BaseURL}/manga?q=${query}`)
+                .then(res => res.json())
+                .then(data => this.oUpdateDomJikan.SetMangaBrowse(data))
                 .catch(err => console.warn(err.message))
     }
 

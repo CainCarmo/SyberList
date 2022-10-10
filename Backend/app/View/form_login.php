@@ -10,6 +10,7 @@
                     <span class="form__error"></span>
                 </header>
                 <main id="login__fields">
+                    <!-- Campo do Email -->
                     <div class="form__field">
                         <div class="form__icon--wrapper">
                             <i class="fa-solid fa-user"></i>
@@ -19,6 +20,7 @@
                             <div class="underline"></div>
                         </div>
                     </div>
+                    <!-- Campo da Senha -->
                     <div class="form__field">
                         <div class="form__icon--wrapper">
                             <i class="fa-solid fa-lock"></i>
@@ -33,6 +35,7 @@
                         </div>
                     </div>
                 </main>
+                <!-- Rodapé do Formulário -->
                 <footer id="login__footer">
                     <button type="submit" name="enviar" value="login" class="form__submit">Enviar</button>
                     <small id="login__alt">Ou crie sua conta</small>

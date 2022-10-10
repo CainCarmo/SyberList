@@ -45,11 +45,16 @@ export class DetailsEvents {
         switch (itemType) {
             case "movie":
 
-                await this.oRequestsTmdb
+                await this.oRequestsTmdb.GetMoviesByID(itemID)
+                await this.oRequestsTmdb.GetMoviesSimilar(itemID)
+                await this.oRequestsTmdb.GetMoviesRecommendatiosByID(itemID)
                 break
 
             case "tv":
 
+                await this.oRequestsTmdb.GetTvByID(itemID)
+                // await this.oRequestsTmdb
+                await this.oRequestsTmdb.GetTvRecommendationsByID(itemID)
                 break
         }
     }

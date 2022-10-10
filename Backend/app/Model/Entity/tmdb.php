@@ -9,7 +9,7 @@ namespace App\Model\Entity {
     class Tmdb {
 
         public int    $ID;
-        public string $ID_Tmdb;
+        public int    $ID_Tmdb;
         public int    $FK_USER_ID;
         public string $Title;
         public string $Description;
@@ -46,7 +46,7 @@ namespace App\Model\Entity {
 
             $responseParsed = json_decode($response);
 
-            $this->ID_Jikan        = $responseParsed->id;
+            $this->ID_Tmdb        = $responseParsed->id;
             $this->FK_USER_ID      = $_SESSION["User"]["ID"];
             $this->Title           = $responseParsed->title;
             $this->Description     = str_replace("'", "\'", $responseParsed->overview);
@@ -55,7 +55,7 @@ namespace App\Model\Entity {
             $this->FK_SITUATION_ID = 1;
         }
 
-        public function GetItemsByUser(User $oUserID) {
+        public function GetItemsByUser(User $oUserID): array|bool {
             return (new QueryBuilder(table: "TMDB"))->Select(where: "FK_USER_ID = '". $oUserID ."'")->fetchAll(PDO::FETCH_CLASS, self::class);
         }
     }
