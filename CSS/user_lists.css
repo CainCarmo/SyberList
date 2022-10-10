@@ -1,0 +1,119 @@
+/* --- Header --- */
+
+#header__page {
+    background-color: transparent;
+}
+
+/* --- Search --- */
+
+#search { background-color: transparent; }
+
+/* --- Banner --- */
+
+#banner {
+    height: 70vh;
+    width: 100%;
+    padding: 50px 100px;
+    overflow: hidden;
+    transition: .3s;
+    background-color: transparent;
+    z-index: 3;
+}
+
+/* === Banner Image === */
+
+#banner > img {
+    height: 100vh;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+    z-index: -1;
+}
+
+/* --- Main (Content) --- */
+
+#container__lists {
+    padding: 0 100px 100px 100px;
+}
+
+#container__lists > #content {
+    position: relative;
+    padding: 50px;
+    border-radius: 0 0 15px 15px;
+    background-color: #FFF;
+    box-shadow: inset 0px 0px 20px rgba(0, 0, 0, .2);
+}
+
+/* === User Header === */
+
+#user__header {
+    height: 25vh;
+    width: 100%;
+    position: absolute;
+    top: -160px;
+    left: 0;
+    display: flex;
+    align-items: center;
+    padding: 50px;
+    border-radius: 15px 15px 0 0;
+    background-color: #FFF;
+    box-shadow: inset 0px 0px 20px rgba(0, 0, 0, .2);
+}
+
+#user__header > img {
+    height: 100px;
+    width: 100px;
+}
+
+#user__informations {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-left: 30px;
+}
+
+#user__username, #user__email { color: #000; }
+
+/* === User Lists === */
+
+#section__sliders {
+    display: flex;
+    align-items: center;
+}
+
+.user__lists > .section__header > .section__title {
+    color: #000;
+}
+
+.lists__tabs {
+    width: auto;
+    display: flex;
+    align-items: center;
+}
+
+.lists__tab {
+    margin-right: 20px;
+    padding: .2rem .5rem;
+    border-radius: 10px 10px 0 0;
+    background-color: rgba(0, 0, 0, .5);
+}
+
+.section__slider {
+    max-width: 0%;
+    transition: .2s;
+    background-color: #000;
+}
+
+/* --- JS Events --- */
+
+.lists__slider.expand {
+    max-width: 100%;
+}
+
+.lists__tab.selected {
+    background-color: #000;
+}

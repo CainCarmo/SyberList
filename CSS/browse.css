@@ -1,0 +1,127 @@
+/* --- Header --- */
+
+#header__page {
+    position: relative;
+    background-color: #2C3333;
+}
+
+/* === Header Logo === */
+
+#header__left > img {
+    position: absolute;
+}
+
+#browse {
+    height: auto;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 2fr 8fr;
+}
+
+/* --- Search --- */
+
+#search {
+    background-color: #2C3333;
+}
+
+/* --- Área de Filtros --- */
+
+#browse__filters {
+    height: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    background-color: #2C3333;
+}
+
+/* === Título Filtro === */
+
+#filter__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#filter__header > h3 {
+    font-size: 1.5em;
+    font-weight: 400;
+    letter-spacing: 2px;
+}
+
+/* === Opção Filtro === */
+
+#filter__options {
+    max-height: 570px;
+    width: 100%;
+    margin-top: 1rem;
+    padding-right: .5rem;
+    overflow-y: auto;
+}
+
+.option__button {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem .5rem;
+    border-radius: 15px;
+    background-color: #A5C9CA;
+}
+
+.option__button > span {
+    font-size: 1.2em;
+    color: #000;
+}
+
+.option__names {
+    height: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+    overflow: hidden;
+    background-color: #E7F6F2;
+}
+
+.option__name {
+    padding: .5rem;
+    border-bottom: 2px solid #000;
+    color: #000;
+    cursor: pointer;
+}
+
+.option__name:hover { background-color: #434443; }
+
+/* --- Main --- */
+
+#browse__main {
+    height: auto;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    padding: 0 2rem;
+    background-color: #395B64;
+}
+
+/* --- JS Events --- */
+
+.option__names.expand {
+    height: 100%;
+}
+
+/* --- Icons --- */
+
+.fa-filter {
+    font-size: 1.3em;
+    color: #FFF;
+}
+
+.fa-chevron-right {
+    font-size: 1.5em;
+    transition: .3s;
+}
+
+.fa-chevron-right.turn {
+    transform: rotate(90deg);
+}

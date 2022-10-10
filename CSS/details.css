@@ -9,7 +9,7 @@
 }
 
 .banner__genre {
-    height: 36px;
+    height: auto;
     width: auto;
     display: flex;
     align-items: center;
@@ -28,4 +28,27 @@
 
 .banner__genre > span {
     letter-spacing: 1.5px;
+}
+
+/* --- Main --- */
+
+#trailer__video--wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#trailer__video {
+    height: 400px;
+    width: 40rem;
+    margin: 1.5rem 0;
+}
+
+
+#form__submit {
+    position: absolute;
+    top: 6px;
+    left: -45px;
+    transition: .3s;
+    background-color: transparent;
 }

@@ -5,7 +5,8 @@ namespace App\Control\Session {
     use App\Model\Entity\User;
 
     class Login {
-        public static function Init() {
+
+        public static function Init(): void {
             if (session_status() !== PHP_SESSION_ACTIVE) {
                 session_start();
             }
@@ -23,32 +24,39 @@ namespace App\Control\Session {
             return isset($_SESSION["User"]["ID"]);
         }
 
-        public static function Login(User $obUser) {
+        public static function Login(User $oUser, string $pageType) {
             self::Init();
 
             $_SESSION["User"] = [
-                "ID"         => $obUser->ID,
-                "USER_EMAIL" => $obUser->UserEmail,
-                "NICKNAME"   => $obUser->Nickname,
-                "FK_ROLE_ID" => $obUser->UserRole
+                "ID"         => $oUser->ID,
+                "USER_EMAIL" => $oUser->UserEmail,
+                "NICKNAME"   => $oUser->Nickname,
+                "FK_ROLE_ID" => $oUser->UserRole
             ];
 
-            header("location: index.php");
+            header("location: home.php?type=". $pageType);
             exit;
         }
 
-        public static function Logout() {
+        public static function Logout(string $pageType) {
             self::Init();
 
             unset($_SESSION["User"]);
 
-            header("location: index.php");
+            header("location: home.php?type=". $pageType);
             exit;
         }
 
-        public static function RequireLogout() {
+        public static function RequireLogin(string $pageType) {
+            if(!self::isLogged()) {
+                header("location: home.php?type=". $pageType);
+                exit;
+            }
+        }
+
+        public static function RequireLogout(string $pageType) {
             if(self::isLogged()) {
-                header("location: index.php");
+                header("location: home.php?type=". $pageType);
                 exit;
             }
         }

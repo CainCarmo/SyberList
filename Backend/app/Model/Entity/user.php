@@ -2,9 +2,10 @@
 
 namespace App\Model\Entity {
 
-    use \App\Model\Data\QueryBuilder;
+    use App\Model\Data\QueryBuilder;
 
     class User {
+
         public int    $ID;
         public string $Username;
         public string $Surname;
@@ -19,8 +20,8 @@ namespace App\Model\Entity {
         public string $RegisDate;
 
         public function __construct() {
-            $this->UserRole = 1;
             $this->UserStatus = 1;
+            $this->UserRole   = 1;
         }
 
         public function Register() {
@@ -42,8 +43,8 @@ namespace App\Model\Entity {
             ]);
         }
 
-        public static function GetUserByEmail(string $email) {
-            return (new QueryBuilder(table: "USER"))->Select("USER_EMAIL = '". $email ."'")->fetchObject(self::class);
+        public static function GetUserByEmail(string $email): object {
+            return (new QueryBuilder(table: "USER"))->Select(where: "USER_EMAIL = '". $email ."'")->fetchObject(self::class);
         }
     }
 }

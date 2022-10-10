@@ -49,6 +49,7 @@ i {
 }
 
 ::-webkit-scrollbar-track {
+    border-radius: 8px;
     background-color: #5C6664;
 }
 
@@ -82,7 +83,7 @@ i {
 #header__left { justify-content: flex-start; }
 
 .logo__image {
-    height: 100px;
+    height: 110px;
 }
 
 /* === Header Links === */
@@ -130,20 +131,41 @@ i {
     font-size: 1em;
     font-weight: 600;
     transition: .5s;
-    border: 1px solid #000;
+    border: 1px solid #FFF;
     border-radius: 15px;
     background-color: transparent;
-    color: #000;
+    color: #FFF;
 }
 
 #header__button:hover {
     letter-spacing: 1px;
     transform: translateY(-5px);
+    border: 1px solid #000;
     background-color: #000;
     color: #FFF;
 }
 
-/* Area de Usuario - (Faltando) */
+#header__user--hidden {
+    height: 100%;
+    width: 100%;
+    display: none;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+#header__icon {
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+    border: 3px solid #D3AD7F;
+    transition: .3s all;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+#header__icon:hover {
+    border: 3px solid #5C6664;
+}
 
 /* --- Search Section --- */
 
@@ -261,6 +283,7 @@ i {
 #banner__info {
     height: 100%;
     width: 70%;
+    position: relative;
 }
 
 #banner__title {
@@ -302,7 +325,7 @@ i {
 
 /* --- Main --- */
 
-#container {
+.container {
     padding: 50px 100px;
     background-color: #222831;
 }
@@ -317,7 +340,7 @@ i {
     letter-spacing: 1px;
     padding: .5rem;
     margin: 2rem .5rem;
-    border-bottom: 2px solid #101010;
+    border-bottom: 3px solid #000;
 }
 
 .section__title { font-weight: 500; }
@@ -384,6 +407,10 @@ i {
     margin: 0 .5rem;
 }
 
+.section__title > i {
+    color: #00ADB5;
+}
+
 /* --- Animation --- */
 
 @keyframes form-down {
@@ -417,3 +444,13 @@ i {
 .glider-dot { background-color: #EEEEEE }
 
 .glider-dot.active { background-color: #00ADB5; }
+
+/* --- PHP Events --- */
+
+#header__button.hidden {
+    display: none;
+}
+
+#header__user--hidden.visible {
+    display: flex;
+}

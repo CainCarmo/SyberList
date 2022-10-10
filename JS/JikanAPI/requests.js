@@ -4,9 +4,23 @@ export class RequestsJikan {
 
     constructor() {
         this.oUpdateDomJikan = new updateDomJikan()
-        this.BaseURL = "https://api.jikan.moe/v4";
+        this.BaseURL         = "https://api.jikan.moe/v4";
     }
 
+    async GetAnimeSearch(query) {
+        await fetch(`${this.BaseURL}/anime?q=${query}`)
+        .then(res => res.json())
+        .then(data => this.oUpdateDomJikan.SetAnimeSearch(data))
+        .catch(err => console.warn(err.message))
+    }
+    
+    async GetAnimeBrowse(query) {
+        await fetch(`${this.BaseURL}/anime?q=${query}`)
+                .then(res => res.json())
+                .then(data => this.oUpdateDomJikan.SetAnimeBrowse(data))
+                .catch(err => console.warn(err.message))
+    }
+    
     async GetAnimeBanner(ID) {
         await fetch(`${this.BaseURL}/anime/${ID}/full`)
                 .then(res => res.json())
@@ -14,17 +28,24 @@ export class RequestsJikan {
                 .catch(err => console.warn(err.message))
     }
 
-    async GetAnimeSearch(query) {
-        await fetch(`${this.BaseURL}/anime?q=${query}`)
+    async GetRankingAnime() {
+        await fetch(`${this.BaseURL}/top/anime`)
                 .then(res => res.json())
-                .then(data => this.oUpdateDomJikan.SetAnimeSearch(data))
+                .then(data => this.oUpdateDomJikan.SetRankingAnime(data))
                 .catch(err => console.warn(err.message))
     }
 
-    async GetMangaSearch(query) {
-        await fetch(`${this.BaseURL}/manga?q=${query}`)
+    async GetSeasonNow() {
+        await fetch(`${this.BaseURL}/seasons/now`)
                 .then(res => res.json())
-                .then(data => this.oUpdateDomJikan.SetMangaSearch(data))
+                .then(data => this.oUpdateDomJikan.SetSeasonNow(data))
+                .catch(err => console.warn(err.message))
+    }
+
+    async GetSeasonUpComming() {
+        await fetch(`${this.BaseURL}/seasons/upcoming`)
+                .then(res => res.json())
+                .then(data => this.oUpdateDomJikan.SetSeasonUpComming(data))
                 .catch(err => console.warn(err.message))
     }
     
@@ -32,27 +53,6 @@ export class RequestsJikan {
         await fetch(`${this.BaseURL}/recommendations/anime`)
                 .then(res => res.json())
                 .then(data => this.oUpdateDomJikan.SetRecentAnimeRecommendations(data))
-                .catch(err => console.warn(err.message))
-    }
-
-    async GetRecentMangaRecommendations() {
-        await fetch(`${this.BaseURL}/recommendations/manga`)
-                .then(res => res.json())
-                .then(data => this.oUpdateDomJikan.SetRecentMangaRecommendations(data))
-                .catch(err => console.warn(err.message))
-    }
-
-    async GetAnimeGenres() {
-        await fetch(`${this.BaseURL}/genres/anime`)
-                .then(res => res.json())
-                .then(data => this.oUpdateDomJikan.SetAnimeGenres(data))
-                .catch(err => console.warn(err.message))
-    }
-
-    async GetMangaGenres() {
-        await fetch(`${this.BaseURL}/genres/manga`)
-                .then(res => res.json())
-                .then(data => this.oUpdateDomJikan.SetMangaGenres(data))
                 .catch(err => console.warn(err.message))
     }
 
@@ -94,7 +94,7 @@ export class RequestsJikan {
     async GetAnimeThemes(ID) {
         await fetch(`${this.BaseURL}/anime/${ID}/themes`)
                 .then(res => res.json())
-                .then(data => this.oUpdateDomJikan.SetAnimeThemes(data))
+                .then(data => console.log(data))
                 .catch(err => console.warn(err.message))
     }
 
@@ -102,6 +102,41 @@ export class RequestsJikan {
         await fetch(`${this.BaseURL}/anime/${ID}/streaming`)
                 .then(res => res.json())
                 .then(data => this.oUpdateDomJikan.SetAnimeStreaming(data))
+                .catch(err => console.warn(err.message))
+    }
+
+    async GetAnimeGenres() {
+        await fetch(`${this.BaseURL}/genres/anime`)
+                .then(res => res.json())
+                .then(data => this.oUpdateDomJikan.SetAnimeGenres(data))
+                .catch(err => console.warn(err.message))
+    }
+
+    async GetMangaSearch(query) {
+        await fetch(`${this.BaseURL}/manga?q=${query}`)
+                .then(res => res.json())
+                .then(data => this.oUpdateDomJikan.SetMangaSearch(data))
+                .catch(err => console.warn(err.message))
+    }
+
+    async GetMangaBrowse(query) {
+        await fetch(`${this.BaseURL}/manga?q=${query}`)
+                .then(res => res.json())
+                .then(data => this.oUpdateDomJikan.SetMangaBrowse(data))
+                .catch(err => console.warn(err.message))
+    }
+
+    async GetRankingManga() {
+        await fetch(`${this.BaseURL}/top/manga`)
+                .then(res => res.json())
+                .then(data => this.oUpdateDomJikan.SetRankingManga(data))
+                .catch(err => console.warn(err.message))
+    }
+
+    async GetRecentMangaRecommendations() {
+        await fetch(`${this.BaseURL}/recommendations/manga`)
+                .then(res => res.json())
+                .then(data => this.oUpdateDomJikan.SetRecentMangaRecommendations(data))
                 .catch(err => console.warn(err.message))
     }
 
@@ -115,7 +150,7 @@ export class RequestsJikan {
     async GetMangaCharacters(ID) {
         await fetch(`${this.BaseURL}/manga/${ID}/characters`)
                 .then(res => res.json())
-                .then(data => SetMangaCharacters(data))
+                .then(data => this.oUpdateDomJikan.SetMangaCharacters(data))
                 .catch(err => console.warn(err.message))
     }
 
@@ -133,31 +168,10 @@ export class RequestsJikan {
                 .catch(err => console.warn(err.message))
     }
 
-    async GetRankingAnime() {
-        await fetch(`${this.BaseURL}/top/anime`)
+    async GetMangaGenres() {
+        await fetch(`${this.BaseURL}/genres/manga`)
                 .then(res => res.json())
-                .then(data => this.oUpdateDomJikan.SetRankingAnime(data))
-                .catch(err => console.warn(err.message))
-    }
-
-    async GetRankingManga() {
-        await fetch(`${this.BaseURL}/top/manga`)
-                .then(res => res.json())
-                .then(data => this.oUpdateDomJikan.SetRankingManga(data))
-                .catch(err => console.warn(err.message))
-    }
-
-    async GetSeasonNow() {
-        await fetch(`${this.BaseURL}/seasons/now`)
-                .then(res => res.json())
-                .then(data => this.oUpdateDomJikan.SetSeasonNow(data))
-                .catch(err => console.warn(err.message))
-    }
-
-    async GetSeasonUpComming() {
-        await fetch(`${this.BaseURL}/seasons/upcoming`)
-                .then(res => res.json())
-                .then(data => this.oUpdateDomJikan.SetSeasonUpComming(data))
+                .then(data => this.oUpdateDomJikan.SetMangaGenres(data))
                 .catch(err => console.warn(err.message))
     }
 }

@@ -6,14 +6,15 @@ namespace App\Model\Data {
     use PDOException;
 
     class ConfigDB {
-        const Host     = "localhost";
-        const Name     = "SyberList";
-        const DataUser = "root";
-        const DataPass = "77000520Ccos+";
+        
+        private const Host     = "localhost";
+        private const Name     = "SyberList";
+        private const DataUser = "root";
+        private const DataPass = "77000520Ccos+";
 
         protected PDO $_connection;
 
-        public function SetConnection() {
+        public function SetConnection(): void {
             try {
                 $this->_connection = new PDO("mysql:host=". self::Host. ";dbname=". self::Name, self::DataUser, self::DataPass);
                 $this->_connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
