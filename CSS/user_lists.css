@@ -13,7 +13,10 @@
 #banner {
     height: 70vh;
     width: 100%;
-    padding: 50px 100px;
+    display: flex;
+    align-items: end;
+    justify-content: center;
+    padding: 50px 100px 0px 100px;
     overflow: hidden;
     transition: .3s;
     background-color: transparent;
@@ -32,12 +35,147 @@
     z-index: -1;
 }
 
-/* --- Main (Content) --- */
+/* === Banner Information  === */
 
-#container__lists {
-    padding: 0 100px 100px 100px;
+#banner__user {
+    height: 30vh;
+    width: 70rem;
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+    padding: 1rem 0;
+    border-radius: 15px 15px 0 0;
+    background-color: #2C3333;
 }
 
+#user__icon {
+    display: flex;
+    justify-content: center;
+}
+
+#user__icon > img {
+    height: 150px;
+    width: 150px;
+    border: 3px solid #D3AD7F;
+    border-radius: 50%;
+}
+
+#info__nickname {
+    font-weight: 400;
+}
+
+#user__control {
+    display: flex;
+    justify-content: center;
+}
+
+#control__button {
+    display: flex;
+    background-color: transparent;
+}
+
+#control__button:hover > span {
+    color: #ED3E18;
+}
+
+#button__text {
+    position: relative;
+    font-size: 1.5em;
+    font-weight: 500;
+    letter-spacing: 1px;
+    transition: .5s;
+    margin-left: 15px;
+}
+
+#button__text::before {
+    height: 3px;
+    width: 0;
+    position: absolute;
+    content: "";
+    left: 0;
+    bottom: -3px;
+    border-radius: 10px;
+    transition: .5s ease;
+    background-color: #ED3E18;
+}
+
+#button__text:hover::before {
+    width: 100%;
+}
+
+/* --- Main (Content) --- */
+
+#content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #222831;
+}
+
+#lists {
+    height: auto;
+    width: 70rem;
+    padding: 0 2rem;
+    margin: 0 .5rem;
+    margin-bottom: 2rem;
+    border-radius: 0 0 15px 15px;
+    background-color: #2C3333;
+}
+
+.lists__user {
+    margin: 2rem 0;
+}
+
+.lists__tabs {
+    width: auto;
+    display: flex;
+    align-items: center;
+}
+
+.lists__tab {
+    font-size: 1em;
+    margin-right: 20px;
+    padding: .2rem .5rem;
+    border-radius: 10px 10px 0 0;
+    background-color: rgba(0, 0, 0, .5);
+}
+
+.section__list {
+    height: auto;
+    width: 100%;
+    display: flex;
+    transition: .3s all;
+    overflow: hidden;
+    border-radius: 0px 15px 15px 15px;
+    background-color: #000;
+}
+
+.list__item {
+    height: auto;
+    width: 0%;
+    display: grid;
+    transition: all .2s;
+    grid-template-columns: repeat(5, 1fr);
+    overflow: hidden;
+}
+
+/* --- JS Events --- */
+
+.lists__tab.selected {
+    background-color: #000;
+}
+
+.list__item.expand {
+    width: 100%;
+}
+
+/* --- Icons --- */
+
+.fa-right-from-bracket {
+    font-size: 2em;
+    color: #ED3E18;
+}
+
+/*
 #container__lists > #content {
     position: relative;
     padding: 50px;
@@ -46,7 +184,7 @@
     box-shadow: inset 0px 0px 20px rgba(0, 0, 0, .2);
 }
 
-/* === User Header === */
+ === User Header === 
 
 #user__header {
     height: 25vh;
@@ -78,7 +216,7 @@
 
 #user__username, #user__email { color: #000; }
 
-/* === User Lists === */
+/* === User Lists === *
 
 #section__sliders {
     display: flex;
@@ -108,7 +246,7 @@
     background-color: #000;
 }
 
-/* --- JS Events --- */
+/* --- JS Events --- *
 
 .lists__slider.expand {
     max-width: 100%;

@@ -22,7 +22,6 @@ export class FactoryDom {
         return element
     }
     
-
     CreateSelectOption(Value = this.defaultValue, InnerHTML = this.defaultInnerHTML) {
         
         const option = document.createElement("option")
@@ -33,5 +32,9 @@ export class FactoryDom {
             option.innerHTML = InnerHTML
 
         return option
+    }
+
+    CreateFilterOption() {
+        
     }
 }

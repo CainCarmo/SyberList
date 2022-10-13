@@ -49,7 +49,7 @@ const videoDetailsMovie = "./Resources/Video/mylivewallpapers-com-Moon-Knight.mp
  * -> Verificando as Páginas para chamar os métodos de Eventos
  */
 
-function  VerifyPage() {
+async function VerifyPage() {
 
     let itemID   = ""
     let itemType = ""
@@ -89,11 +89,11 @@ function  VerifyPage() {
 
             if (itemType === "anime" || itemType === "manga") {
                 objHomeDom.videoBanner.src = videoDetailsAnime
-                oDetailsEvents.DetailsAnime(itemType, itemID)
+                await oDetailsEvents.DetailsAnime(itemType, itemID)
             }
             else {
                 objHomeDom.videoBanner.src = videoDetailsMovie
-                oDetailsEvents.DetailsFilm(itemType, itemID)
+                await oDetailsEvents.DetailsFilm(itemType, itemID)
             }
 
             oLoginEvents.Login()

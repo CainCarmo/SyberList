@@ -13,16 +13,21 @@ export class BrowseEvents {
     }
 
     Browse(pageType) {
-        
-        //#region Set de Eventos e Métodos da Caixa de Pesquisa
+       //#region Set de Eventos e Métodos da Caixa de Pesquisa
 
-        window.addEventListener("load", () => {
+        window.addEventListener("load", async () => {
             switch(pageType) {
+
                 case "anime":
                 case "manga":
     
                     objHeaderDom.selectSearch.appendChild(this.oFactoryDom.CreateSelectOption("anime", "Anime"))
                     objHeaderDom.selectSearch.appendChild(this.oFactoryDom.CreateSelectOption("manga", "Mangá"))
+
+                    pageType === "anime"
+                        ? await this.oRequestsJikan.GetAnimeBrowse("Naruto")
+                        : await this.oRequestsJikan.GetMangaBrowse("Naruto")
+
                     break
                 
                 case "tv":
@@ -30,6 +35,11 @@ export class BrowseEvents {
                     
                     objHeaderDom.selectSearch.appendChild(this.oFactoryDom.CreateSelectOption("tv", "Série"))
                     objHeaderDom.selectSearch.appendChild(this.oFactoryDom.CreateSelectOption("movie", "Filme"))
+
+                    pageType === "movie"
+                        ? await this.oRequestsTmdb.GetMovieBrowse("Batman")
+                        : await this.oRequestsTmdb.GetTvBrowse("Bad")
+                        
                     break
             }
         })
@@ -42,50 +52,56 @@ export class BrowseEvents {
                 : objHeaderDom.divTimesWrapper.classList.remove("visible")
         })
 
-        objHeaderDom.formSearch.addEventListener("submit", async e => {
-            e.preventDefault()
+        objHeaderDom.formSearch.addEventListener("submit", async event => {
+            event.preventDefault()
             
             let query = objHeaderDom.inputSearch.value
 
             switch(pageType) {
+
                 case "anime":
                 case "manga":
 
                     objHeaderDom.selectSearch.value === "anime"
-                    ? await this.oRequestsJikan.GetAnimeBrowse(query)
-                    : await this.oRequestsJikan.GetMangaBrowse(query)
+                        ? await this.oRequestsJikan.GetAnimeBrowse(query)
+                        : await this.oRequestsJikan.GetMangaBrowse(query)
+
                     break
                 
                 case "tv":
                 case "movie":
                     
                     objHeaderDom.selectSearch.value === "tv"
-                    ? await this.oRequestsTmdb.GetTvBrowse(query)
-                    : await this.oRequestsTmdb.GetMovieBrowse(query)
+                        ? await this.oRequestsTmdb.GetTvBrowse(query)
+                        : await this.oRequestsTmdb.GetMovieBrowse(query)
+
                     break
             }
         })
 
-        objHeaderDom.iconSearch.addEventListener("click", async e => {
-            e.preventDefault()
+        objHeaderDom.iconSearch.addEventListener("click", async event => {
+            event.preventDefault()
 
             let query = objHeaderDom.inputSearch.value
 
             switch(pageType) {
+
                 case "anime":
                 case "manga":
 
                     objHeaderDom.selectSearch.value === "anime"
-                    ? await this.oRequestsJikan.GetAnimeBrowse(query)
-                    : await this.oRequestsJikan.GetMangaBrowse(query)
+                        ? await this.oRequestsJikan.GetAnimeBrowse(query)
+                        : await this.oRequestsJikan.GetMangaBrowse(query)
+
                     break
                 
                 case "tv":
                 case "movie":
                     
                     objHeaderDom.selectSearch.value === "tv"
-                    ? await this.oRequestsTmdb.GetTvBrowse(query)
-                    : await this.oRequestsTmdb.GetMovieBrowse(query)
+                        ? await this.oRequestsTmdb.GetTvBrowse(query)
+                        : await this.oRequestsTmdb.GetMovieBrowse(query)
+
                     break
             }
         })

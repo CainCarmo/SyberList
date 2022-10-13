@@ -1,15 +1,13 @@
-<?
+<?php
 
     use App\Model\Entity\User;
     use App\Control\Session\Login;
     use App\Model\Enums\EnumsUser;
     use App\Control\Errors\RegisterErrors;
 
-    $errorRegister = "";
-    
-    $pageType      = explode("&", explode("=", $_SERVER["QUERY_STRING"])[1])[0];
+    Login::RequireLogout();
 
-    Login::RequireLogout($pageType);
+    $errorRegister = "";
 
     if (isset($_POST["enviar"])) {
 
@@ -45,6 +43,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <!-- CSS -->
+        <link rel="icon"       href="./Resources/Image/Icons/icone_syber.png">
         <link rel="stylesheet" href="./CSS/form_register.css">
         <link rel="stylesheet" href="./CSS/fields.css">
 

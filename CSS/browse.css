@@ -96,6 +96,7 @@
 /* --- Main --- */
 
 #browse__main {
+    min-height: 20.5rem;
     height: auto;
     width: 100%;
     display: grid;

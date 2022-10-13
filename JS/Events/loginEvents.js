@@ -4,7 +4,6 @@ import { objHeaderDom } from "../Collections/headerCollection.js"
 export class LoginEvents {
 
     Login() {
-
         if (objLoginDom.formLogin != null) {
 
             objHeaderDom.buttonLogin.addEventListener("click", () => {

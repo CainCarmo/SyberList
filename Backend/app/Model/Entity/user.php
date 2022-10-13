@@ -43,7 +43,7 @@ namespace App\Model\Entity {
             ]);
         }
 
-        public static function GetUserByEmail(string $email): object {
+        public static function GetUserByEmail(string $email): object|bool {
             return (new QueryBuilder(table: "USER"))->Select(where: "USER_EMAIL = '". $email ."'")->fetchObject(self::class);
         }
     }

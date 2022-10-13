@@ -6,24 +6,24 @@
     use App\Control\Errors\LoginErrors;
 
     $oUserLogged = Login::GetUserLogged();
-
-    $pageType    = explode("&", explode("=", $_SERVER["QUERY_STRING"])[1])[0];
+    
+    $pageType     = explode("&", explode("type=", $_SERVER["QUERY_STRING"])[1])[0];
+    $errorLogin   = "";
+    $userListsCSS = "";
 
     $hiddenBtn   = $oUserLogged ? "class='hidden'" : "";
     $visibleIcon = $oUserLogged ? "class='visible'" : "";
 
-    $errorLogin   = "";
-    $userListsCSS = "";
-
     $_SERVER["PHP_SELF"] === "/lists.php"
         ? $userListsCSS = '<link rel="stylesheet" href="./CSS/user_lists.css">'
-        : $userListsCSS = null;
+        : null;
 
     $_SERVER["PHP_SELF"] === "/search.php"
         ? $userListsCSS = '<link rel="stylesheet" href="./CSS/browse.css">'
-        : $userListsCSS = null;
+        : null;
 
     if (isset($_POST["enviar"])) {
+        
         $oUser = User::GetUserByEmail(email: $_POST["login__email"]);
 
         $passwordField = $_POST["login__password"];
@@ -49,8 +49,8 @@
             Login::Login(oUser: $oUser, pageType: $pageType);
         }
         else {
-            
             $errorLogin = $oVerifyLogin[1];
+            
             header("location: home.php?type=". $pageType);
             exit;
         }

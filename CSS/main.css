@@ -340,7 +340,7 @@ i {
     letter-spacing: 1px;
     padding: .5rem;
     margin: 2rem .5rem;
-    border-bottom: 3px solid #000;
+    border-bottom: 3px solid #FFF;
 }
 
 .section__title { font-weight: 500; }

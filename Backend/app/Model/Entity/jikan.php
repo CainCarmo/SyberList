@@ -3,8 +3,8 @@
 namespace App\Model\Entity {
 
     use PDO;
-    use App\Model\Data\QueryBuilder;
     use App\Model\Enums\EnumsJikan;
+    use App\Model\Data\QueryBuilder;
 
     class Jikan {
 
@@ -54,7 +54,7 @@ namespace App\Model\Entity {
         }
 
         public function GetItemsByUser(int $oUserID): array|bool {
-            return (new QueryBuilder(table: "JIKAN"))->Select(where: "FK_USER_ID = '". $oUserID ."'")->fetchAll(PDO::FETCH_CLASS, self::class);
+            return (new QueryBuilder(table: "JIKAN"))->Select(where: "FK_USER_ID = ". $oUserID ."")->fetchAll(PDO::FETCH_CLASS, self::class);
         }
     }
 }

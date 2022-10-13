@@ -6,9 +6,9 @@
     $oTmdb  = new Tmdb();
     $oJikan = new Jikan();
 
-    $itemID = explode("=", $_SERVER["QUERY_STRING"])[2];
+    $itemID = explode("&", explode("id=", $_SERVER["QUERY_STRING"])[1])[0];
 
-    if (isset($_POST["salvar"])) {
+    if (isset($_POST["salvar"]) && $oUserLogged) {
 
         switch ($pageType) {
 
@@ -16,17 +16,18 @@
             case "manga":
 
                 $oJikan->SearchItemByID(type: $pageType, ID: $itemID);
-
-                
                 $oJikan->Register();
+
+                header("location: " . $_SERVER["REQUEST_URI"]);
                 break;
 
-            case "movie":
             case "tv":
+            case "movie":
 
                 $oTmdb->SearchItemByID(type: $pageType, ID: $itemID);
-
                 $oTmdb->Register();
+                
+                header("location: " . $_SERVER["REQUEST_URI"]);
                 break;
         }
     }

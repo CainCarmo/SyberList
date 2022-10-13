@@ -91,13 +91,6 @@ export class RequestsJikan {
                 .catch(err => console.warn(err.message))
     }
 
-    async GetAnimeThemes(ID) {
-        await fetch(`${this.BaseURL}/anime/${ID}/themes`)
-                .then(res => res.json())
-                .then(data => console.log(data))
-                .catch(err => console.warn(err.message))
-    }
-
     async GetAnimeStreaming(ID) {
         await fetch(`${this.BaseURL}/anime/${ID}/streaming`)
                 .then(res => res.json())

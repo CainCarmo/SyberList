@@ -3,7 +3,6 @@ import { objIntroDom } from "../Collections/introCollection.js"
 export class IntroEvents {
 
     Intro() {
-
         objIntroDom.btnAnime.addEventListener("mouseover", () => {
             objIntroDom.boxAnime.classList.add("hover")
             objIntroDom.videoAnime.play()

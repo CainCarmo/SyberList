@@ -1,5 +1,5 @@
 import { RequestsJikan } from "../JikanAPI/requests.js"
-import { RequestsTmdb } from "../TmdbAPI/requests.js"
+import { RequestsTmdb }  from "../TmdbAPI/requests.js"
 
 export class HomeEvents {
 
@@ -9,7 +9,6 @@ export class HomeEvents {
     }
 
     HomeAnime() {
-
         window.addEventListener("load", async () => {
             await this.oRequestsJikan.GetAnimeBanner(38000)
             await this.oRequestsJikan.GetRankingAnime()
@@ -28,7 +27,6 @@ export class HomeEvents {
     }
 
     HomeFilm() {
-
         window.addEventListener("load", async () => {
             await this.oRequestsTmdb.GetTvBanner(414906)
             await this.oRequestsTmdb.GetMoviesTop()

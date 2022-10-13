@@ -2,9 +2,9 @@
 
 namespace App\Model\Entity {
 
-    use App\Model\Data\QueryBuilder;
-    use App\Model\Enums\EnumsTmdb;
     use PDO;
+    use App\Model\Enums\EnumsTmdb;
+    use App\Model\Data\QueryBuilder;
 
     class Tmdb {
 
@@ -22,7 +22,7 @@ namespace App\Model\Entity {
 
             $this->Add_Time = date("Y-m-d H:i:s");
 
-            $oQueryBuilder = new QueryBuilder(table: "TMDB");
+            $oQueryBuilder  = new QueryBuilder(table: "TMDB");
 
             $this->ID = $oQueryBuilder->Insert([
                 "ID_TMDB"         => $this->ID_Tmdb,
@@ -38,25 +38,28 @@ namespace App\Model\Entity {
 
         public function SearchItemByID(string $type, int $ID): void {
 
-            $baseURL      = "https://api.themoviedb.org/3";
             $apiKey       = "32a48ac8387366ff3d957d772176624f";
+            $baseURL      = "https://api.themoviedb.org/3";
             $baseImageURL = "https://image.tmdb.org/t/p/w500";
 
             $response = file_get_contents($baseURL . "/" . $type . "/" . $ID . "?api_key=" . $apiKey);
 
             $responseParsed = json_decode($response);
 
-            $this->ID_Tmdb        = $responseParsed->id;
+            $this->ID_Tmdb         = $responseParsed->id;
             $this->FK_USER_ID      = $_SESSION["User"]["ID"];
-            $this->Title           = $responseParsed->title;
             $this->Description     = str_replace("'", "\'", $responseParsed->overview);
             $this->FK_TYPE_ID      = EnumsTmdb::ToggleType(method: "POST", type: $type);
             $this->Cover           = $baseImageURL . $responseParsed->poster_path;
             $this->FK_SITUATION_ID = 1;
+
+            $type === "movie"
+                ? $this->Title = $responseParsed->title
+                : $this->Title = $responseParsed->name;
         }
 
-        public function GetItemsByUser(User $oUserID): array|bool {
-            return (new QueryBuilder(table: "TMDB"))->Select(where: "FK_USER_ID = '". $oUserID ."'")->fetchAll(PDO::FETCH_CLASS, self::class);
+        public function GetItemsByUser(int $oUserID): array|bool {
+            return (new QueryBuilder(table: "TMDB"))->Select(where: "FK_USER_ID = ". $oUserID)->fetchAll(PDO::FETCH_CLASS, self::class);
         }
     }
 }
