@@ -6,24 +6,44 @@
     use App\Control\Errors\LoginErrors;
 
     $oUserLogged = Login::GetUserLogged();
+    
+    $pageType    = explode("&", explode("type=", $_SERVER["QUERY_STRING"])[1])[0];
 
-    $pageType    = explode("&", explode("=", $_SERVER["QUERY_STRING"])[1])[0];
+    $savedError  = key_exists(1, explode("saved=", $_SERVER["QUERY_STRING"]))
+        ? explode("saved=", $_SERVER["QUERY_STRING"])[1]
+        : null;
 
-    $hiddenBtn   = $oUserLogged ? "class='hidden'" : "";
-    $visibleIcon = $oUserLogged ? "class='visible'" : "";
-
-    $errorLogin   = "";
+    $loginError  = key_exists(1, explode("login=", $_SERVER["QUERY_STRING"]))
+        ? explode("login=", $_SERVER["QUERY_STRING"])[1]
+        : null;
+        
     $userListsCSS = "";
+
+    $hiddenBtn    = $oUserLogged ? "class='hidden'" : "";
+    $visibleIcon  = $oUserLogged ? "class='visible'" : "";
+
+    $oUserLogged
+        ? $cover = $_SESSION["User"]["COVER"]
+        : "";
+
+    $messageLoginError = is_null($loginError)
+        ? null
+        : '<div id="error"><span>Login ou senha inválidos!</span><i class="fas fa-times" id="message__delete"></i></div>';
+
+    $messageSaveError  = is_null($savedError)
+        ? null
+        : '<div id="error"><span>Para favoritar precisa efetuar o login</span><i class="fas fa-times" id="message__delete"></i></div>';
 
     $_SERVER["PHP_SELF"] === "/lists.php"
         ? $userListsCSS = '<link rel="stylesheet" href="./CSS/user_lists.css">'
-        : $userListsCSS = null;
+        : null;
 
     $_SERVER["PHP_SELF"] === "/search.php"
         ? $userListsCSS = '<link rel="stylesheet" href="./CSS/browse.css">'
-        : $userListsCSS = null;
+        : null;
 
     if (isset($_POST["enviar"])) {
+        
         $oUser = User::GetUserByEmail(email: $_POST["login__email"]);
 
         $passwordField = $_POST["login__password"];
@@ -44,14 +64,13 @@
             $oUser->UserRole   = EnumsUser::ToggleRole($oUser->FK_ROLE_ID);
             $oUser->UserStatus = EnumsUser::ToggleStatus($oUser->FK_STATUS_ID);
             $oUser->BirthDate  = $oUser->BIRTH_DATE;
+            $oUser->UserIcon   = $oUser->USER_ICON;
             $oUser->RegisDate  = $oUser->REGISTER_DATE;
 
             Login::Login(oUser: $oUser, pageType: $pageType);
         }
         else {
-            
-            $errorLogin = $oVerifyLogin[1];
-            header("location: home.php?type=". $pageType);
+            header("location: home.php?type=". $pageType . "&login=error");
             exit;
         }
     }
@@ -85,6 +104,9 @@
         <title id="page__title">Home | SyberList</title>
     </head>
     <body>
+        <!-- Mensagem de Erro -->
+        <?=$messageLoginError?>
+        <?=$messageSaveError?>
         <!-- Topo da Página -->
         <header id="header__page">
             <div id="header__left">
@@ -104,7 +126,7 @@
                     <a href="search.php?type=movie">Filmes</a>
                 </li>
                 <li class="header__link">
-                    <a href="./build.php">Nosso Blog</a>
+                    <a href="https://blog-syberlist.blogspot.com/">Nosso Blog</a>
                 </li>
             </nav>
             <div id="header__right">
@@ -112,7 +134,7 @@
                 <button type="button" id="header__button" <?=$hiddenBtn?>>Login</button>
                 <div id="header__user--hidden" <?=$visibleIcon?>>
                     <a href="./lists.php">
-                        <img id="header__icon" src="./Resources/Image/perfil.jpg" alt="Ícone do Usuário">
+                        <img id="header__icon" src="./Resources/Image/Perfil/<?=$cover?>" alt="Ícone do Usuário">
                     </a>
                 </div>
             </div>

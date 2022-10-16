@@ -2,102 +2,61 @@ import { objListsDom } from "../Collections/listsCollection.js"
 
 export class ListEvents {
 
-    ChangeState() {
+    ChangeStateAnime() {
 
-        objListsDom.buttonsAnime.forEach(e => {
-            e.classList.remove("selected")
+        objListsDom.buttonsAnime.forEach(element => {
+            element.classList.remove("selected")
         })
 
-        objListsDom.divListsAnime.forEach((e, i) => {
-            e.classList.remove("expand")
+        objListsDom.divListsAnime.forEach(element => {
+            element.classList.remove("expand")
+        })
+    }
+
+    ChangeStateMovie() {
+
+        objListsDom.buttonsMovie.forEach(element => {
+            element.classList.remove("selected")
+        })
+
+        objListsDom.divListsMovie.forEach(element => {
+            element.classList.remove("expand")
         })
     }
 
     List() {
-        
-        window.addEventListener("load", async () => {
-            objListsDom.buttonWatch.classList.add("selected")
-            objListsDom.divListAnimeWatch.classList.add("expand")
+        objListsDom.divListAnime.classList.add("expand")
+        objListsDom.buttonAnime.classList.add("selected")
 
-            let glider = new Glider(objListsDom.divListAnimeWatch, {
-                slidesToShow: 5,
-                slidesToScroll: 5,
-                draggable: true,
-                arrows: {
-                    prev: `#arrow__back`,
-                    next: `#arrow__next`
-                }
-            })
+        objListsDom.divListMovie.classList.add("expand")
+        objListsDom.buttonMovie.classList.add("selected")
+
+        objListsDom.buttonAnime.addEventListener("click", () => {
+            this.ChangeStateAnime()
+
+            objListsDom.buttonAnime.classList.add("selected")
+            objListsDom.divListAnime.classList.add("expand")
         })
-    
-        objListsDom.buttonWatch.addEventListener("click", () => {
-            this.ChangeState()
-    
-            objListsDom.buttonWatch.classList.add("selected")
-            objListsDom.divListAnimeWatch.classList.add("expand")
 
-            let glider = new Glider(objListsDom.divListAnimeWatch, {
-                slidesToShow: 5,
-                slidesToScroll: 5,
-                draggable: true,
-                arrows: {
-                    prev: `#arrow__back`,
-                    next: `#arrow__next`
-                }
-            })
+        objListsDom.buttonManga.addEventListener("click", () => {
+            this.ChangeStateAnime()
+
+            objListsDom.buttonManga.classList.add("selected")
+            objListsDom.divListManga.classList.add("expand")
         })
-    
-        objListsDom.buttonWatching.addEventListener("click", () => {
-            this.ChangeState()
-    
-            objListsDom.buttonWatching.classList.add("selected")
-            objListsDom.divListAnimeWatching.classList.add("expand")
 
-            let glider = new Glider(objListsDom.divListAnimeWatching, {
-                slidesToShow: 5,
-                slidesToScroll: 5,
-                draggable: true,
-                arrows: {
-                    prev: `#arrow__back`,
-                    next: `#arrow__next`
-                }
-            })
+        objListsDom.buttonMovie.addEventListener("click", () => {
+            this.ChangeStateMovie()
+
+            objListsDom.buttonMovie.classList.add("selected")
+            objListsDom.divListMovie.classList.add("expand")
         })
-    
-        objListsDom.buttonWatched.addEventListener("click", () => {
-            this.ChangeState()
-    
-            objListsDom.buttonWatched.classList.add("selected")
-            objListsDom.divListAnimeWatched.classList.add("expand")
 
-            let glider = new Glider(objListsDom.divListAnimeWatched, {
-                slidesToShow: 5,
-                slidesToScroll: 5,
-                draggable: true,
-                arrows: {
-                    prev: `#arrow__back`,
-                    next: `#arrow__next`
-                }
-            })
+        objListsDom.buttonSerie.addEventListener("click", () => {
+            this.ChangeStateMovie()
 
-            console.log(glider)
-        })
-    
-        objListsDom.buttonDrop.addEventListener("click", () => {
-            this.ChangeState()
-    
-            objListsDom.buttonDrop.classList.add("selected")
-            objListsDom.divListAnimeWatchDrop.classList.add("expand")
-
-            let glider = new Glider(objListsDom.divListAnimeWatchDrop, {
-                slidesToShow: 5,
-                slidesToScroll: 5,
-                draggable: true,
-                arrows: {
-                    prev: `#arrow__back`,
-                    next: `#arrow__next`
-                }
-            })
+            objListsDom.buttonSerie.classList.add("selected")
+            objListsDom.divListSerie.classList.add("expand")
         })
     }
 }

@@ -1,15 +1,21 @@
-<?
+<?php
 
     use App\Model\Entity\User;
     use App\Control\Session\Login;
     use App\Model\Enums\EnumsUser;
     use App\Control\Errors\RegisterErrors;
 
-    $errorRegister = "";
-    
-    $pageType      = explode("&", explode("=", $_SERVER["QUERY_STRING"])[1])[0];
+    Login::RequireLogout();
 
-    Login::RequireLogout($pageType);
+    
+    $pageType      = explode("&", explode("type=", $_SERVER["QUERY_STRING"])[1])[0];
+    $errorRegister = $_SERVER["QUERY_STRING"] === "type=" . $pageType . "&register=error"
+        ? explode("&", explode("register=", $_SERVER["QUERY_STRING"])[1])[0]
+        : null;
+
+    $RegisterError = is_null($errorRegister)
+        ? null
+        : "Email já Cadastrado";
 
     if (isset($_POST["enviar"])) {
 
@@ -25,13 +31,19 @@
             $oUser->UserPass   = password_hash($_POST["register__password"], PASSWORD_DEFAULT);
             $oUser->BirthDate  = $_POST["register__birth"];
             $oUser->UserGender = EnumsUser::ToggleGender("POST", $_POST["register__gender"]);
+
+            $oUser->UserGender === 1
+                ? $oUser->UserIcon = "perfil-M.jpg"
+                : $oUser->UserIcon = "perfil-F.jpg";
             
             $oUser->Register();
 
             Login::Login(oUser: $oUser, pageType: $pageType);
         }
-        else
-            $errorRegister = $oVerifyReigister[1];
+        else {
+            header("location: register.php?type=". $pageType . "&register=error");
+            exit;
+        }
     }
 
 ?>
@@ -45,6 +57,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <!-- CSS -->
+        <link rel="icon"       href="./Resources/Image/Icons/icone_syber.png">
         <link rel="stylesheet" href="./CSS/form_register.css">
         <link rel="stylesheet" href="./CSS/fields.css">
 
@@ -80,14 +93,9 @@
                         <!-- Logo -->
                         <img class="form__logo" src="https://cdn.discordapp.com/attachments/1000527265303642194/1006613565182054470/Logo-image.png" alt="Imagem da Logo" />
                         <!-- Mensagem de Erro -->
-                        <span class="form__error"></span>
+                        <span class="form__error"><?=$RegisterError?></span>
                     </header>
                     <main id="register__fields">
-                        <!-- Área Icon do Usuário -->
-                        <div id="form__photo--wrapper">
-                            <label for="form__photo">Escolha o Perfil</label>
-                            <input type="file" name="form__photo" id="form__photo">
-                        </div>
                         <!-- Campo do Nome -->
                         <div class="form__field" id="field__username">
                             <div class="form__icon--wrapper">

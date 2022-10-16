@@ -39,11 +39,12 @@ namespace App\Model\Entity {
                 'FK_ROLE_ID'    => $this->UserRole,
                 'FK_STATUS_ID'  => $this->UserStatus,
                 'BIRTH_DATE'    => $this->BirthDate,
+                'USER_ICON'     => $this->UserIcon,
                 'REGISTER_DATE' => $this->RegisDate
             ]);
         }
 
-        public static function GetUserByEmail(string $email): object {
+        public static function GetUserByEmail(string $email): object|bool {
             return (new QueryBuilder(table: "USER"))->Select(where: "USER_EMAIL = '". $email ."'")->fetchObject(self::class);
         }
     }

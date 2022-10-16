@@ -10,10 +10,11 @@ namespace App\Control\Errors {
             
             $isUser = User::GetUserByEmail($email);
 
-            if ($isUser)
-                return [false, "Email existente!"];
-            else
-                return [true, "Registrado com sucesso!"];
+            $isUser
+                ? $arrResponse = [false, "Email existente!"]
+                : $arrResponse = [true, "Registrado com sucesso!"];
+
+            return $arrResponse;
         }
     }
 }

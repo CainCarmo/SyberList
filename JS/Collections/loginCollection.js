@@ -8,6 +8,6 @@ export const objLoginDom = {
     // -> Input
     inputPasswordLogin: document.querySelector("#login__password"),
     // -> Icon
-    iconTimesLogin: document.querySelectorAll(".fa-times")[1],
+    iconTimesLogin: document.querySelectorAll(".form__times")[0],
     iconEyeLogin: document.querySelectorAll(".fa-eye")[0]
 }

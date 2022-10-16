@@ -4,7 +4,6 @@ import { objRegisterDom } from "../Collections/registerCollection.js"
 export class PasswordEvents {
 
     PasswordLogin() {
-
         if (objLoginDom.iconTimesLogin != null) {
 
             objLoginDom.iconEyeLogin.addEventListener("click", () => {
@@ -19,7 +18,6 @@ export class PasswordEvents {
     }
 
     PasswordRegister() {
-
         objRegisterDom.iconEyeLogin.addEventListener("click", () => {
             objRegisterDom.divLineEyeLogin.classList.toggle("visible")
 

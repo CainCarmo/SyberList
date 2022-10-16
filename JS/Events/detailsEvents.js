@@ -9,20 +9,17 @@ export class DetailsEvents {
     }
 
     async DetailsAnime(itemType, itemID) {
-
         switch (itemType) {
             case "anime":
 
                 await this.oRequestsJikan.GetAnimeFullByID(itemID)
                 await this.oRequestsJikan.GetAnimeCharacters(itemID)
                 await this.oRequestsJikan.GetAnimeStaff(itemID)
-                
 
                 setTimeout(async () => {
-                    await this.oRequestsJikan.GetAnimeRecommendations(itemID)    
-                    await this.oRequestsJikan.GetAnimeThemes(itemID)
+                    await this.oRequestsJikan.GetAnimeRecommendations(itemID)
                 }, 3100)
-                
+
                 break
             
             case "manga":
@@ -41,20 +38,26 @@ export class DetailsEvents {
     }
 
     async DetailsFilm(itemType, itemID) {
-
         switch (itemType) {
             case "movie":
 
                 await this.oRequestsTmdb.GetMoviesByID(itemID)
+                await this.oRequestsTmdb.GetMovieTrailer(itemID)
                 await this.oRequestsTmdb.GetMoviesSimilar(itemID)
-                await this.oRequestsTmdb.GetMoviesRecommendatiosByID(itemID)
+                
+                
+                setTimeout(async () => {
+                    await this.oRequestsTmdb.GetMoviesRecommendatiosByID(itemID)    
+                })
+
                 break
 
             case "tv":
 
                 await this.oRequestsTmdb.GetTvByID(itemID)
-                // await this.oRequestsTmdb
+                await this.oRequestsTmdb.GetGenre(itemType)
                 await this.oRequestsTmdb.GetTvRecommendationsByID(itemID)
+
                 break
         }
     }

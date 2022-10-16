@@ -41,19 +41,22 @@ export class updateDomJikan {
         const animeYear     = divAnimeItemsWrapper.querySelectorAll(".item__year")
         const animeType     = divAnimeItemsWrapper.querySelectorAll(".item__type")
 
-        animeEpisodes.forEach((e, i) => {
-            if (informationAnimes[i].episodes === null)
-                e.innerHTML = null
+        animeEpisodes.forEach((element, index) => {
+            informationAnimes[index].episodes === null
+                ? element.innerHTML = null
+                : ""         
         })
 
-        animeYear.forEach((e, i) => {
-            if (informationAnimes[i].year === null)
-                e.innerHTML = null
+        animeYear.forEach((element, index) => {
+            informationAnimes[index].year === null
+                ? element.innerHTML = null
+                : ""
         })
 
-        animeType.forEach((e, i) => {
-            if (informationAnimes[i].type === null)
-                e.innerHTML = null
+        animeType.forEach((element, index) => {
+            informationAnimes[index].type === null
+                ? element.innerHTML = null
+                : ""
         })
 
         objHeaderDom.divSearchResults.appendChild(divAnimeItemsWrapper)
@@ -61,7 +64,7 @@ export class updateDomJikan {
 
     SetAnimeBrowse(data) {
         const informationAnimes = data.data
-        console.log(informationAnimes)
+        
         objBrowse.mainResults.innerHTML = informationAnimes.map(anime => {
             return `
                 <div class="section__card">
@@ -71,21 +74,26 @@ export class updateDomJikan {
                     <div class="card__information">
                         <h3 class="card__title">${anime.title}</h3>
                         <button type="button" class="card__button">
-                            <a href="./details.php?type=movie&id=${anime.mal_id}">Saiba Mais</a>
+                            <a href="./details.php?type=anime&id=${anime.mal_id}">Saiba Mais</a>
                         </button>
                         <span class="card__extra">
-                            ${anime.type} <br /> ${anime.year}
+                            ${anime.type} <br/> ${anime.year}
                         </span>
                     </div>
                 </div>   
             `
         }).join("")
 
-        const itemYear = document.querySelectorAll(".card__extra")
+        const itemExtra = document.querySelectorAll(".card__extra")
 
-        itemYear.forEach((e, i) => {
-            if (informationAnimes[i].year === null)
-                e.innerHTML = informationAnimes[i].type
+        itemExtra.forEach((element, index) => {
+            informationAnimes[index].year === null
+                ? element.innerHTML = informationAnimes[index].type
+                : ""
+
+            informationAnimes[index].type === null
+                ? element.innerHTML = informationAnimes[index].year
+                : ""
         })
     }
 
@@ -109,6 +117,10 @@ export class updateDomJikan {
             </div>
         `
 
+        informationAnime.synopsis === null
+            ? bannerInfoWrapper.querySelector("#banner__description").innerHTML = null
+            : null
+
         VanillaTilt.init(bannerInfoWrapper.querySelector("#banner__image"), {
             max: "25",
             speed: 400,
@@ -130,15 +142,14 @@ export class updateDomJikan {
             <h2 class="section__title">
                 <i class="fa-solid fa-arrow-trend-up"></i> - Ranking Animes
             </h2>
-            <button type="button" class="section__button">Veja Mais</button>
         `
 
-        sectionRankList.innerHTML = informationAnimes.slice(0, 5).map(anime => {
+        sectionRankList.innerHTML = informationAnimes.slice(0, 5).map((anime, index) => {
             return `
                 <div class="section__item">
                     <!-- Rank Index -->
                     <div class="item__rank--wrapper">
-                        <h2 class="item__rank">${anime.rank}</h2>
+                        <h2 class="item__rank">${index + 1}</h2>
                     </div>
                     <!-- Rank Description -->
                     <div class="item__description">
@@ -167,6 +178,28 @@ export class updateDomJikan {
 
         sectionRank.appendChild(sectionHeader)
         sectionRank.appendChild(sectionRankList)
+
+        const animeEpisodes = sectionRankList.querySelectorAll(".item__episodes")
+        const animeYear     = sectionRankList.querySelectorAll(".item__year")
+        const animeType     = sectionRankList.querySelectorAll(".item__type")
+
+        animeEpisodes.forEach((element, index) => {
+            informationAnimes[index].episodes === null
+                ? element.innerHTML = null
+                : ""         
+        })
+
+        animeYear.forEach((element, index) => {
+            informationAnimes[index].year === null
+                ? element.innerHTML = null
+                : ""
+        })
+
+        animeType.forEach((element, index) => {
+            informationAnimes[index].type === null
+                ? element.innerHTML = null
+                : ""
+        })
         objHomeDom.mainPage.appendChild(sectionRank)
     }
 
@@ -176,7 +209,7 @@ export class updateDomJikan {
         const sectionSlider     = this.oFactoryDom.CreateBlockElement("div", ["section__slider"], ["slider__seasonSN"])
         const sectionDots       = this.oFactoryDom.CreateBlockElement("div", ["dots"], ["slider__seasonSN--dots"], ["tablist"])
         const informationAnimes = data.data
-
+        
         sectionHeader.innerHTML = `
             <!-- Título da Sessão -->
             <h2 class="section__title">
@@ -214,6 +247,19 @@ export class updateDomJikan {
         sectionSliders.appendChild(sectionHeader)
         sectionSliders.appendChild(sectionSlider)
         sectionSliders.appendChild(sectionDots)
+
+        const itemExtra = sectionSliders.querySelectorAll(".card__extra")
+
+        itemExtra.forEach((element, index) => {
+            informationAnimes[index].year === null
+                ? element.innerHTML = informationAnimes[index].type
+                : ""
+
+            informationAnimes[index].type === null
+                ? element.innerHTML = informationAnimes[index].year
+                : ""
+        })
+
         objHomeDom.mainPage.appendChild(sectionSliders)
         
         new Glider(sectionSlider, {
@@ -259,7 +305,7 @@ export class updateDomJikan {
                     <div class="card__information">
                         <h3 class="card__title">${anime.title}</h3>
                         <button type="button" class="card__button">
-                            <a href="#">Saiba Mais</a>
+                            <a href="./details.php?type=anime&id=${anime.mal_id}">Saiba Mais</a>
                         </button>
                         <span class="card__extra">
                             ${anime.type}<br>${anime.year}
@@ -269,16 +315,22 @@ export class updateDomJikan {
             `
         }).join("")
 
-        const itemYear = sectionSlider.querySelectorAll(".card__extra")
-
-        itemYear.forEach((e, i) => {
-            if (informationAnimes[i].year === null)
-                e.innerHTML = informationAnimes[i].type
-        })
-
         sectionSliders.appendChild(sectionHeader)
         sectionSliders.appendChild(sectionSlider)
         sectionSliders.appendChild(sectionDots)
+
+        const itemExtra = sectionSliders.querySelectorAll(".card__extra")
+
+        itemExtra.forEach((element, index) => {
+            informationAnimes[index].year === null
+                ? element.innerHTML = informationAnimes[index].type
+                : ""
+
+            informationAnimes[index].type === null
+                ? element.innerHTML = informationAnimes[index].year
+                : ""
+        })
+
         objHomeDom.mainPage.appendChild(sectionSliders)
         
         new Glider(sectionSlider, {
@@ -355,11 +407,6 @@ export class updateDomJikan {
 
         bannerInfoWrapper.innerHTML = `
             <div id="banner__info">
-                <form method="POST" id="banner__form">
-                    <button id="form__submit" name="salvar" type="submit">
-                        <i class="fa-star fa-regular" id="star-details"></i>
-                    </button>
-                </form>
                 <h1 id="banner__title">${informationAnime.title}</h1>
                 <p id="banner__description">
                     ${informationAnime.synopsis}
@@ -368,9 +415,13 @@ export class updateDomJikan {
 
             <div id="banner__card">
                 <img id="banner__image" src="${informationAnime.images.webp.large_image_url}" alt="Imagem do Card">
-                
             </div>
         `
+
+        informationAnime.synopsis === null
+            ? bannerInfoWrapper.querySelector("#banner__description").innerHTML = null
+            : null
+        
         const bannerInfo   = bannerInfoWrapper.querySelector("#banner__info")
         const bannerGenres = this.oFactoryDom.CreateBlockElement("div", [], ["banner__genres"])
         const bannerGenre  = this.oFactoryDom.CreateBlockElement("div", ["banner__genre"], ["banner__type"])
@@ -383,7 +434,7 @@ export class updateDomJikan {
             `
         }).join("")
 
-        bannerGenre.innerHTML = ` <span>${informationAnime.type}</span> `
+        bannerGenre.innerHTML = `<span>${informationAnime.type}</span>`
 
         VanillaTilt.init(bannerInfoWrapper.querySelector("#banner__image"), {
             max: "25",
@@ -459,7 +510,10 @@ export class updateDomJikan {
         sectionSliders.appendChild(sectionHeader)
         sectionSliders.appendChild(sectionSlider)
         sectionSliders.appendChild(sectionDots)
-        objDetailsDom.mainDetails.appendChild(sectionSliders)
+
+        informationCharacters.length !== 0
+            ? objDetailsDom.mainDetails.appendChild(sectionSliders)
+            : null
 
         new Glider(sectionSlider, {
             slidesToShow: 5,
@@ -478,7 +532,7 @@ export class updateDomJikan {
         const sectionHeader    = this.oFactoryDom.CreateBlockElement("header", ["section__header"])
         const sectionSlider    = this.oFactoryDom.CreateBlockElement("div", ["section__slider"], ["slider__seasonSF"])
         const sectionDots      = this.oFactoryDom.CreateBlockElement("div", ["dots"], ["slider__seasonSF--dots"], ["tablist"])
-        const informationAnime = data.data
+        const informationStaff = data.data
 
         sectionHeader.innerHTML = `
             <!-- Título da Sessão -->
@@ -495,7 +549,7 @@ export class updateDomJikan {
             </div>
         `
 
-        sectionSlider.innerHTML = informationAnime.slice(0, 10).map(staff => {
+        sectionSlider.innerHTML = informationStaff.slice(0, 10).map(staff => {
             return `
                 <div class="section__card">
                     <!-- Imagem do Card -->
@@ -505,7 +559,7 @@ export class updateDomJikan {
                         <h3 class="card__title">${staff.person.name}</h3>
                         
                         <span class="card__extra">
-                            ${staff.positions[0]} <br /> ${staff.positions[1]}
+                            ${staff.positions[0]}
                         </span>
                     </div>
                 </div>   
@@ -515,7 +569,10 @@ export class updateDomJikan {
         sectionSliders.appendChild(sectionHeader)
         sectionSliders.appendChild(sectionSlider)
         sectionSliders.appendChild(sectionDots)
-        objDetailsDom.mainDetails.appendChild(sectionSliders)
+
+        informationStaff.length !== 0
+                ? objDetailsDom.mainDetails.appendChild(sectionSliders)
+                : null    
 
         new Glider(sectionSlider, {
             slidesToShow: 5,
@@ -537,7 +594,7 @@ export class updateDomJikan {
         const sectionSlider     = this.oFactoryDom.CreateBlockElement("div", ["section__slider"], ["slider__seasonRE"])
         const sectionDots       = this.oFactoryDom.CreateBlockElement("div", ["dots"], ["slider__seasonRE--dots"], ["tablist"])
         const informationAnimes = data.data
-
+        
         sectionHeader.innerHTML = `
             <!-- Título da Sessão -->
             <h2 class="section__title">
@@ -573,8 +630,11 @@ export class updateDomJikan {
         sectionSliders.appendChild(sectionHeader)
         sectionSliders.appendChild(sectionSlider)
         sectionSliders.appendChild(sectionDots)
-        objDetailsDom.mainDetails.appendChild(sectionSliders)
-        
+
+        informationAnimes.length !== 0
+            ? objDetailsDom.mainDetails.appendChild(sectionSliders)
+            : null
+            
         new Glider(sectionSlider, {
             slidesToShow: 5,
             slidesToScroll: 5,
@@ -587,14 +647,89 @@ export class updateDomJikan {
         })
     }
 
-    SetAnimeThemes(data) {}
-
     SetAnimeStreaming(data) {}
 
     SetAnimeGenres(data) {}
 
+    SetMangaSearch(data) {
+        const divMangaItemsWrapper = this.oFactoryDom.CreateBlockElement("div", [], ["search__items--wrapper"])
+        const informationMangas    = data.data
+
+        divMangaItemsWrapper.innerHTML = informationMangas.map(manga => {
+            return `
+            <div class="search__item">
+                <div class="item__description">
+                    <img src="${manga.images.webp.image_url}" alt="Image Result">
+                    <div class="item__information">
+                        <div class="item__title--wrapper">
+                            <h3 class="item__title">
+                                <a href="./details.php?type=manga&id=${manga.mal_id}">${manga.title}</a>
+                            </h3>
+                        </div>
+                        <div class="item__extra--wrapper">
+                            <span class="item__episodes">${manga.chapters} capítulos</span>
+                            <span class="item__year">${manga.published.prop.from.year}</span>
+                            <span class="item__type">${manga.type}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            `
+        }).join("")
+
+        const mangaChapters = divMangaItemsWrapper.querySelectorAll(".item__episodes")
+        const mangaYear     = divMangaItemsWrapper.querySelectorAll(".item__year")
+        const mangaType     = divMangaItemsWrapper.querySelectorAll(".item__type")
+
+        mangaChapters.forEach((element, index) => {
+            informationMangas[index].chapters === null
+                ? element.innerHTML = null
+                : ""         
+        })
+
+        mangaYear.forEach((element, index) => {
+            informationMangas[index].published.prop.from.year === null
+                ? element.innerHTML = null
+                : ""
+        })
+
+        mangaType.forEach((element, index) => {
+            informationMangas[index].type === null
+                ? element.innerHTML = null
+                : ""
+        })
+
+        objHeaderDom.divSearchResults.appendChild(divMangaItemsWrapper)
+    }
+
     SetMangaBrowse(data) {
+        const informationMangas = data.data
         
+        objBrowse.mainResults.innerHTML = informationMangas.map(anime => {
+            return `
+                <div class="section__card">
+                    <!-- Imagem do Card -->
+                    <img src="${anime.images.webp.large_image_url}" alt="Card Image">
+                    <!-- Informações do Card -->
+                    <div class="card__information">
+                        <h3 class="card__title">${anime.title}</h3>
+                        <button type="button" class="card__button">
+                            <a href="./details.php?type=anime&id=${anime.mal_id}">Saiba Mais</a>
+                        </button>
+                        <span class="card__extra">
+                            ${anime.type}<br/>${anime.published.prop.from.year}
+                        </span>
+                    </div>
+                </div>   
+            `
+        }).join("")
+
+        const itemYear = document.querySelectorAll(".card__extra")
+
+        itemYear.forEach((e, i) => {
+            if (informationAnimes[i].published.prop.from.year === null)
+                e.innerHTML = informationAnimes[i].type
+        })
     }
 
     SetRankingManga(data) {
@@ -608,7 +743,6 @@ export class updateDomJikan {
             <h2 class="section__title">
                 <i class="fa-solid fa-arrow-trend-up"></i> - Ranking Mangás
             </h2>
-            <button type="button" class="section__button">Veja Mais</button>
         `
 
         sectionRankList.innerHTML = informationMangas.slice(0, 5).map(manga => {
@@ -729,11 +863,6 @@ export class updateDomJikan {
 
         bannerInfoWrapper.innerHTML = `
             <div id="banner__info">
-                <form method="POST" id="banner__form">
-                    <button id="form__submit" name="salvar" type="submit">
-                        <i class="fa-star fa-regular" id="star-details"></i>
-                    </button>
-                </form>
                 <h1 id="banner__title">${informationManga.title}</h1>
                 <p id="banner__description">
                     ${informationManga.synopsis}
@@ -806,21 +935,24 @@ export class updateDomJikan {
             `
         }).join("")
 
-        sectionSliders.appendChild(sectionHeader)
-        sectionSliders.appendChild(sectionSlider)
-        sectionSliders.appendChild(sectionDots)
-        objDetailsDom.mainDetails.appendChild(sectionSliders)
+        if (informationManga.length !== 0) {
 
-        new Glider(sectionSlider, {
-            slidesToShow: 5,
-            slidesToScroll: 5,
-            dots: `#${sectionDots.id}`,
-            draggable: true,
-            arrows: {
-                prev: "#arrow__backCH",
-                next: "#arrow__nextCH"
-            }
-        })
+            sectionSliders.appendChild(sectionHeader)
+            sectionSliders.appendChild(sectionSlider)
+            sectionSliders.appendChild(sectionDots)
+            objDetailsDom.mainDetails.appendChild(sectionSliders)
+
+            new Glider(sectionSlider, {
+                slidesToShow: 5,
+                slidesToScroll: 5,
+                dots: `#${sectionDots.id}`,
+                draggable: true,
+                arrows: {
+                    prev: "#arrow__backCH",
+                    next: "#arrow__nextCH"
+                }
+            })
+        }
     }
 
     SetMangaPictures(data) {
@@ -854,21 +986,23 @@ export class updateDomJikan {
             `
         }).join("")
 
-        sectionSliders.appendChild(sectionHeader)
-        sectionSliders.appendChild(sectionSlider)
-        sectionSliders.appendChild(sectionDots)
-        objDetailsDom.mainDetails.appendChild(sectionSliders)
+        if (informationPictures.length !== 0) {
+            sectionSliders.appendChild(sectionHeader)
+            sectionSliders.appendChild(sectionSlider)
+            sectionSliders.appendChild(sectionDots)
+            objDetailsDom.mainDetails.appendChild(sectionSliders)
 
-        new Glider(sectionSlider, {
-            slidesToShow: 5,
-            slidesToScroll: 5,
-            dots: `#${sectionDots.id}`,
-            draggable: true,
-            arrows: {
-                prev: "#arrow__backPC",
-                next: "#arrow__nextPC"
-            }
-        })
+            new Glider(sectionSlider, {
+                slidesToShow: 5,
+                slidesToScroll: 5,
+                dots: `#${sectionDots.id}`,
+                draggable: true,
+                arrows: {
+                    prev: "#arrow__backPC",
+                    next: "#arrow__nextPC"
+                }
+            })
+        }
     }
 
     SetMangaRecommendations(data) {
@@ -910,21 +1044,24 @@ export class updateDomJikan {
             `
         }).join("")
 
-        sectionSliders.appendChild(sectionHeader)
-        sectionSliders.appendChild(sectionSlider)
-        sectionSliders.appendChild(sectionDots)
-        objDetailsDom.mainDetails.appendChild(sectionSliders)
-        
-        new Glider(sectionSlider, {
-            slidesToShow: 5,
-            slidesToScroll: 5,
-            dots: `#${sectionDots.id}`,
-            draggable: true,
-            arrows: {
-                prev: "#arrow__backRE",
-                next: "#arrow__nextRE"
-            }
-        })
+        if (informationMangas.length !== 0) {
+
+            sectionSliders.appendChild(sectionHeader)
+            sectionSliders.appendChild(sectionSlider)
+            sectionSliders.appendChild(sectionDots)
+            objDetailsDom.mainDetails.appendChild(sectionSliders)
+            
+            new Glider(sectionSlider, {
+                slidesToShow: 5,
+                slidesToScroll: 5,
+                dots: `#${sectionDots.id}`,
+                draggable: true,
+                arrows: {
+                    prev: "#arrow__backRE",
+                    next: "#arrow__nextRE"
+                }
+            })
+        }re
     }
 
     SetMangaGenres(data) {}

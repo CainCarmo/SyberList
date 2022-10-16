@@ -12,33 +12,34 @@ namespace App\Control\Session {
             }
         }
 
-        public static function GetUserLogged() {
+        public static function GetUserLogged(): bool|null {
             self::Init();
 
             return self::IsLogged() ? : null;
         }
 
-        public static function IsLogged() {
+        public static function IsLogged(): bool {
             self::Init();
 
             return isset($_SESSION["User"]["ID"]);
         }
 
-        public static function Login(User $oUser, string $pageType) {
+        public static function Login(User $oUser, string $pageType): never {
             self::Init();
 
             $_SESSION["User"] = [
-                "ID"         => $oUser->ID,
-                "USER_EMAIL" => $oUser->UserEmail,
-                "NICKNAME"   => $oUser->Nickname,
-                "FK_ROLE_ID" => $oUser->UserRole
+                "ID"           => $oUser->ID,
+                "USER_EMAIL"   => $oUser->UserEmail,
+                "NICKNAME"     => $oUser->Nickname,
+                "FK_STATUS_ID" => $oUser->UserStatus,
+                "COVER"        => $oUser->UserIcon
             ];
 
             header("location: home.php?type=". $pageType);
             exit;
         }
 
-        public static function Logout(string $pageType) {
+        public static function Logout(string $pageType): never {
             self::Init();
 
             unset($_SESSION["User"]);
@@ -47,16 +48,16 @@ namespace App\Control\Session {
             exit;
         }
 
-        public static function RequireLogin(string $pageType) {
+        public static function RequireLogin(string $pageType): void {
             if(!self::isLogged()) {
                 header("location: home.php?type=". $pageType);
                 exit;
             }
         }
 
-        public static function RequireLogout(string $pageType) {
+        public static function RequireLogout(): void {
             if(self::isLogged()) {
-                header("location: home.php?type=". $pageType);
+                header("location: index.php");
                 exit;
             }
         }

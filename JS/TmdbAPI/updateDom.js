@@ -13,20 +13,9 @@ export class UpdateDomTmdb {
         this.ImageNotFound = "./Resources/Image/Not-Found.jpg"
     }
 
-    // async GetGenre(ID) {
-    //     let genresJson = await fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=32a48ac8387366ff3d957d772176624f&language=pt-BR`)
-    //                         .then(res => res.json())
-    //                         .catch(err => console.warn(err.message))
-        
-    //     let genreParsed
-        
-    //     genresJson.genres.map(genre => {
-    //         if (genre.id === ID)
-    //             genreParsed = genre
-    //     })
-
-    //     return genreParsed
-    // }
+    async SetGenre(data, IDs) {
+        const informationGenres = data
+    }
 
     async SetMovieSearch(data) {
         const divMovieItemsWrapper = this.oFactoryDom.CreateBlockElement("div", [], ["search__items--wrapper"])
@@ -145,7 +134,6 @@ export class UpdateDomTmdb {
             <h2 class="section__title">
                 <i class="fa-solid fa-arrow-trend-up"></i> - Ranking Filmes 
             </h2>
-            <button type="button" class="section__button">Veja Mais</button>
         `
 
         sectionRankList.innerHTML = informationMovies.slice(0, 5).map((movie, index) => {
@@ -334,11 +322,6 @@ export class UpdateDomTmdb {
 
         bannerInfoWrapper.innerHTML = `
             <div id="banner__info">
-                <form method="POST" id="banner__form">
-                    <button id="form__submit" name="salvar" type="submit">
-                        <i class="fa-star fa-regular" id="star-details"></i>
-                    </button>
-                </form>
                 <h1 id="banner__title">${infomationMovie.title}</h1>
                 <p id="banner__description">
                     ${infomationMovie.overview}
@@ -354,16 +337,6 @@ export class UpdateDomTmdb {
         const bannerGenres = this.oFactoryDom.CreateBlockElement("div", [], ["banner__genres"])
         const bannerGenre  = this.oFactoryDom.CreateBlockElement("div", ["banner__genre"], ["banner__type"])
 
-        // bannerGenres.innerHTML = await infomationMovie.genres.map(async genre => {
-        //     let genreName = (await this.GetGenre(genre.id)).name
-            
-        //     return `
-        //         <div class="banner__genre">
-        //             <span>${genreName}</span>
-        //         </div>
-        //     `
-        // }).join("")
-
         bannerGenre.innerHTML = ` <span>Movie</span> `
 
         VanillaTilt.init(bannerInfoWrapper.querySelector("#banner__image"), {
@@ -373,9 +346,36 @@ export class UpdateDomTmdb {
             "max-glare": 1
         })
 
+        objHeaderDom.title.innerHTML = `${infomationMovie.title} | SyberList`
+
         bannerGenres.insertBefore(bannerGenre, bannerGenres.children[0])
         bannerInfo.appendChild(bannerGenres)
         objDetailsDom.sectionBanner.appendChild(bannerInfoWrapper)
+    }
+
+    SetMovieTrailer(data) {
+        const sectionTrailer      = this.oFactoryDom.CreateBlockElement("section", [], ["section__trailer"])
+        const sectionHeader       = this.oFactoryDom.CreateBlockElement("header", ["section__header"])
+        const trailerVideoWrapper = this.oFactoryDom.CreateBlockElement("div", [], ["trailer__video--wrapper"])
+        const informationTrailer  = data.results
+
+        sectionHeader.innerHTML = `
+            <!-- Título da Sessão -->
+            <h2 class="section__title">
+                <i class="fa-solid fa-mug-saucer"></i> - Trailler
+            </h2>
+        `
+
+        trailerVideoWrapper.innerHTML = `
+            <iframe id="trailer__video" src="https://www.youtube.com/embed/${informationTrailer[0].key}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        `
+
+        sectionTrailer.appendChild(sectionHeader)
+        sectionTrailer.appendChild(trailerVideoWrapper)
+        
+        informationTrailer[0].key == null
+            ? ""
+            : objDetailsDom.mainDetails.appendChild(sectionTrailer)
     }
 
     SetMoviesRecommendatiosByID(data) {
@@ -599,7 +599,6 @@ export class UpdateDomTmdb {
             <h2 class="section__title">
                 <i class="fa-solid fa-arrow-trend-up"></i> - Ranking Séries
             </h2>
-            <button type="button" class="section__button">Veja Mais</button>
         `
 
         sectionRankList.innerHTML = informationSeries.slice(0, 5).map((serie, index) => {
@@ -721,11 +720,6 @@ export class UpdateDomTmdb {
 
         bannerInfoWrapper.innerHTML = `
             <div id="banner__info">
-                <form method="POST" id="banner__form">
-                    <button id="form__submit" name="salvar" type="submit">
-                        <i class="fa-star fa-regular" id="star-details"></i>
-                    </button>
-                </form>
                 <h1 id="banner__title">${infomationSerie.name}</h1>
                 <p id="banner__description">
                     ${infomationSerie.overview}
@@ -741,16 +735,6 @@ export class UpdateDomTmdb {
         const bannerGenres = this.oFactoryDom.CreateBlockElement("div", [], ["banner__genres"])
         const bannerGenre  = this.oFactoryDom.CreateBlockElement("div", ["banner__genre"], ["banner__type"])
 
-        // bannerGenres.innerHTML = await infomationMovie.genres.map(async genre => {
-        //     let genreName = (await this.GetGenre(genre.id)).name
-            
-        //     return `
-        //         <div class="banner__genre">
-        //             <span>${genreName}</span>
-        //         </div>
-        //     `
-        // }).join("")
-
         bannerGenre.innerHTML = ` <span>${infomationSerie.type}</span> `
 
         VanillaTilt.init(bannerInfoWrapper.querySelector("#banner__image"), {
@@ -764,6 +748,8 @@ export class UpdateDomTmdb {
         bannerInfo.appendChild(bannerGenres)
         objDetailsDom.sectionBanner.appendChild(bannerInfoWrapper)
     }
+
+    
     
     SetTvRecommendationsByID(data) {
         const sectionSliders    = this.oFactoryDom.CreateBlockElement("section", ["section__sliders"])

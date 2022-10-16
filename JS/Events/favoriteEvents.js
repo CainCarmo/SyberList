@@ -1,16 +1,7 @@
 export class FavoriteEvents {
 
     ButtonFavorite() {
-
-        const button = document.querySelector("#form__submit")
         const star   = document.querySelector("#star-details")
-
-        button.addEventListener("click", () => {
-
-            star.classList.remove("fa-regular")
-            star.classList.add("fa-solid")
-            star.classList.add("fa-checked")
-        })
 
         star.addEventListener("mouseenter", () => {
             if (star.classList.contains("fa-regular")) {

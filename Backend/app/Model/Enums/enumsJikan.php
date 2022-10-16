@@ -46,6 +46,7 @@ namespace App\Model\Enums {
             if ($method === "POST") {
                 
                 switch($type) {
+                    case "Anime": 
                     case "TV":
                         return JikanType::from(1)->value;
                         break;
