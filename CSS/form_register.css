@@ -45,6 +45,10 @@ input[type="file"] {
     display: none;
 }
 
+select > option{
+    color: #000;
+}
+
 /* === Scroll Bar === */
 
 ::-webkit-scrollbar {
@@ -144,6 +148,10 @@ input[type="file"] {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+.form__error {
+    color: #C40;
 }
 
 .form__logo {

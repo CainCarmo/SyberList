@@ -36,7 +36,7 @@ namespace App\Model\Entity {
             ]);
         }
 
-        public function SearchItemByID(string $type, int $ID): void {
+        public function SearchItemByID(string $type, string $ID): void {
 
             $apiKey       = "32a48ac8387366ff3d957d772176624f";
             $baseURL      = "https://api.themoviedb.org/3";
@@ -56,6 +56,18 @@ namespace App\Model\Entity {
             $type === "movie"
                 ? $this->Title = $responseParsed->title
                 : $this->Title = $responseParsed->name;
+        }
+
+        public function VerifyItemSaved(int $itemID, string $itemType, mixed $oUserID) {
+            return (new QueryBuilder(table: "TMDB"))->Select(where: "ID_TMDB = " . $itemID . " AND FK_TYPE_ID = " . EnumsTmdb::ToggleType("POST", $itemType) . " AND FK_USER_ID = ". $oUserID)->fetchAll(PDO::FETCH_CLASS, self::class);
+        }
+
+        public function UpdateSituation(int $itemID, string $itemType, int $situationID, int $oUserID,) {
+            return (new QueryBuilder(table: "TMDB"))->Update(where: "ID_TMDB = " . $itemID . " AND FK_TYPE_ID = " . EnumsTmdb::ToggleType("POST", $itemType) . " AND FK_USER_ID = ". $oUserID, values: ['FK_SITUATION_ID' => $situationID]);
+        }
+
+        public function DeleteItem(string $itemID, string $itemType,int $oUserID) {
+            return (new QueryBuilder(table: "TMDB"))->Delete(where: "ID_TMDB = ". $itemID ." AND FK_TYPE_ID = ". $itemType ." AND FK_USER_ID = ". $oUserID);
         }
 
         public function GetItemsByUser(int $oUserID): array|bool {

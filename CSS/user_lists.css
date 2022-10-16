@@ -63,6 +63,20 @@
     font-weight: 400;
 }
 
+#info__situation--wrapper {
+    display: flex;
+    align-items: center;
+    margin-top: 70px;
+}
+
+#situation__circle {
+    height: 10px;
+    width: 10px;
+    margin-right: 10px;
+    border-radius: 50%;
+    background-color: greenyellow;
+}
+
 #user__control {
     display: flex;
     justify-content: center;
@@ -150,12 +164,36 @@
 }
 
 .list__item {
+    position: relative;
     height: auto;
     width: 0%;
     display: grid;
     transition: all .2s;
     grid-template-columns: repeat(5, 1fr);
+    gap: 25px;
     overflow: hidden;
+}
+
+.section__card:hover > .card__information {
+    transition: 0s !important;
+}
+
+.form__delete {
+    position: absolute;
+    right: -35px;
+    width: 5rem;
+    display: flex;
+    justify-content: flex-end;
+    padding: 1rem;
+    border-radius: 0 15px 15px 0;
+    background-color: #FF0000;
+    box-shadow: #B22222 6px 2px 16px 0px, #A52A2A;
+    z-index: -999;
+}
+
+.delete__link {
+    position: absolute;
+    right: 0;
 }
 
 /* --- JS Events --- */
@@ -175,83 +213,12 @@
     color: #ED3E18;
 }
 
-/*
-#container__lists > #content {
-    position: relative;
-    padding: 50px;
-    border-radius: 0 0 15px 15px;
-    background-color: #FFF;
-    box-shadow: inset 0px 0px 20px rgba(0, 0, 0, .2);
+.fa-trash-can {
+    transition: .3s ease;
+    font-size: 1em;
+    color: #FFF;
 }
 
- === User Header === 
-
-#user__header {
-    height: 25vh;
-    width: 100%;
-    position: absolute;
-    top: -160px;
-    left: 0;
-    display: flex;
-    align-items: center;
-    padding: 50px;
-    border-radius: 15px 15px 0 0;
-    background-color: #FFF;
-    box-shadow: inset 0px 0px 20px rgba(0, 0, 0, .2);
-}
-
-#user__header > img {
-    height: 100px;
-    width: 100px;
-}
-
-#user__informations {
-    height: 100%;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    margin-left: 30px;
-}
-
-#user__username, #user__email { color: #000; }
-
-/* === User Lists === *
-
-#section__sliders {
-    display: flex;
-    align-items: center;
-}
-
-.user__lists > .section__header > .section__title {
-    color: #000;
-}
-
-.lists__tabs {
-    width: auto;
-    display: flex;
-    align-items: center;
-}
-
-.lists__tab {
-    margin-right: 20px;
-    padding: .2rem .5rem;
-    border-radius: 10px 10px 0 0;
-    background-color: rgba(0, 0, 0, .5);
-}
-
-.section__slider {
-    max-width: 0%;
-    transition: .2s;
-    background-color: #000;
-}
-
-/* --- JS Events --- *
-
-.lists__slider.expand {
-    max-width: 100%;
-}
-
-.lists__tab.selected {
-    background-color: #000;
+.fa-trash-can:hover {
+    font-size: 1.2em;
 }

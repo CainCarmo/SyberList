@@ -9,9 +9,9 @@ export class RequestsJikan {
 
     async GetAnimeSearch(query) {
         await fetch(`${this.BaseURL}/anime?q=${query}`)
-        .then(res => res.json())
-        .then(data => this.oUpdateDomJikan.SetAnimeSearch(data))
-        .catch(err => console.warn(err.message))
+                .then(res => res.json())
+                .then(data => this.oUpdateDomJikan.SetAnimeSearch(data))
+                .catch(err => console.warn(err.message))
     }
     
     async GetAnimeBrowse(query) {

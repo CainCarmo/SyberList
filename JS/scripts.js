@@ -46,6 +46,17 @@ const videoHomeMovie    = "./Resources/Video/mylivewallpapers.com-The-Batman-202
 const videoDetailsMovie = "./Resources/Video/mylivewallpapers-com-Moon-Knight.mp4"
 
 /**
+ * -> Evento de click do Times da Mensagem
+ */
+
+function TimesClick() {
+
+    objHeaderDom.iconTimesMessage.addEventListener("click", () => {
+        objHeaderDom.divMessageError.remove("error")
+    })
+}
+
+/**
  * -> Verificando as Páginas para chamar os métodos de Eventos
  */
 
@@ -55,15 +66,18 @@ async function VerifyPage() {
     let itemType = ""
 
     if (objURL.atualPage !== objURL.indexPage && objURL.atualPage !== objURL.registerPage) {
-        itemType = document.location.href.split("/")[3].split("=")[1].split("&")[0]
-        itemID   = document.location.href.split("/")[3].split("=")[2]
+        itemType = document.location.href.split("type=")[1].split("&")[0]
+        itemID   = document.location.href.split("id=")[1] 
+            ? document.location.href.split("id=")[1].split("&")[0]
+            : null
 
         objHeaderDom.linkHome.href = `${objURL.homePage}?type=${itemType}`
         objHeaderDom.linkList.href = `${objURL.listPage}?type=${itemType}`
     }
 
     switch (objURL.atualPage) {
-    
+
+        case "":
         case objURL.indexPage:
             
             oIntroEvents.Intro()
@@ -83,6 +97,11 @@ async function VerifyPage() {
             oLoginEvents.Login()
             oSearchEvents.Search(itemType)
             oPasswordEvents.PasswordLogin()
+
+            objHeaderDom.divMessageError != null
+                ? TimesClick()
+                : null
+
             break
 
         case objURL.detailsPage:
@@ -100,15 +119,25 @@ async function VerifyPage() {
             oSearchEvents.Search(itemType)
             oPasswordEvents.PasswordLogin()
             oFavoriteEvents.ButtonFavorite()
+
+            objHeaderDom.divMessageError != null
+                ? TimesClick()
+                : null
+            
             break
 
         case objURL.searchPage:
 
-            objHeaderDom.title.innerHTML = "Procurar | SyberAnime"
+            objHeaderDom.title.innerHTML = "Procurar | SyberList"
 
             oLoginEvents.Login()
             oBrowseEvents.Browse(itemType)
             oPasswordEvents.PasswordLogin()
+
+            objHeaderDom.divMessageError != null
+                ? TimesClick()
+                : null
+            
             break;
 
         case objURL.registerPage:
@@ -119,7 +148,7 @@ async function VerifyPage() {
 
         case objURL.listPage:
 
-            objHeaderDom.title.innerHTML = "My list | SyberAnime"
+            objHeaderDom.title.innerHTML = "Minha Lista | SyberList"
 
             oListEvents.List()
             oLoginEvents.Login()

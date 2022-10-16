@@ -408,11 +408,6 @@ export class updateDomJikan {
 
         bannerInfoWrapper.innerHTML = `
             <div id="banner__info">
-                <form method="POST" id="banner__form">
-                    <button type="submit" id="form__submit" name="salvar" title="Favoritar">
-                        <i class="fa-star fa-regular" id="star-details"></i>
-                    </button>
-                </form>
                 <h1 id="banner__title">${informationAnime.title}</h1>
                 <p id="banner__description">
                     ${informationAnime.synopsis}
@@ -662,7 +657,6 @@ export class updateDomJikan {
         const informationMangas    = data.data
 
         divMangaItemsWrapper.innerHTML = informationMangas.map(manga => {
-            console.log(manga)
             return `
             <div class="search__item">
                 <div class="item__description">
@@ -724,7 +718,7 @@ export class updateDomJikan {
                             <a href="./details.php?type=anime&id=${anime.mal_id}">Saiba Mais</a>
                         </button>
                         <span class="card__extra">
-                            ${anime.type} <br /> ${anime.published.prop.from.year}
+                            ${anime.type}<br/>${anime.published.prop.from.year}
                         </span>
                     </div>
                 </div>   
@@ -871,11 +865,6 @@ export class updateDomJikan {
 
         bannerInfoWrapper.innerHTML = `
             <div id="banner__info">
-                <form method="POST" id="banner__form">
-                    <button id="form__submit" name="salvar" type="submit">
-                        <i class="fa-star fa-regular" id="star-details"></i>
-                    </button>
-                </form>
                 <h1 id="banner__title">${informationManga.title}</h1>
                 <p id="banner__description">
                     ${informationManga.synopsis}

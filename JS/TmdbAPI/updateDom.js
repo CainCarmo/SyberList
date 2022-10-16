@@ -323,11 +323,6 @@ export class UpdateDomTmdb {
 
         bannerInfoWrapper.innerHTML = `
             <div id="banner__info">
-                <form method="POST" id="banner__form">
-                    <button id="form__submit" name="salvar" type="submit">
-                        <i class="fa-star fa-regular" id="star-details"></i>
-                    </button>
-                </form>
                 <h1 id="banner__title">${infomationMovie.title}</h1>
                 <p id="banner__description">
                     ${infomationMovie.overview}
@@ -727,11 +722,6 @@ export class UpdateDomTmdb {
 
         bannerInfoWrapper.innerHTML = `
             <div id="banner__info">
-                <form method="POST" id="banner__form">
-                    <button id="form__submit" name="salvar" type="submit">
-                        <i class="fa-star fa-regular" id="star-details"></i>
-                    </button>
-                </form>
                 <h1 id="banner__title">${infomationSerie.name}</h1>
                 <p id="banner__description">
                     ${infomationSerie.overview}

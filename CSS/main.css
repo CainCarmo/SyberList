@@ -411,6 +411,10 @@ i {
     color: #00ADB5;
 }
 
+#message__delete {
+    color: #FFF;
+}
+
 /* --- Animation --- */
 
 @keyframes form-down {
@@ -453,4 +457,15 @@ i {
 
 #header__user--hidden.visible {
     display: flex;
+}
+
+#error {
+    height: auto;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px;
+    border: 2px solid rgb(216, 117, 117);
+    background-color: #C40;
 }

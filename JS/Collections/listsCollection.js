@@ -8,7 +8,7 @@ export const  objListsDom = {
     buttonSerie: document.querySelector("#button__serie"),
     // -> Div
     divListsAnime: document.querySelectorAll(".list__item.item__anime"),
-    divListsAnime: document.querySelectorAll(".list__item.item__movie"),
+    divListsMovie: document.querySelectorAll(".list__item.item__movie"),
     divListAnime: document.querySelector("#list__anime"),
     divListManga: document.querySelector("#list__manga"),
     divListMovie: document.querySelector("#list__movie"),

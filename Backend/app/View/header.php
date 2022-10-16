@@ -7,12 +7,28 @@
 
     $oUserLogged = Login::GetUserLogged();
     
-    $pageType     = explode("&", explode("type=", $_SERVER["QUERY_STRING"])[1])[0];
-    $errorLogin   = "";
+    $pageType    = explode("&", explode("type=", $_SERVER["QUERY_STRING"])[1])[0];
+
+    $savedError  = key_exists(1, explode("saved=", $_SERVER["QUERY_STRING"]))
+        ? explode("saved=", $_SERVER["QUERY_STRING"])[1]
+        : null;
+
+    $loginError  = key_exists(1, explode("login=", $_SERVER["QUERY_STRING"]))
+        ? explode("login=", $_SERVER["QUERY_STRING"])[1]
+        : null;
+        
     $userListsCSS = "";
 
-    $hiddenBtn   = $oUserLogged ? "class='hidden'" : "";
-    $visibleIcon = $oUserLogged ? "class='visible'" : "";
+    $hiddenBtn    = $oUserLogged ? "class='hidden'" : "";
+    $visibleIcon  = $oUserLogged ? "class='visible'" : "";
+
+    $messageLoginError = is_null($loginError)
+        ? null
+        : '<div id="error"><span>Login ou senha inválidos!</span><i class="fas fa-times" id="message__delete"></i></div>';
+
+    $messageSaveError  = is_null($savedError)
+        ? null
+        : '<div id="error"><span>Para favoritar precisa efetuar o login</span><i class="fas fa-times" id="message__delete"></i></div>';
 
     $_SERVER["PHP_SELF"] === "/lists.php"
         ? $userListsCSS = '<link rel="stylesheet" href="./CSS/user_lists.css">'
@@ -49,9 +65,7 @@
             Login::Login(oUser: $oUser, pageType: $pageType);
         }
         else {
-            $errorLogin = $oVerifyLogin[1];
-            
-            header("location: home.php?type=". $pageType);
+            header("location: home.php?type=". $pageType . "&login=error");
             exit;
         }
     }
@@ -85,6 +99,9 @@
         <title id="page__title">Home | SyberList</title>
     </head>
     <body>
+        <!-- Mensagem de Erro -->
+        <?=$messageLoginError?>
+        <?=$messageSaveError?>
         <!-- Topo da Página -->
         <header id="header__page">
             <div id="header__left">
@@ -104,7 +121,7 @@
                     <a href="search.php?type=movie">Filmes</a>
                 </li>
                 <li class="header__link">
-                    <a href="./build.php">Nosso Blog</a>
+                    <a href="https://blog-syberlist.blogspot.com/">Nosso Blog</a>
                 </li>
             </nav>
             <div id="header__right">

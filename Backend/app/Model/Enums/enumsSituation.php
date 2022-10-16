@@ -11,32 +11,22 @@ namespace App\Model\Enums {
 
     class EnumsSituation {
 
-        public static function ToggleType(string $method, mixed $situation): string|int {
+        public static function ToggleSituation(string $method, mixed $situation): string|int {
             
             if ($method === "GET") {
                 
                 switch($situation) {
                     case 1:
-                        return Situation::from(1)->name;
+                        return "Para assistir";
                         break;
                     case 2:
-                        return Situation::from(2)->name;
+                        return "Assistindo";
                         break;
                     case 3:
-                        return Situation::from(3)->name;
+                        return "Completo";
                         break;
                     case 4:
-                        return Situation::from(4)->name;
-                        break;
-                    case 5:
-                        return Situation::from(5)->name;
-                        break;
-                    case 6:
-                        return Situation::from(6)->name;
-                        break;
-                    case 7:
-                        return Situation::from(7)->name;
-                        break;
+                        return "Dropado";
                 }
             }
 
@@ -54,15 +44,6 @@ namespace App\Model\Enums {
                         break;
                     case 4:
                         return Situation::from(4)->value;
-                        break;
-                    case 5:
-                        return Situation::from(5)->value;
-                        break;
-                    case 6:
-                        return Situation::from(6)->value;
-                        break;
-                    case 7:
-                        return Situation::from(7)->value;
                         break;
                 }
             }

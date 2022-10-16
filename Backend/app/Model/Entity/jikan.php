@@ -36,7 +36,7 @@ namespace App\Model\Entity {
             ]);
         }
 
-        public function SearchItemByID(string $type, int $ID): void {
+        public function SearchItemByID(string $type, string $ID): void {
 
             $baseURL = "https://api.jikan.moe/v4/";
 
@@ -51,6 +51,32 @@ namespace App\Model\Entity {
             $this->FK_TYPE_ID      = EnumsJikan::ToggleType(method: "POST", type: $responseParsed->type);
             $this->Cover           = $responseParsed->images->webp->large_image_url;
             $this->FK_SITUATION_ID = 1;
+        }
+
+        public function VerifyItemSaved(int $itemID, string $itemType, mixed $oUserID) {
+            if ($itemType === "anime") {
+
+                return (new QueryBuilder(table: "JIKAN"))->Select(where: "ID_JIKAN = " . $itemID . " AND FK_TYPE_ID <= " . EnumsJikan::ToggleType("POST", $itemType) . " AND FK_USER_ID = ". $oUserID)->fetchAll(PDO::FETCH_CLASS, self::class);
+            }
+            else {
+
+                return (new QueryBuilder(table: "JIKAN"))->Select(where: "ID_JIKAN = " . $itemID . " AND FK_TYPE_ID >= " . EnumsJikan::ToggleType("POST", $itemType) . " AND FK_USER_ID = ". $oUserID)->fetchAll(PDO::FETCH_CLASS, self::class);
+            }
+        }
+
+        public function UpdateSituation(int $itemID, string $itemType, int $situationID, int $oUserID,) {
+            if ($itemType === "anime") {
+
+                return (new QueryBuilder(table: "JIKAN"))->Update(where: "ID_JIKAN = " . $itemID . " AND FK_TYPE_ID <= " . EnumsJikan::ToggleType("POST", $itemType) . " AND FK_USER_ID = ". $oUserID, values: ['FK_SITUATION_ID' => $situationID]);
+            }
+            else {
+
+                return (new QueryBuilder(table: "JIKAN"))->Update(where: "ID_JIKAN = " . $itemID . " AND FK_TYPE_ID >= " . EnumsJikan::ToggleType("POST", $itemType) . " AND FK_USER_ID = ". $oUserID, values: ['FK_SITUATION_ID' => $situationID]);
+            }
+        }
+
+        public function DeleteItem(string $itemID, string $itemType,int $oUserID) {
+            return (new QueryBuilder(table: "JIKAN"))->Delete(where: "ID_JIKAN = ". $itemID ." AND FK_TYPE_ID = ". $itemType ." AND FK_USER_ID = ". $oUserID);
         }
 
         public function GetItemsByUser(int $oUserID): array|bool {

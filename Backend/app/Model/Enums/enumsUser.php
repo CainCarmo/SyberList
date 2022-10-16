@@ -58,14 +58,20 @@ namespace App\Model\Enums {
             }
         }
 
-        public static function ToggleStatus(mixed $status): string {
+        public static function ToggleStatus(mixed $status) {
             
             switch ($status) {
                 case 1:
-                    return Status::from(1)->name;
+                    return "Ativo";
                     break;
                 case 2:
-                    return Status::from(2)->name;
+                    return "Suspenso";
+                    break;
+                case 3:
+                    return "Banido";
+                    break;
+                case 4:
+                    return "Inválido";
                     break;
             }
         }

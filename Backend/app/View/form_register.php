@@ -7,7 +7,15 @@
 
     Login::RequireLogout();
 
-    $errorRegister = "";
+    
+    $pageType      = explode("&", explode("type=", $_SERVER["QUERY_STRING"])[1])[0];
+    $errorRegister = $_SERVER["QUERY_STRING"] === "type=" . $pageType . "&register=error"
+        ? explode("&", explode("register=", $_SERVER["QUERY_STRING"])[1])[0]
+        : null;
+
+    $RegisterError = is_null($errorRegister)
+        ? null
+        : "Email já Cadastrado";
 
     if (isset($_POST["enviar"])) {
 
@@ -28,8 +36,10 @@
 
             Login::Login(oUser: $oUser, pageType: $pageType);
         }
-        else
-            $errorRegister = $oVerifyReigister[1];
+        else {
+            header("location: register.php?type=". $pageType . "&register=error");
+            exit;
+        }
     }
 
 ?>
@@ -79,7 +89,7 @@
                         <!-- Logo -->
                         <img class="form__logo" src="https://cdn.discordapp.com/attachments/1000527265303642194/1006613565182054470/Logo-image.png" alt="Imagem da Logo" />
                         <!-- Mensagem de Erro -->
-                        <span class="form__error"></span>
+                        <span class="form__error"><?=$RegisterError?></span>
                     </header>
                     <main id="register__fields">
                         <!-- Área Icon do Usuário -->

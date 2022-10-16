@@ -31,7 +31,7 @@ namespace App\Control\Session {
                 "ID"         => $oUser->ID,
                 "USER_EMAIL" => $oUser->UserEmail,
                 "NICKNAME"   => $oUser->Nickname,
-                "FK_ROLE_ID" => $oUser->UserRole
+                "FK_STATUS_ID" => $oUser->UserStatus
             ];
 
             header("location: home.php?type=". $pageType);

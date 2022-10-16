@@ -26,10 +26,10 @@ namespace App\Model\Enums {
             if ($method === "POST") {
 
                 switch($type) {
-                    case "movie":
+                    case "Movie":
                         return TmdbType::from(1)->value;
                         break;
-                    case "tv":
+                    case "Tv":
                         return TmdbType::from(2)->value;
                         break;
                 }

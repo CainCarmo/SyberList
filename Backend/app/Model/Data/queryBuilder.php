@@ -47,7 +47,7 @@ namespace App\Model\Data {
             return $this->Execute($query);
         }
 
-        public function Update(string $where, array $values): bool {
+        public function Update(string $where, array $values) {
             $fields = array_keys($values);
 
             $query = "UPDATE ". $this->_table ." SET ". implode("=?,", $fields) ."=? WHERE ". $where;
