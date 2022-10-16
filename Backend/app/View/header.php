@@ -22,6 +22,10 @@
     $hiddenBtn    = $oUserLogged ? "class='hidden'" : "";
     $visibleIcon  = $oUserLogged ? "class='visible'" : "";
 
+    $oUserLogged
+        ? $cover = $_SESSION["User"]["COVER"]
+        : "";
+
     $messageLoginError = is_null($loginError)
         ? null
         : '<div id="error"><span>Login ou senha inválidos!</span><i class="fas fa-times" id="message__delete"></i></div>';
@@ -60,6 +64,7 @@
             $oUser->UserRole   = EnumsUser::ToggleRole($oUser->FK_ROLE_ID);
             $oUser->UserStatus = EnumsUser::ToggleStatus($oUser->FK_STATUS_ID);
             $oUser->BirthDate  = $oUser->BIRTH_DATE;
+            $oUser->UserIcon   = $oUser->USER_ICON;
             $oUser->RegisDate  = $oUser->REGISTER_DATE;
 
             Login::Login(oUser: $oUser, pageType: $pageType);
@@ -129,7 +134,7 @@
                 <button type="button" id="header__button" <?=$hiddenBtn?>>Login</button>
                 <div id="header__user--hidden" <?=$visibleIcon?>>
                     <a href="./lists.php">
-                        <img id="header__icon" src="./Resources/Image/perfil.jpg" alt="Ícone do Usuário">
+                        <img id="header__icon" src="./Resources/Image/Perfil/<?=$cover?>" alt="Ícone do Usuário">
                     </a>
                 </div>
             </div>

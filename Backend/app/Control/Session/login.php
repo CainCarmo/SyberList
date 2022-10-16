@@ -28,10 +28,11 @@ namespace App\Control\Session {
             self::Init();
 
             $_SESSION["User"] = [
-                "ID"         => $oUser->ID,
-                "USER_EMAIL" => $oUser->UserEmail,
-                "NICKNAME"   => $oUser->Nickname,
-                "FK_STATUS_ID" => $oUser->UserStatus
+                "ID"           => $oUser->ID,
+                "USER_EMAIL"   => $oUser->UserEmail,
+                "NICKNAME"     => $oUser->Nickname,
+                "FK_STATUS_ID" => $oUser->UserStatus,
+                "COVER"        => $oUser->UserIcon
             ];
 
             header("location: home.php?type=". $pageType);

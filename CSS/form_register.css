@@ -41,10 +41,6 @@ i {
     color: #000;
 }
 
-input[type="file"] {
-    display: none;
-}
-
 select > option{
     color: #000;
 }

@@ -31,6 +31,10 @@
             $oUser->UserPass   = password_hash($_POST["register__password"], PASSWORD_DEFAULT);
             $oUser->BirthDate  = $_POST["register__birth"];
             $oUser->UserGender = EnumsUser::ToggleGender("POST", $_POST["register__gender"]);
+
+            $oUser->UserGender === 1
+                ? $oUser->UserIcon = "perfil-M.jpg"
+                : $oUser->UserIcon = "perfil-F.jpg";
             
             $oUser->Register();
 
@@ -92,11 +96,6 @@
                         <span class="form__error"><?=$RegisterError?></span>
                     </header>
                     <main id="register__fields">
-                        <!-- Área Icon do Usuário -->
-                        <div id="form__photo--wrapper">
-                            <label for="form__photo">Escolha o Perfil</label>
-                            <input type="file" name="form__photo" id="form__photo">
-                        </div>
                         <!-- Campo do Nome -->
                         <div class="form__field" id="field__username">
                             <div class="form__icon--wrapper">

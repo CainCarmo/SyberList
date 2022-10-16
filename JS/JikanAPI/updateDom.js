@@ -142,7 +142,6 @@ export class updateDomJikan {
             <h2 class="section__title">
                 <i class="fa-solid fa-arrow-trend-up"></i> - Ranking Animes
             </h2>
-            <button type="button" class="section__button">Veja Mais</button>
         `
 
         sectionRankList.innerHTML = informationAnimes.slice(0, 5).map((anime, index) => {
@@ -744,7 +743,6 @@ export class updateDomJikan {
             <h2 class="section__title">
                 <i class="fa-solid fa-arrow-trend-up"></i> - Ranking Mangás
             </h2>
-            <button type="button" class="section__button">Veja Mais</button>
         `
 
         sectionRankList.innerHTML = informationMangas.slice(0, 5).map(manga => {

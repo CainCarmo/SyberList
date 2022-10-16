@@ -134,7 +134,6 @@ export class UpdateDomTmdb {
             <h2 class="section__title">
                 <i class="fa-solid fa-arrow-trend-up"></i> - Ranking Filmes 
             </h2>
-            <button type="button" class="section__button">Veja Mais</button>
         `
 
         sectionRankList.innerHTML = informationMovies.slice(0, 5).map((movie, index) => {
@@ -600,7 +599,6 @@ export class UpdateDomTmdb {
             <h2 class="section__title">
                 <i class="fa-solid fa-arrow-trend-up"></i> - Ranking Séries
             </h2>
-            <button type="button" class="section__button">Veja Mais</button>
         `
 
         sectionRankList.innerHTML = informationSeries.slice(0, 5).map((serie, index) => {

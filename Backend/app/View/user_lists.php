@@ -4,6 +4,7 @@
     use App\Model\Entity\Jikan;
     use App\Control\Session\Login;
     use App\Model\Enums\EnumsSituation;
+use App\Model\Enums\EnumsUser;
 
     Login::RequireLogin(pageType: $pageType);
 
@@ -19,6 +20,7 @@
             : $oTmdb->DeleteItem(itemID: $itemID, itemType: $itemType, oUserID: $_SESSION["User"]["ID"]);
 
         header("location: lists.php?type=". $pageType);
+        exit;
     }
 
     $cardsAnime = "";
@@ -121,6 +123,10 @@
         ? Login::Logout(pageType: $pageType)
         : null;
 
+    $situation = $_SESSION["User"]["FK_STATUS_ID"] === 1 || $_SESSION["User"]["FK_STATUS_ID"] === 2
+        ? EnumsUser::ToggleStatus($_SESSION["User"]["FK_STATUS_ID"])
+        : $_SESSION["User"]["FK_STATUS_ID"];
+
     $cardsAnime === ""
         ? $cardsAnime = "<span style='padding: 20px;'>Nenhum item na lista</span>"
         : $cardsAnime;
@@ -142,14 +148,14 @@
             <img src="./Resources/Image/戦争.png" alt="Banner Image">
             <header id="banner__user">
                 <div id="user__icon">
-                    <img src="./Resources/Image/perfil.jpg" alt="">
+                    <img src="./Resources/Image/Perfil/<?=$cover?>">
                 </div>
                 <div id="user__info">
                     <h1 id="info__nickname"><?=$_SESSION["User"]["NICKNAME"]?> #<?=$_SESSION["User"]["ID"]?></h1>
                     <span id="info__email"><?=$_SESSION["User"]["USER_EMAIL"]?></span>
                     <div id="info__situation--wrapper">
                         <div id="situation__circle"></div>
-                        <span id="info__situation"><?=$_SESSION["User"]["FK_STATUS_ID"]?></span>
+                        <span id="info__situation"><?=$situation?></span>
                     </div>
                 </div>
                 <div id="user__control">

@@ -39,6 +39,7 @@ namespace App\Model\Entity {
                 'FK_ROLE_ID'    => $this->UserRole,
                 'FK_STATUS_ID'  => $this->UserStatus,
                 'BIRTH_DATE'    => $this->BirthDate,
+                'USER_ICON'     => $this->UserIcon,
                 'REGISTER_DATE' => $this->RegisDate
             ]);
         }

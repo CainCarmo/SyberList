@@ -33,8 +33,4 @@ export class FactoryDom {
 
         return option
     }
-
-    CreateFilterOption() {
-        
-    }
 }
