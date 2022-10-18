@@ -415,6 +415,10 @@ export class updateDomJikan {
 
             <div id="banner__card">
                 <img id="banner__image" src="${informationAnime.images.webp.large_image_url}" alt="Imagem do Card">
+                <div id="banner__avaliation">
+                    <i class="fa-star fa-solid" id="star-avaliation"></i>
+                    <span id="avaliation__text">${informationAnime.score}</span>
+                </div>
             </div>
         `
 
@@ -586,8 +590,6 @@ export class updateDomJikan {
         })
     }
 
-    SetAnimeEpisodes(data) {}
-
     SetAnimeRecommendations(data) {
         const sectionSliders    = this.oFactoryDom.CreateBlockElement("section", ["section__sliders"])
         const sectionHeader     = this.oFactoryDom.CreateBlockElement("header", ["section__header"])
@@ -646,10 +648,6 @@ export class updateDomJikan {
             }
         })
     }
-
-    SetAnimeStreaming(data) {}
-
-    SetAnimeGenres(data) {}
 
     SetMangaSearch(data) {
         const divMangaItemsWrapper = this.oFactoryDom.CreateBlockElement("div", [], ["search__items--wrapper"])
@@ -871,7 +869,10 @@ export class updateDomJikan {
 
             <div id="banner__card">
                 <img id="banner__image" src="${informationManga.images.webp.large_image_url}" alt="Imagem do Card">
-                
+                <div id="banner__avaliation">
+                    <i class="fa-star fa-solid" id="star-avaliation"></i>
+                    <span id="avaliation__text">${informationManga.score}</span>
+                </div>
             </div>
         `
         const bannerInfo   = bannerInfoWrapper.querySelector("#banner__info")
@@ -1063,6 +1064,4 @@ export class updateDomJikan {
             })
         }re
     }
-
-    SetMangaGenres(data) {}
 }

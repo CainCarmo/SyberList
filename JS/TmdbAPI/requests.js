@@ -8,13 +8,6 @@ export class RequestsTmdb {
         this.API_KEY        = "32a48ac8387366ff3d957d772176624f"
     }
 
-    async GetGenre(type, IDs) {
-        await fetch(`${this.BaseURL}/genre/${type}/list?api_key=${this.API_KEY}&language=pt-BR`)
-                .then(res => res.json())
-                .then(data => this.oUpdateDomTmdb.SetGenre(data, IDs))
-                .catch(err => console.log(err.message))
-    }
-
     async GetMovieSearch(query) {
         await fetch(`${this.BaseURL}/search/movie?api_key=${this.API_KEY}&query=${query}&language=pt-BR`)
                 .then(res => res.json())

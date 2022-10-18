@@ -25,7 +25,7 @@ namespace App\Model\Entity {
         }
 
         public function Register() {
-            $this->RegisDate = date("Y-m-d H:i:s");
+            $this->RegisDate = date("Y-m-d");
 
             $oQueryBuilder = new QueryBuilder(table: "USER");
 

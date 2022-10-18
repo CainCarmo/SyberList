@@ -55,7 +55,6 @@ export class DetailsEvents {
             case "tv":
 
                 await this.oRequestsTmdb.GetTvByID(itemID)
-                await this.oRequestsTmdb.GetGenre(itemType)
                 await this.oRequestsTmdb.GetTvRecommendationsByID(itemID)
 
                 break

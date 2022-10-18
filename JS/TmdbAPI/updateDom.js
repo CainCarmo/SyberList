@@ -13,10 +13,6 @@ export class UpdateDomTmdb {
         this.ImageNotFound = "./Resources/Image/Not-Found.jpg"
     }
 
-    async SetGenre(data, IDs) {
-        const informationGenres = data
-    }
-
     async SetMovieSearch(data) {
         const divMovieItemsWrapper = this.oFactoryDom.CreateBlockElement("div", [], ["search__items--wrapper"])
         const informationMovies    = data.results
@@ -330,7 +326,10 @@ export class UpdateDomTmdb {
 
             <div id="banner__card">
                 <img id="banner__image" src="${this.BaseImageURL + infomationMovie.poster_path}" alt="Imagem do Card">
-                
+                <div id="banner__avaliation">
+                    <i class="fa-star fa-solid" id="star-avaliation"></i>
+                    <span id="avaliation__text">${infomationMovie.vote_average.toFixed(1)}</span>
+                </div>
             </div>
         `
         const bannerInfo   = bannerInfoWrapper.querySelector("#banner__info")
@@ -728,7 +727,10 @@ export class UpdateDomTmdb {
 
             <div id="banner__card">
                 <img id="banner__image" src="${this.BaseImageURL + infomationSerie.poster_path}" alt="Imagem do Card">
-                
+                <div id="banner__avaliation">
+                    <i class="fa-star fa-solid" id="star-avaliation"></i>
+                    <span id="avaliation__text">${infomationSerie.vote_average.toFixed(1)}</span>
+                </div>
             </div>
         `
         const bannerInfo   = bannerInfoWrapper.querySelector("#banner__info")
@@ -748,8 +750,6 @@ export class UpdateDomTmdb {
         bannerInfo.appendChild(bannerGenres)
         objDetailsDom.sectionBanner.appendChild(bannerInfoWrapper)
     }
-
-    
     
     SetTvRecommendationsByID(data) {
         const sectionSliders    = this.oFactoryDom.CreateBlockElement("section", ["section__sliders"])
