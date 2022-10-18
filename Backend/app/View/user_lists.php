@@ -30,7 +30,7 @@ use App\Model\Enums\EnumsUser;
 
     $cardsMovieRequest = $oTmdb->GetItemsByUser(oUserID: $_SESSION["User"]["ID"]);
     $cardsAnimeRequest = $oJikan->GetItemsByUser(oUserID: $_SESSION["User"]["ID"]);
-    
+
     foreach($cardsAnimeRequest as $cardsAnimeResponse) {
 
         if ($cardsAnimeResponse->FK_TYPE_ID <= 3) {
@@ -77,7 +77,7 @@ use App\Model\Enums\EnumsUser;
 
     foreach($cardsMovieRequest as $cardsMovieResponse) {
 
-        if ($cardsMovieResponse->FK_TYPE_ID = 1) {
+        if ($cardsMovieResponse->FK_TYPE_ID === 1) {
 
             $cardsMovie .= '
                 
@@ -108,7 +108,7 @@ use App\Model\Enums\EnumsUser;
                             </a>
                             <h3 class="card__title">' . $cardsMovieResponse->TITLE . '</h3>
                             <button type="button" class="card__button">
-                                <a href="./details.php?type=serie&id=' . $cardsMovieResponse->ID_TMDB . '">Saiba Mais</a>
+                                <a href="./details.php?type=tv&id=' . $cardsMovieResponse->ID_TMDB . '">Saiba Mais</a>
                             </button>
                             <span class="card__extra">' . EnumsSituation::ToggleSituation("GET", $cardsMovieResponse->FK_SITUATION_ID) . '</span>
                         </div>

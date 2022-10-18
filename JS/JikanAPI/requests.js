@@ -77,31 +77,10 @@ export class RequestsJikan {
                 .catch(err => console.warn(err.message))
     }
 
-    async GetAnimeEpisodes(ID) {
-        await fetch(`${this.BaseURL}/anime/${ID}/episodes`)
-                .then(res => res.json())
-                .then(data => this.oUpdateDomJikan.SetAnimeEpisodes(data))
-                .catch(err => console.warn(err.message))
-    }
-
     async GetAnimeRecommendations(ID) {
         await fetch(`${this.BaseURL}/anime/${ID}/recommendations`)
                 .then(res => res.json())
                 .then(data => this.oUpdateDomJikan.SetAnimeRecommendations(data))
-                .catch(err => console.warn(err.message))
-    }
-
-    async GetAnimeStreaming(ID) {
-        await fetch(`${this.BaseURL}/anime/${ID}/streaming`)
-                .then(res => res.json())
-                .then(data => this.oUpdateDomJikan.SetAnimeStreaming(data))
-                .catch(err => console.warn(err.message))
-    }
-
-    async GetAnimeGenres() {
-        await fetch(`${this.BaseURL}/genres/anime`)
-                .then(res => res.json())
-                .then(data => this.oUpdateDomJikan.SetAnimeGenres(data))
                 .catch(err => console.warn(err.message))
     }
 
@@ -158,13 +137,6 @@ export class RequestsJikan {
         await fetch(`${this.BaseURL}/manga/${ID}/recommendations`)
                 .then(res => res.json())
                 .then(data => this.oUpdateDomJikan.SetMangaRecommendations(data))
-                .catch(err => console.warn(err.message))
-    }
-
-    async GetMangaGenres() {
-        await fetch(`${this.BaseURL}/genres/manga`)
-                .then(res => res.json())
-                .then(data => this.oUpdateDomJikan.SetMangaGenres(data))
                 .catch(err => console.warn(err.message))
     }
 }

@@ -126,7 +126,7 @@ i {
 #header__right { justify-content: flex-end; }
 
 #header__button {
-    width: 45%;
+    width: 50%;
     padding: .5rem;
     font-size: 1em;
     font-weight: 600;
@@ -312,7 +312,10 @@ i {
 
 /* === Banner Card === */
 
-#banner__card { margin-left: 125px; }
+#banner__card { 
+    position: relative;
+    margin-left: 125px;
+}
 
 #banner__card img {
     max-height: 300px;
