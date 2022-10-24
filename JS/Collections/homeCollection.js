@@ -1,8 +1,8 @@
-export const objHomeDom = {
-    // -> Section
-    sectionBanner: document.querySelector("#banner"),
-    // -> Video
-    videoBanner: document.querySelector("#banner__video"),
+export const objHomeDOM = {
     // -> Main
-    mainPage: document.querySelector("#container__home")
+    MainPage: document.querySelector("#container__home"),
+    // -> Section
+    SectionBanner: document.querySelector("#banner"),
+    // -> Video
+    VideoBanner: document.querySelector("#banner__video")
 }

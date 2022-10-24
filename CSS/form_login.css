@@ -9,8 +9,7 @@
     display: none;
     align-items: center;
     justify-content: center;
-    background-color: rgba(0, 0, 0, .8);
-    z-index: 999;
+    z-index: 20;
 }
 
 /* --- Form --- */
@@ -24,7 +23,6 @@
     padding: 1.5rem;
     overflow: hidden;
     border-radius: 15px;
-    background-color: #FFF;
 }
 
 /* === Form Header === */
@@ -40,7 +38,9 @@
     position: relative;
 }
 
-#login__error { position: absolute; }
+#login__error {
+    position: absolute;
+}
 
 /* === Form Main === */
 
@@ -66,20 +66,17 @@
 #login__alt {
     letter-spacing: 1px;
     font-size: .7em;
-    color: rgba(0, 0, 0, .9);
 }
 
 #login__footer > span > a {
     position: relative;
     font-size: .9em;
-    color: rgba(0, 0, 0, .9);
     transition: .5s;
 }
 
 
 #login__footer > span > a:hover {
     transition: .3s ease;
-    color: #D3AD7F;
 }
 
 #login__footer > span > a::before {
@@ -91,14 +88,15 @@
     content: "";
     transition: .3s ease;
     border-radius: 8px;
-    background-color: #D3AD7F;
 }
 
-#login__footer > span > a:hover::before { width: 100%; }
+#login__footer > span > a:hover::before {
+    width: 100%;
+}
 
 /* --- Icons --- */
 
-.form__times {
+#login__times {
     position: absolute;
     top: 20px;
     right: 10px;

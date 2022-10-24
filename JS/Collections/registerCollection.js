@@ -1,9 +1,9 @@
-export const objRegisterDom = {
+export const objRegisterDOM = {
     // -> Div
-    divLineEyeLogin: document.querySelector("#password__line"),
+    DivLineEye: document.querySelector("#password__line"),
     // -> Input
-    inputPasswordLogin: document.querySelector("#register__password"),
+    InputPassword: document.querySelector("#register__password"),
     // -> Icon
-    iconArrowReturn: document.querySelector("#return"),
-    iconEyeLogin: document.querySelectorAll(".fa-eye")[0]
+    IconArrowReturn: document.querySelector("#return"),
+    IconEye: document.querySelectorAll(".fa-eye")[0]
 }

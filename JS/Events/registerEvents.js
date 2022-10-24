@@ -1,8 +1,8 @@
-import { objRegisterDom } from "../Collections/registerCollection.js"
+import { objRegisterDOM } from "../Collections/registerCollection.js"
 
 export class RegisterEvents {
 
     Register() {
-        objRegisterDom.iconArrowReturn.addEventListener("click", () => history.back())
+        objRegisterDOM.IconArrowReturn.addEventListener("click", () => history.back())
     }
 }

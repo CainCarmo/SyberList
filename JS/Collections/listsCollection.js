@@ -1,4 +1,4 @@
-export const  objListsDom = {
+export const  objListsDOM = {
     // -> Button
     buttonsAnime: document.querySelectorAll(".lists__tab.tab__anime"),
     buttonsMovie: document.querySelectorAll(".lists__tab.tab__movie"),

@@ -2,6 +2,8 @@
 
 namespace App\Model\Entity {
 
+    use DateTime;
+    use DateTimeZone;
     use App\Model\Data\QueryBuilder;
 
     class User {
@@ -23,9 +25,10 @@ namespace App\Model\Entity {
             $this->UserStatus = 1;
             $this->UserRole   = 1;
         }
-
-        public function Register() {
-            $this->RegisDate = date("Y-m-d");
+        
+        public function Register(): void {
+            $timezone = new DateTimeZone("America/Sao_Paulo");
+            $this->RegisDate = date_format(new DateTime("now", $timezone), "Y-m-d H:i:s");
 
             $oQueryBuilder = new QueryBuilder(table: "USER");
 

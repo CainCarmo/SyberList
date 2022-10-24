@@ -1,19 +1,19 @@
-import { objLoginDom }  from "../Collections/loginCollection.js"
-import { objHeaderDom } from "../Collections/headerCollection.js"
+import { objLoginDOM } from "../Collections/loginCollection.js"
+import { objHeaderDOM } from "../Collections/headerCollection.js"
 
 export class LoginEvents {
-
+    
     Login() {
-        if (objLoginDom.formLogin != null) {
+        if (objLoginDOM.FormLogin != null) {
 
-            objHeaderDom.buttonLogin.addEventListener("click", () => {
-                objLoginDom.backgroundFormLogin.classList.add("visible")
-                objLoginDom.formLogin.classList.add("down")
+            objHeaderDOM.ButtonLogin.addEventListener("click", () => {
+                objLoginDOM.DivBackgroundForm.classList.add("visible")
+                objLoginDOM.FormLogin.classList.add("down")
             })
-            
-            objLoginDom.iconTimesLogin.addEventListener("click", () => {
-                objLoginDom.backgroundFormLogin.classList.remove("visible")
-                objLoginDom.formLogin.classList.remove("down")
+
+            objLoginDOM.IconTimes.addEventListener("click", () => {
+                objLoginDOM.DivBackgroundForm.classList.remove("visible")
+                objLoginDOM.FormLogin.classList.remove("down")
             })
         }
     }

@@ -1,0 +1,278 @@
+/* --- Variáveis --- */
+
+:root {
+    --scroll-bar-track: #5C6664;
+    --scroll-bar-thumb: #000;
+
+    --text-color: #FFF;
+    --text-links: #D3AD7F;
+    --text-banner: #FFF;
+    --text-login: rgba(0, 0, 0, .9);
+
+    --color-header-icon: #00ADB5;
+    --color-times: #C40;
+
+    --bg-button-login: rgba(0, 0, 0, .6);
+    --bg-search-side: #393E46;
+    --bg-search-input: #999999;
+    --bg-banner: rgba(0, 0, 0, .8);
+    --bg-banner-button: #393E46;
+    --bg-login: rgba(0, 0, 0, .8);
+    --bg-login-form: #FFF;
+    --bg-main: #222831;
+    --bg-ranking-card: #000;
+    --bg-ranking-side: #393E46;
+    --bg-ranking-center: #808080;
+    --bg-dot: #EEEEEE;
+    --bg-dot-active: #00ADB5;
+    --bg-div-controls: #808080;
+    --bg-icons-controls: #EEEEEE;
+    --bg-footer: #222831;
+    --bg-footer-line: #5C6664;
+
+    --border-button-login: 1px solid #FFF;
+    --border-section-header: 3px solid #FFF;
+
+    --shadow-card: 10px 10px 10px #101010;
+    --shadow-card-hover: 3px 3px 5px #808080;
+    --shadow-footer: 0 -16px 20px rgba(0, 0, 0, .2);
+}
+
+.light:root {
+    --text-color: #000;
+
+    --color-header-icon: #FEA82F;
+
+    --bg-main: #FCECDD;
+    --bg-ranking-card: #FFF;
+    --bg-ranking-side: #FEA82F;
+    --bg-ranking-center: #FFC288;
+    --bg-dot: #808080;
+    --bg-dot-active: #000;
+    --bg-footer: #FCECDD;
+    --bg-footer-line: #5C6664;
+
+    --border-section-header: 3px solid #000;
+}
+
+/* --- Reset --- */
+
+* {
+    transition: .2s;
+    color: var(--text-color);
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+    height: 7px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: var(--scroll-bar-track);
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    background-color: var(--scroll-bar-thumb);
+}
+
+/*
+ * -> Home - Details - Search
+ */
+
+/* --- Header --- */
+
+#header__page {
+    background-color: var(--bg-banner);
+}
+
+.header__link > a {
+    color: var(--text-banner);
+}
+
+.header__link > a:hover {
+    color: var(--text-links);
+}
+
+.header__link::before {
+    background-color: var(--text-links);
+}
+
+#header__button {
+    border: var(--border-button-login);
+    background-color: transparent;
+    color: var(--text-banner);
+}
+
+#header__icon {
+    border: 3px solid var(--text-links);
+}
+
+#header__icon:hover {
+    border: 3px solid #808080;
+}
+
+/* --- Search --- */
+
+#search {
+    background-color: var(--bg-banner);
+}
+
+#search__select, #search__controls {
+    background-color: var(--bg-search-side);
+}
+
+#search__input {
+    background-color: var(--bg-search-input);
+}
+
+#search__button {
+    background-color: transparent;
+}
+
+#search__results {
+    background-color: var(--bg-banner);
+}
+
+.search__item > .item__description {
+    background-color: transparent;
+}
+
+.search__item:hover {
+    background-color: #808080;
+}
+
+/* --- Banner --- */
+
+#banner {
+    background-color: var(--bg-banner);
+}
+
+#banner__title {
+    color: var(--text-banner);
+}
+
+#banner__description {
+    color: var(--text-banner);
+}
+
+#banner__button {
+    background-color: var(--bg-div-controls);
+}
+
+#banner__button > a {
+    color: var(--text-banner);
+}
+
+/* --- Main --- */
+
+.container {
+    background-color: var(--bg-main);
+}
+
+.section__header {
+    border-bottom: var(--border-section-header);
+}
+
+.section__title > i {
+    color: var(--color-header-icon);
+}
+
+/* === Card Ranking === */
+
+.section__item {
+    background-color: var(--bg-ranking-card);
+}
+
+.item__rank--wrapper, .item__score {
+    background-color: var(--bg-ranking-side);
+}
+
+.item__description {
+    background-color: var(--bg-ranking-center);
+}
+
+/* === Card Slider === */
+
+.section__arrow {
+    background-color: var(--bg-dot-active);
+}
+
+.section__arrow > i {
+    color: var(--text-banner);
+}
+
+.card__title, .card__button > a, .card__extra {
+    color: var(--text-banner);
+}
+
+.glider-dot {
+    background-color: var(--bg-dot);
+}
+
+.glider-dot.active {
+    background-color: var(--bg-dot-active);
+}
+
+/* --- Login --- */
+
+#login--hidden {
+    background-color: var(--bg-login);
+}
+
+#login {
+    background-color: var(--bg-login-form);
+}
+
+#login__alt, #login__footer > span > a {
+    color: var(--text-login);
+}
+
+#login__footer > span > a:hover {
+    color: var(--text-links);
+}
+
+#login__footer > span > a::before {
+    background-color: var(--text-links);
+}
+
+/* --- Controles --- */
+
+#theme__dark {
+    background-color: #101010;
+    border: 2px solid var(--text-links);
+}
+
+#theme__light {
+    background-color: #EEEEEE;
+    border: 2px solid #808080;
+}
+
+/* --- Footer --- */
+
+#footer__page {
+    background-color: var(--bg-footer);
+    box-shadow: var(--shadow-footer);
+}
+
+#footer__line {
+    background-color: var(--bg-footer-line);
+}
+
+/* --- Icons --- */
+
+#header__right > .fa-search {
+    color: var(--text-banner);
+}
+
+#login__times {
+    color: var(--color-times);
+}
+
+.form__icon--wrapper > i {
+    color: var(--text-login);
+}
+
+.fa-eye {
+    color: var(--text-login);
+}

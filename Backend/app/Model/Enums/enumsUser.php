@@ -20,60 +20,33 @@ namespace App\Model\Enums {
     }
 
     class EnumsUser {
-        
-        public static function ToggleGender(string $method, mixed $gender): int|string {
-            
-            if ($method === "GET") {
-                switch ($gender) {
-                    case 1:
-                        return Gender::from(1)->name;
-                        break;
-                    case 2:
-                        return Gender::from(2)->name;
-                        break;
-                }
-            }
 
-            if ($method === "POST") {
-                switch($gender) {
-                    case "M":
-                        return Gender::from(1)->value;
-                        break;
-                    case "F":
-                        return Gender::from(2)->value;
-                        break;
-                }
+        public static function ToggleGender(string $method, mixed $gender): int|string {
+            switch ($method) {
+                case "GET":
+                    if ($gender === 1) return "Masculino";
+                    if ($gender === 2) return "Feminino";
+
+                    break;
+
+                case "POST":
+                    if ($gender === "M") return Gender::from(1)->value;
+                    if ($gender === "F") return Gender::from(2)->value;
+
+                    break;
             }
         }
 
         public static function ToggleRole(mixed $role): string {
-            
-            switch ($role) {
-                case 1:
-                    return Role::from(1)->name;
-                    break;
-                case 2:
-                    return Role::from(2)->name;
-                    break;
-            }
+            if ($role === 1) return "Cliente";
+            if ($role === 2) return "Administrador";
         }
 
-        public static function ToggleStatus(mixed $status) {
-            
-            switch ($status) {
-                case 1:
-                    return "Ativo";
-                    break;
-                case 2:
-                    return "Suspenso";
-                    break;
-                case 3:
-                    return "Banido";
-                    break;
-                case 4:
-                    return "Inválido";
-                    break;
-            }
+        public static function ToggleStatus(mixed $status): string {
+            if ($status === 1) return "Ativo";
+            if ($status === 2) return "Suspenso";
+            if ($status === 3) return "Banido";
+            if ($status === 4) return "Indisponível";
         }
     }
 }

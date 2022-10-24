@@ -20,7 +20,7 @@ namespace App\Model\Data {
                 $this->_connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             }
             catch(PDOException $ex) {
-                die("ERROR: ".$ex->getMessage());
+                die("ERRO AO TENTAR CONECTAR-SE COM O BANCO: ".$ex->getMessage());
             }
         }
     }

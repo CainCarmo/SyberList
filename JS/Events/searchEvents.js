@@ -1,14 +1,107 @@
-import { FactoryDom }    from "../DOM/factoryDom.js"
+import { FactoryDOM }    from "../DOM/factoryDom.js"
 import { RequestsJikan } from "../JikanAPI/requests.js" 
 import { RequestsTmdb }  from "../TmdbAPI/requests.js"
-import { objHeaderDom }  from "../Collections/headerCollection.js"
+import { objHeaderDOM }  from "../Collections/headerCollection.js"
 
 export class SearchEvents {
 
     constructor() {
-        this.oFactoryDom    = new FactoryDom()
+        this.oFactoryDOM    = new FactoryDOM()
         this.oRequestsJikan = new RequestsJikan()
         this.oRequestsTmdb  = new RequestsTmdb()
+    }
+
+    Find(pageType) { 
+        
+        switch(pageType) {
+            case "anime":
+            case "manga":
+                
+                objHeaderDOM.SelectSearch.appendChild(this.oFactoryDOM.CreateSelectOption("anime", "Anime"))
+                objHeaderDOM.SelectSearch.appendChild(this.oFactoryDOM.CreateSelectOption("manga", "Mangá"))
+                break
+
+            case "tv":
+            case "movie":
+
+                objHeaderDOM.SelectSearch.appendChild(this.oFactoryDOM.CreateSelectOption("tv", "Série"))
+                objHeaderDOM.SelectSearch.appendChild(this.oFactoryDOM.CreateSelectOption("movie", "Filme"))
+                break
+        }
+
+        objHeaderDOM.IconSearchHeader.addEventListener("click", () => {
+            objHeaderDOM.DivSearchBox.classList.toggle("max")
+        })
+
+        objHeaderDOM.InputSearch.addEventListener("input", () => {
+            if (objHeaderDOM.InputSearch.value.length > 0) {
+                objHeaderDOM.DivTimesWrapper.classList.add("visible")
+            }
+            else {
+                objHeaderDOM.DivTimesWrapper.classList.remove("visible")
+                objHeaderDOM.DivSearchResults.classList.remove("max")
+            }
+        })
+
+        objHeaderDOM.FormSearch.addEventListener("submit", event => {
+            event.preventDefault()
+
+            let query = objHeaderDOM.InputSearch.value
+            objHeaderDOM.DivSearchResults.innerHTML = null
+
+            switch(pageType)  {
+                case "anime":
+                case "manga":
+
+                    objHeaderDOM.SelectSearch.value === "anime"
+                        ? this.oRequestsJikan.GetAnimeSearch(query)
+                        : this.oRequestsJikan.GetMangaSearch(query)
+                    break
+
+                case "tv":
+                case "movie":
+
+                    objHeaderDOM.SelectSearch.value === "anime"
+                        ? this.oRequestsTmdb.GetTvSearch(query)
+                        : this.oRequestsTmdb.GetMovieSearch(query)
+                    break
+            }
+
+            objHeaderDOM.DivSearchResults.classList.add("max")
+        })
+
+        objHeaderDOM.IconSearchForm.addEventListener("click", event => {
+            event.preventDefault()
+
+            let query = objHeaderDOM.InputSearch.value
+            objHeaderDOM.DivSearchResults.innerHTML = null
+
+            switch(pageType)  {
+                case "anime":
+                case "manga":
+
+                    objHeaderDOM.SelectSearch.value === "anime"
+                        ? this.oRequestsJikan.GetAnimeSearch(query)
+                        : this.oRequestsJikan.GetMangaSearch(query)
+                    break
+
+                case "tv":
+                case "movie":
+
+                    objHeaderDOM.SelectSearch.value === "anime"
+                        ? this.oRequestsTmdb.GetTvSearch(query)
+                        : this.oRequestsTmdb.GetMovieSearch(query)
+                    break
+            }
+
+            objHeaderDOM.DivSearchResults.classList.add("max")
+        })
+
+        objHeaderDOM.IconTimesSearch.addEventListener("click", () => {
+            objHeaderDOM.DivSearchResults.classList.remove("max")
+            objHeaderDOM.DivTimesWrapper.classList.remove("visible")
+            objHeaderDOM.InputSearch.value = ""
+        })
     }
 
     Search(pageType) {
@@ -16,94 +109,79 @@ export class SearchEvents {
             case "anime":
             case "manga":
 
-                objHeaderDom.selectSearch.appendChild(this.oFactoryDom.CreateSelectOption("anime", "Anime"))
-                objHeaderDom.selectSearch.appendChild(this.oFactoryDom.CreateSelectOption("manga", "Mangá"))
+                objHeaderDOM.SelectSearch.appendChild(this.oFactoryDOM.CreateSelectOption("anime", "Anime"))
+                objHeaderDOM.SelectSearch.appendChild(this.oFactoryDOM.CreateSelectOption("manga", "Mangá"))
                 break
-            
+
             case "tv":
             case "movie":
-                
-                objHeaderDom.selectSearch.appendChild(this.oFactoryDom.CreateSelectOption("tv", "Série"))
-                objHeaderDom.selectSearch.appendChild(this.oFactoryDom.CreateSelectOption("movie", "Filme"))
+
+                objHeaderDOM.SelectSearch.appendChild(this.oFactoryDOM.CreateSelectOption("tv", "Série"))
+                objHeaderDOM.SelectSearch.appendChild(this.oFactoryDOM.CreateSelectOption("movie", "Filme"))
                 break
         }
 
-        objHeaderDom.iconSearchHeader.addEventListener("click", () => objHeaderDom.divSearchBox.classList.toggle("max"))
-
-        objHeaderDom.inputSearch.addEventListener("input", () => {
-            objHeaderDom.inputSearch.value.length > 0
-                ? objHeaderDom.divTimesWrapper.classList.add("visible")
-                : objHeaderDom.divTimesWrapper.classList.remove("visible")
-            
-            objHeaderDom.inputSearch.value.length === 0
-                ? objHeaderDom.divSearchResults.classList.remove("max")
-                : ""
+        objHeaderDOM.IconSearchHeader.addEventListener("click", () => {
+            objHeaderDOM.DivSearchBox.classList.toggle("max")
         })
 
-        objHeaderDom.formSearch.addEventListener("submit", async event => {
+        objHeaderDOM.InputSearch.addEventListener("input", () => {
+            objHeaderDOM.InputSearch.value.length > 0
+                ? objHeaderDOM.DivTimesWrapper.classList.add("visible")
+                : objHeaderDOM.DivTimesWrapper.classList.remove("visible")
+        })
+
+        objHeaderDOM.FormSearch.addEventListener("submit", event => {
             event.preventDefault()
 
-            objHeaderDom.divSearchResults.innerHTML = null
-            
-            let query = objHeaderDom.inputSearch.value
+            let query = objHeaderDOM.InputSearch.value
 
-            switch(pageType) {
+            switch(pageType)  {
                 case "anime":
                 case "manga":
 
-                    objHeaderDom.selectSearch.value === "anime"
-                        ? await this.oRequestsJikan.GetAnimeSearch(query)
-                        : await this.oRequestsJikan.GetMangaSearch(query)
-
+                    objHeaderDOM.SelectSearch.value === "anime"
+                        ? this.oRequestsJikan.GetAnimeFind(query)
+                        : this.oRequestsJikan.GetMangaFind(query)
                     break
-                
+
                 case "tv":
                 case "movie":
-                    
-                    objHeaderDom.selectSearch.value === "tv"
-                        ? await this.oRequestsTmdb.GetTvSearch(query)
-                        : await this.oRequestsTmdb.GetMovieSearch(query)
 
+                    objHeaderDOM.SelectSearch.value === "anime"
+                        ? this.oRequestsTmdb.GetTvFind(query)
+                        : this.oRequestsTmdb.GetMovieFind(query)
                     break
             }
-            
-            objHeaderDom.divSearchResults.classList.add("max")
         })
 
-        objHeaderDom.iconSearch.addEventListener("click", async event => {
+        objHeaderDOM.IconSearchForm.addEventListener("click", event => {
             event.preventDefault()
-            
-            objHeaderDom.divSearchResults.innerHTML = null
 
-            let query = objHeaderDom.inputSearch.value
+            let query = objHeaderDOM.InputSearch.value
 
-            switch(pageType) {
+            switch(pageType)  {
                 case "anime":
                 case "manga":
 
-                    objHeaderDom.selectSearch.value === "anime"
-                        ? await this.oRequestsJikan.GetAnimeSearch(query)
-                        : await this.oRequestsJikan.GetMangaSearch(query)
-                    
+                    objHeaderDOM.SelectSearch.value === "anime"
+                        ? this.oRequestsJikan.GetAnimeSearch(query)
+                        : this.oRequestsJikan.GetMangaSearch(query)
                     break
-                
+
                 case "tv":
                 case "movie":
-                    
-                    objHeaderDom.selectSearch.value === "tv"
-                        ? await this.oRequestsTmdb.GetTvSearch(query)
-                        : await this.oRequestsTmdb.GetMovieSearch(query)
-                
+
+                    objHeaderDOM.SelectSearch.value === "anime"
+                        ? this.oRequestsTmdb.GetTvSearch(query)
+                        : this.oRequestsTmdb.GetMovieSearch(query)
                     break
             }
-            
-            objHeaderDom.divSearchResults.classList.add("max")
         })
 
-        objHeaderDom.iconTimesSearch.addEventListener("click", () => {
-            objHeaderDom.divSearchResults.classList.toggle("max")
-            objHeaderDom.divTimesWrapper.classList.remove("visible")
-            objHeaderDom.inputSearch.value = ""
+        objHeaderDOM.IconTimesSearch.addEventListener("click", () => {
+            objHeaderDOM.DivTimesWrapper.classList.remove("visible")
+            objHeaderDOM.InputSearch.value = ""
         })
     }
 }

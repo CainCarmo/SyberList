@@ -1,4 +1,4 @@
-import { UpdateDomTmdb } from "./updateDom.js"
+import { UpdateDomTmdb } from "./updateDOM.js"
 
 export class RequestsTmdb {
 
@@ -15,10 +15,10 @@ export class RequestsTmdb {
                 .catch(err => console.log(err.message))
     }
 
-    async GetMovieBrowse(query) {
+    async GetMovieFind(query) {
         await fetch(`${this.BaseURL}/search/movie?api_key=${this.API_KEY}&query=${query}&language=pt-BR`)
                 .then(res => res.json())
-                .then(data => this.oUpdateDomTmdb.SetMovieBrowse(data))
+                .then(data => this.oUpdateDomTmdb.SetMovieFind(data))
                 .catch(err => console.log(err.message))
     }
 
@@ -29,31 +29,31 @@ export class RequestsTmdb {
                 .catch(err => console.log(err.message))
     }
 
-    async GetMoviesTop() {
+    async GetMovieRanking() {
         await fetch(`${this.BaseURL}/movie/top_rated?api_key=${this.API_KEY}&language=pt-BR`)
                 .then(res => res.json())
-                .then(data => this.oUpdateDomTmdb.SetMoviesTop(data))
+                .then(data => this.oUpdateDomTmdb.SetMovieRanking(data))
                 .catch(err => console.warn(err.message))
     }
 
-    async GetMoviesPopular() {
+    async GetMoviePopular() {
         await fetch(`${this.BaseURL}/movie/popular?api_key=${this.API_KEY}&language=pt-BR`)
                 .then(res => res.json())
-                .then(data => this.oUpdateDomTmdb.SetMoviesPopular(data))
+                .then(data => this.oUpdateDomTmdb.SetMoviePopular(data))
                 .catch(err => console.warn(err.message))
     }
 
-    async GetMoviesUpComing() {
+    async GetMovieUpComing() {
         await fetch(`${this.BaseURL}/movie/upcoming?api_key=${this.API_KEY}&language=pt-BR`)
                 .then(res => res.json())
-                .then(data => this.oUpdateDomTmdb.SetMoviesUpComing(data))
+                .then(data => this.oUpdateDomTmdb.SetMovieUpComing(data))
                 .catch(err => console.warn(err.message))
     }
 
-    async GetMoviesByID(ID) {
+    async GetMovieByID(ID) {
         await fetch(`${this.BaseURL}/movie/${ID}?api_key=${this.API_KEY}&language=pt-BR`)
                 .then(res => res.json())
-                .then(data => this.oUpdateDomTmdb.SetMoviesByID(data))
+                .then(data => this.oUpdateDomTmdb.SetMovieByID(data))
                 .catch(err => console.warn(err.message))
     }
 
@@ -64,17 +64,24 @@ export class RequestsTmdb {
                 .catch(err => console.warn(err.message))
     }
 
-    async GetMoviesSimilar(ID) {
-        await fetch(`${this.BaseURL}/movie/${ID}/similar?api_key=${this.API_KEY}&language=pt-BR`)
+    async GetMovieCast(ID) {
+        await fetch(`${this.BaseURL}/movie/${ID}/credits?api_key=${this.API_KEY}&language=pt-BR`)
                 .then(res => res.json())
-                .then(data => this.oUpdateDomTmdb.SetMoviesSimilar(data))
+                .then(data => this.oUpdateDomTmdb.SetMovieCast(data))
                 .catch(err => console.warn(err.message))
     }
 
-    async GetMoviesRecommendatiosByID(ID) {
+    async GetMovieSimilar(ID) {
+        await fetch(`${this.BaseURL}/movie/${ID}/similar?api_key=${this.API_KEY}&language=pt-BR`)
+                .then(res => res.json())
+                .then(data => this.oUpdateDomTmdb.SetMovieSimilar(data))
+                .catch(err => console.warn(err.message))
+    }
+
+    async GetMovieRecommendatiosByID(ID) {
         await fetch(`${this.BaseURL}/movie/${ID}/recommendations?api_key=${this.API_KEY}&language=pt-BR`)
                 .then(res => res.json())
-                .then(data => this.oUpdateDomTmdb.SetMoviesRecommendatiosByID(data))
+                .then(data => this.oUpdateDomTmdb.SetMovieRecommendatiosByID(data))
                 .catch(err => console.warn(err.message))
     }
 
@@ -85,10 +92,10 @@ export class RequestsTmdb {
                 .catch(err => console.log(err.message))
     }
 
-    async GetTvBrowse(query) {
+    async GetTvFind(query) {
         await fetch(`${this.BaseURL}/search/tv?api_key=${this.API_KEY}&query=${query}&language=pt-BR`)
                 .then(res => res.json())
-                .then(data => this.oUpdateDomTmdb.SetTvBrowse(data))
+                .then(data => this.oUpdateDomTmdb.SetTvFind(data))
                 .catch(err => console.log(err.message))
     }
 
@@ -101,15 +108,36 @@ export class RequestsTmdb {
     
     async GetTvPopular() {
         await fetch(`${this.BaseURL}/tv/popular?api_key=${this.API_KEY}&language=pt-BR`)
+        .then(res => res.json())
+        .then(data => this.oUpdateDomTmdb.SetTvPopular(data))
+        .catch(err => console.warn(err.message))
+    }
+    
+    async GetTvOnAir() {
+        await fetch(`${this.BaseURL}/tv/on_the_air?api_key=${this.API_KEY}&language=pt-BR`)
                 .then(res => res.json())
-                .then(data => this.oUpdateDomTmdb.SetTvPopular(data))
+                .then(data => this.oUpdateDomTmdb.SetTvTop(data))
                 .catch(err => console.warn(err.message))
     }
-
+    
     async GetTvByID(ID) {
         await fetch(`${this.BaseURL}/tv/${ID}?api_key=${this.API_KEY}&language=pt-BR`)
                 .then(res => res.json())
                 .then(data => this.oUpdateDomTmdb.SetTvByID(data))
+                .catch(err => console.warn(err.message))
+    }
+
+    async GetTvCast(ID) {
+        await fetch(`${this.BaseURL}/tv/${ID}/credits?api_key=${this.API_KEY}&language=pt-BR`)
+                .then(res => res.json())
+                .then(data => this.oUpdateDomTmdb.SetTvCast(data))
+                .catch(err => console.warn(err.message))
+    }
+
+    async GetTvSimilar(ID) {
+        await fetch(`${this.BaseURL}/tv/${ID}/similar?api_key=${this.API_KEY}&language=pt-BR`)
+                .then(res => res.json())
+                .then(data => this.oUpdateDomTmdb.SetTvSimilar(data))
                 .catch(err => console.warn(err.message))
     }
 

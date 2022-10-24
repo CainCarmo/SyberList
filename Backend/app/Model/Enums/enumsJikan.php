@@ -14,61 +14,30 @@ namespace App\Model\Enums {
 
     class EnumsJikan {
 
-        public static function ToggleType(string $method, mixed $type): string|int {
-            
-            if ($method === "GET") {
-                
-                switch($type) {
-                    case 1:
-                        return JikanType::from(1)->name;
-                        break;
-                    case 2:
-                        return JikanType::from(2)->name;
-                        break;
-                    case 3:
-                        return JikanType::from(3)->name;
-                        break;
-                    case 4:
-                        return JikanType::from(4)->name;
-                        break;
-                    case 5:
-                        return JikanType::from(5)->name;
-                        break;
-                    case 6:
-                        return JikanType::from(6)->name;
-                        break;
-                    case 7:
-                        return JikanType::from(7)->name;
-                        break;
-                }
-            }
+        public static function ToggleType(string $method, mixed $type): int|string {
+            switch ($method) {
+                case "GET":
+                    if ($type === 1) return JikanType::from(1)->name;
+                    if ($type === 2) return JikanType::from(2)->name;
+                    if ($type === 3) return JikanType::from(3)->name;
+                    if ($type === 4) return JikanType::from(4)->name;
+                    if ($type === 5) return JikanType::from(5)->name;
+                    if ($type === 6) return JikanType::from(6)->name;
+                    if ($type === 7) return JikanType::from(7)->name;
+                    
+                    break;
+                    
+                case "POST":
+                    if ($type === "TV")       return JikanType::from(1)->value;
+                    if ($type === "OVA")      return JikanType::from(2)->value;
+                    if ($type === "ONA")      return JikanType::from(2)->value;
+                    if ($type === "Movie")    return JikanType::from(3)->value;
+                    if ($type === "Manga")    return JikanType::from(4)->value;
+                    if ($type === "Manhwa")   return JikanType::from(5)->value;
+                    if ($type === "Manhua")   return JikanType::from(6)->value;
+                    if ($type === "Webtoons") return JikanType::from(7)->value;
 
-            if ($method === "POST") {
-                
-                switch($type) {
-                    case "Anime": 
-                    case "TV":
-                        return JikanType::from(1)->value;
-                        break;
-                    case "OVA":
-                        return JikanType::from(2)->value;
-                        break;
-                    case "Movie":
-                        return JikanType::from(3)->value;
-                        break;
-                    case "Manga":
-                        return JikanType::from(4)->value;
-                        break;
-                    case "Manhwa":
-                        return JikanType::from(5)->value;
-                        break;
-                    case "Manhua":
-                        return JikanType::from(6)->value;
-                        break;
-                    case "Webtoons":
-                        return JikanType::from(7)->value;
-                        break;
-                }
+                    break;
             }
         }
     }

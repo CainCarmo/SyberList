@@ -1,26 +1,46 @@
-import { objIntroDom } from "../Collections/introCollection.js"
+import { objIntroDOM } from "../Collections/introCollection.js"
 
 export class IntroEvents {
 
+    constructor() {
+        this.VideoAnimeMotion = "./Resources/Video/anime-introduction.mp4"
+        this.VideoFireForce   = "./Resources/Video/mylivewallpapers.com-Fire-Force.mp4"
+        this.VideoGodzilaKing = "./Resources/Video/mylivewallpapers-com-Kong-vs-Godzilla.mp4"
+        this.VideoMovieMotion = "./Resources/Video/mylivewallpapers-com-Kong-vs-Godzilla.mp4"
+    }
+
     Intro() {
-        objIntroDom.btnAnime.addEventListener("mouseover", () => {
-            objIntroDom.boxAnime.classList.add("hover")
-            objIntroDom.videoAnime.play()
+        window.addEventListener("load", () => {
+            let randomNumberAnime = Math.floor(Math.random() * 20)
+            let randomNumberMovie = Math.floor(Math.random() * 20)
+
+            randomNumberAnime % 2 === 0
+                ? objIntroDOM.VideoAnime.src = this.VideoFireForce
+                : objIntroDOM.VideoAnime.src = this.VideoAnimeMotion
+
+            randomNumberMovie % 2 === 0
+                ? objIntroDOM.VideoFilms.src = this.VideoMovieMotion
+                : objIntroDOM.VideoFilms.src = this.VideoGodzilaKing
+        })
+
+        objIntroDOM.BtnAnime.addEventListener("mouseover", () => {
+            objIntroDOM.BoxAnime.classList.add("hover")
+            objIntroDOM.VideoAnime.play()
         })
     
-        objIntroDom.btnAnime.addEventListener("mouseleave", () => {
-            objIntroDom.boxAnime.classList.remove("hover")
-            objIntroDom.videoAnime.pause()
+        objIntroDOM.BtnAnime.addEventListener("mouseleave", () => {
+            objIntroDOM.BoxAnime.classList.remove("hover")
+            objIntroDOM.VideoAnime.pause()
         })
     
-        objIntroDom.btnFilms.addEventListener("mouseover", () => {
-            objIntroDom.boxFilms.classList.add("hover")
-            objIntroDom.videoFilms.play()
+        objIntroDOM.BtnFilms.addEventListener("mouseover", () => {
+            objIntroDOM.BoxFilms.classList.add("hover")
+            objIntroDOM.VideoFilms.play()
         })
     
-        objIntroDom.btnFilms.addEventListener("mouseleave", () => {
-            objIntroDom.boxFilms.classList.remove("hover")
-            objIntroDom.videoFilms.pause()
+        objIntroDOM.BtnFilms.addEventListener("mouseleave", () => {
+            objIntroDOM.BoxFilms.classList.remove("hover")
+            objIntroDOM.VideoFilms.pause()
         })
     }
 }

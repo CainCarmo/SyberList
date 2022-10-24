@@ -1,25 +1,23 @@
-export const objHeaderDom = {
+export const objHeaderDOM = {
     // -> Title
-    title: document.querySelector("#page__title"),
-    // -> Div
-    divSearchBox: document.querySelector("#search"),
-    divTimesWrapper: document.querySelector("#search__clear--hidden"),
-    divSearchResults: document.querySelector("#search__results"),
-    divMessageError: document.querySelector("#error"),
-    // -> Link (a)
-    linkHome: document.querySelectorAll(".header__link > a")[1],
-    linkList: document.querySelector("#header__user--hidden > a"),
-    // -> Button
-    buttonLogin: document.querySelector("#header__button"),
+    Title: document.querySelector("#page__title"),
+    // -> Divs
+    DivSearchBox:     document.querySelector("#search"),
+    DivTimesWrapper:  document.querySelector("#search__clear--hidden"),
+    DivSearchResults: document.querySelector("#search__results"),
     // -> Form
-    formSearch: document.querySelector("#search__form"),
+    FormSearch: document.querySelector("#search__form"),
+    // -> Links
+    LinkHome: document.querySelectorAll(".header__link > a")[1],
+    LinkList: document.querySelector("#header__user--hidden > a"),
+    // -> Button
+    ButtonLogin: document.querySelector("#header__button"),
     // -> Select 
-    selectSearch: document.querySelector("#search__select"),
+    SelectSearch: document.querySelector("#search__select"),
     // -> Input
-    inputSearch: document.querySelector("#search__input"),
-    // -> Icon
-    iconSearchHeader: document.querySelectorAll(".fa-search")[0],
-    iconSearch: document.querySelectorAll(".fa-search")[1],
-    iconTimesSearch: document.querySelector("#search__times"),
-    iconTimesMessage: document.querySelector("#message__delete")
+    InputSearch: document.querySelector("#search__input"),
+    // -> Icons
+    IconSearchHeader: document.querySelectorAll(".fa-search")[0],
+    IconSearchForm:   document.querySelectorAll(".fa-search")[1],
+    IconTimesSearch:  document.querySelectorAll(".fa-times")[0]
 }
