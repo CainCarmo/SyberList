@@ -6,7 +6,7 @@ export class IntroEvents {
         this.VideoAnimeMotion = "./Resources/Video/anime-introduction.mp4"
         this.VideoFireForce   = "./Resources/Video/mylivewallpapers.com-Fire-Force.mp4"
         this.VideoGodzilaKing = "./Resources/Video/mylivewallpapers-com-Kong-vs-Godzilla.mp4"
-        this.VideoMovieMotion = "./Resources/Video/mylivewallpapers-com-Kong-vs-Godzilla.mp4"
+        this.VideoMovieMotion = "./Resources/Video/movie-introduction.mp4"
     }
 
     Intro() {

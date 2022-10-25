@@ -119,7 +119,7 @@ html {
 #header__user--hidden {
     height: 100%;
     width: 100%;
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: flex-end;
 }
@@ -453,13 +453,16 @@ html {
     display: flex;
 }
 
-/* #error {
+.error {
+    position: fixed;
+    left: 20px;
+    bottom: 20px;
     height: auto;
-    width: 100%;
+    width: 300px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0 10px;
     border: 2px solid rgb(216, 117, 117);
     background-color: #C40;
-} */
+}

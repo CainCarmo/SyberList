@@ -63,13 +63,6 @@ export class RequestsJikan {
                 .catch(err => console.warn(err.message))
     }
 
-    async GetAnimeStreaming(ID) {
-        await fetch(`${this.BaseURL}/anime/${ID}/streaming`)
-                .then(res => res.json())
-                .then(data => this.oUpdateDomJikan.SetAnimeStreaming(data))
-                .catch(err => console.warn(err.message))
-    }
-
     async GetAnimeCharacters(ID) {
         await fetch(`${this.BaseURL}/anime/${ID}/characters`)
                 .then(res => res.json())

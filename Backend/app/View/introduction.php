@@ -9,8 +9,6 @@
         <link rel="icon"       href="./Resources/Image/Icon/icone_syber.png" />
         <link rel="stylesheet" href="./CSS/main.css" />
         <link rel="stylesheet" href="./CSS/introduction.css" />
-        <!-- Icons -->
-        <script src="https://kit.fontawesome.com/a39dd60c9e.js" crossorigin="anonymous"></script>
         <!-- Título -->
         <title id="page__title">Introdução | SyberList</title>
     </head>

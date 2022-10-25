@@ -11,7 +11,7 @@ export class HomeEvents {
         this.oRequestsJikan = new RequestsJikan()
     }
 
-    async HomeAnime() {
+    HomeAnime() {
         window.addEventListener("load", async () => {
             objHomeDOM.VideoBanner.src = this.videoHomeAnime
 
@@ -31,17 +31,17 @@ export class HomeEvents {
         })
     }
     
-    async HomeMovie() {
+    HomeMovie() {
         window.addEventListener("load", async () => {
             objHomeDOM.VideoBanner.src = this.videoHomeMovie
 
             await this.oRequestsTmdb.GetTvBanner(414906)
-            await this.oRequestsTmdb.GetMoviesTop()
-            await this.oRequestsTmdb.GetMoviesPopular()
+            await this.oRequestsTmdb.GetMovieRanking()
+            await this.oRequestsTmdb.GetMoviePopular()
 
             setTimeout(async () => {
-                await this.oRequestsTmdb.GetMoviesUpComing()
-                await this.oRequestsTmdb.GetTvTop()
+                await this.oRequestsTmdb.GetMovieUpComing()
+                await this.oRequestsTmdb.GetTvRanking()
                 await this.oRequestsTmdb.GetTvPopular()
             }, 3100)
 

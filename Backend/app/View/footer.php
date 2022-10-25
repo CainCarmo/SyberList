@@ -13,6 +13,10 @@
             <div class="theme__color" id="theme__dark"></div>
             <div class="theme__color" id="theme__light"></div>
         </div>
+        
+        <!-- Mensagem de Erro -->
+        <?=$messageSaveError?>
+        <?=$messageLoginError?>
 
         <!-- Rodapé da Página -->
         <footer id="footer__page">

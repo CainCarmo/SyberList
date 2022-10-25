@@ -1,24 +1,28 @@
 import { RequestsTmdb }  from "../TmdbAPI/requests.js"
 import { RequestsJikan } from "../JikanAPI/requests.js"
+import { objDetailsDOM } from "../Collections/detailsCollection.js"
 
 export class DetailsEvents {
 
     constructor() {
+        this.videoDetailsAnime = "./Resources/Video/mylivewallpapers.com-Raindrops-Shanghai.mp4"
+        this.videoDetailsMovie = "./Resources/Video/mylivewallpapers.com-Underground-Pass-4K.mp4"
         this.oRequestsTmdb  = new RequestsTmdb()
         this.oRequestsJikan = new RequestsJikan()
     }
 
     DetailsAnime(itemID, itemType) {
         window.addEventListener("load", async () => {
+            objDetailsDOM.VideoBanner.src = this.videoDetailsAnime
+            
             switch(itemType) {
                 
                 case "anime":
                     await this.oRequestsJikan.GetAnimeFullByID(itemID)
-                    await this.oRequestsJikan.GetAnimeStreaming(itemID)
                     await this.oRequestsJikan.GetAnimeCharacters(itemID)
-                    
+                    await this.oRequestsJikan.GetAnimeStaff(itemID)
+
                     setTimeout(async () => {
-                        await this.oRequestsJikan.GetAnimeStaff(itemID)
                         await this.oRequestsJikan.GetAnimeRecommendations(itemID)
                     }, 3100)
 
@@ -38,8 +42,10 @@ export class DetailsEvents {
         })
     }
 
-    DetailsMovie() {
+    DetailsMovie(itemID, itemType) {
         window.addEventListener("load", async () => {
+            objDetailsDOM.VideoBanner.src = this.videoDetailsMovie
+            
             switch(itemType) {
 
                 case "movie":
@@ -49,7 +55,7 @@ export class DetailsEvents {
 
                     setTimeout(async () => {
                         await this.oRequestsTmdb.GetMovieSimilar(itemID)
-                        await this.oRequestsTmdb.GetMoviesRecommendatiosByID(itemID)    
+                        await this.oRequestsTmdb.GetMovieRecommendatiosByID(itemID)    
                     })
 
                     break

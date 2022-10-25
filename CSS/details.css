@@ -1,6 +1,4 @@
-/* --- Banner Genres --- */
-
-#banner__form {
+#banner__save {
     position: absolute;
     top: 155px;
     left: 60px;
@@ -29,6 +27,7 @@
     position: absolute;
     top: 30rem;
     right: 100px;
+    z-index: 999;
 }
 
 #situation__select {
@@ -40,6 +39,10 @@
     color: #FFF;
 }
 
+#situation__select > option {
+    color: #FFF;
+}
+
 #situation__submit {
     height: 35px;
     width: 35px;
@@ -48,6 +51,8 @@
     background-color: #222831;
     color: #FFF;
 }
+
+/* --- Banner Genres --- */
 
 #banner__genres {
     height: auto;
@@ -97,5 +102,4 @@
 
 #comments {
     padding: 50px 100px;
-    background-color: #222831;
 }

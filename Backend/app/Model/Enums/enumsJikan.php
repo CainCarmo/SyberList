@@ -28,14 +28,14 @@ namespace App\Model\Enums {
                     break;
                     
                 case "POST":
-                    if ($type === "TV")       return JikanType::from(1)->value;
-                    if ($type === "OVA")      return JikanType::from(2)->value;
-                    if ($type === "ONA")      return JikanType::from(2)->value;
-                    if ($type === "Movie")    return JikanType::from(3)->value;
-                    if ($type === "Manga")    return JikanType::from(4)->value;
-                    if ($type === "Manhwa")   return JikanType::from(5)->value;
-                    if ($type === "Manhua")   return JikanType::from(6)->value;
-                    if ($type === "Webtoons") return JikanType::from(7)->value;
+                    if ($type === "TV" || $type === "Anime")       return JikanType::from(1)->value;
+                    if ($type === "OVA")                           return JikanType::from(2)->value;
+                    if ($type === "ONA")                           return JikanType::from(2)->value;
+                    if ($type === "Movie")                         return JikanType::from(3)->value;
+                    if ($type === "Manga")                         return JikanType::from(4)->value;
+                    if ($type === "Manhwa")                        return JikanType::from(5)->value;
+                    if ($type === "Manhua")                        return JikanType::from(6)->value;
+                    if ($type === "Webtoons")                      return JikanType::from(7)->value;
 
                     break;
             }

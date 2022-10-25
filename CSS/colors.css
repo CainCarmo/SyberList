@@ -19,7 +19,9 @@
     --bg-banner-button: #393E46;
     --bg-login: rgba(0, 0, 0, .8);
     --bg-login-form: #FFF;
+    --bg-user: #2C3333;
     --bg-main: #222831;
+    --bg-find: #395B64;
     --bg-ranking-card: #000;
     --bg-ranking-side: #393E46;
     --bg-ranking-center: #808080;
@@ -43,7 +45,9 @@
 
     --color-header-icon: #FEA82F;
 
+    --bg-user: #FFC288;
     --bg-main: #FCECDD;
+    --bg-find: #FEA82F;
     --bg-ranking-card: #FFF;
     --bg-ranking-side: #FEA82F;
     --bg-ranking-center: #FFC288;
@@ -118,6 +122,10 @@
     background-color: var(--bg-banner);
 }
 
+#search__select, #search__select > option, #search__controls i  {
+    color: var(--text-banner);
+}
+
 #search__select, #search__controls {
     background-color: var(--bg-search-side);
 }
@@ -164,6 +172,18 @@
     color: var(--text-banner);
 }
 
+#save__submit {
+    background-color: transparent;
+}
+
+.banner__genre > span {
+    color: var(--text-banner);
+}
+
+#avaliation__text {
+    color: var(--text-banner);
+}
+
 /* --- Main --- */
 
 .container {
@@ -186,6 +206,11 @@
 
 .item__rank--wrapper, .item__score {
     background-color: var(--bg-ranking-side);
+}
+
+.item__title > a:hover {
+    transition: 0s;
+    border-bottom: 2px solid var(--text-color);
 }
 
 .item__description {
@@ -236,7 +261,17 @@
     background-color: var(--text-links);
 }
 
+/* --- Comentários --- */
+
+#comments {
+    background-color: var(--bg-main);
+}
+
 /* --- Controles --- */
+
+#footer__control, #footer__above, #footer__theme {
+    background-color: #909099;
+}
 
 #theme__dark {
     background-color: #101010;
@@ -269,10 +304,91 @@
     color: var(--color-times);
 }
 
+#message__delete {
+    color: #FFF;
+}
+
 .form__icon--wrapper > i {
     color: var(--text-login);
 }
 
 .fa-eye {
     color: var(--text-login);
+}
+
+/*
+ * -> Lists
+ */
+
+/* --- Banner Information --- */
+
+#banner__user, #lists {
+    background-color: var(--bg-user);
+}
+
+/* --- Main --- */
+
+#content {
+    background-color: var(--bg-main);
+}
+
+/*
+ * -> Find
+ */
+
+
+
+#find__main {
+    background-color: var(--bg-find);
+}
+
+/*
+ * -> Register
+ */
+
+ select > option{
+    color: #000;
+}
+
+/* --- Background --- */
+
+#register--background {
+    background: url("https://images.unsplash.com/photo-1465146633011-14f8e0781093?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3450&q=80"), #101010;
+}
+
+/* --- Link to Home --- */
+
+#return:hover {
+    background-color: #808080;
+}
+
+/* --- Form --- */
+
+#register {
+    background-color: var(--bg-main);
+}
+
+/* --- Curves --- */
+
+path {
+    fill: var(--bg-main);
+}
+
+/* --- Register Photo --- */
+
+#register__photo {
+    border: 2px solid var(--text-links);
+    background-color: #5C6664;
+}
+
+/* --- Register Inputs --- */
+
+.form__input {
+    color: var(--text-color);
+}
+
+/* --- Icons --- */
+
+.fa-arrow-left {
+    color: #EDEDED;
 }

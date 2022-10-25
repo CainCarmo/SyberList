@@ -7,7 +7,7 @@ namespace App\Control\Session {
     class Login {
 
         public static function Init(): void {
-            if (session_start() !== PHP_SESSION_ACTIVE)
+            if (session_status() !== PHP_SESSION_ACTIVE)
                 session_start();
         }
 
@@ -21,7 +21,7 @@ namespace App\Control\Session {
             return self::IsLogged() ? : null;
         }
 
-        public static function Login(User $oUser, string $atualPage, string $pageType): never {
+        public static function Login(User $oUser, string $atualPage): never {
             self::Init();
 
             $_SESSION["User"] = [
@@ -32,7 +32,7 @@ namespace App\Control\Session {
                 "FK_STATUS_ID" => $oUser->UserStatus
             ];
 
-            header("location: ". $atualPage ."?type=". $pageType);
+            header("location: ". $atualPage);
             exit;
         }
 

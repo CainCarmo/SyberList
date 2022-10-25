@@ -1,3 +1,79 @@
+<?php
+
+    use App\Control\Errors\Register\RegisterError;
+    use App\Control\Session\Login;
+    use App\Model\Entity\User;
+    use App\Model\Enums\EnumsUser;
+
+    Login::RequireLogout();
+
+    $pageType      = explode("&", explode("type=", $_SERVER["QUERY_STRING"])[1])[0];
+    $RegisterError = "";
+
+    $errorRegister = key_exists(1, explode("register=", $_SERVER["QUERY_STRING"]));
+    $errorRegister
+        ? $RegisterError = "Email já Cadastrado"
+        : null;
+
+    $files   = "./Resources/Image/Perfil/";
+    $archive = "";
+    $path    = "";
+    
+    $archiveNewName = "";
+
+    $namePhoto = "";
+    $extension = "";
+
+    if (isset($_POST["registrar"]))  {
+        $oUser           = new User();
+        $oVerifyRegister = RegisterError::VerifyRegister($_POST["register__email"]);
+
+        if (isset($_FILES["photo__input"])) {
+            $archive = $_FILES["photo__input"];
+            
+            $archiveName    = $archive["name"];
+            $archiveNewName = uniqid();
+            $extension      = strtolower(pathinfo($archiveName, PATHINFO_EXTENSION));
+
+            $path      = $files . $archiveNewName . "." . $extension;
+            $namePhoto = $archiveNewName . "." . $extension;
+            $response  = move_uploaded_file($archive["tmp_name"], $path);
+
+            if ($extension === "") {
+                $_POST["register__gender"] === "M"
+                    ? $oUser->UserIcon = "Default-M.png"
+                    : $oUser->UserIcon = "Default-F.jpg";    
+            }
+            else {
+                $oUser->UserIcon = $namePhoto;
+            }
+        }
+        else {
+            $_POST["register__gender"] === "M"
+                ? $oUser->UserIcon = "Default-M.png"
+                : $oUser->UserIcon = "Default-F.jpg";
+        }
+
+
+        if ($oVerifyRegister) {
+            $oUser->Username   = $_POST["register__username"];
+            $oUser->Surname    = $_POST["register__surname"];
+            $oUser->Nickname   = $_POST["register__nickname"];
+            $oUser->UserEmail  = $_POST["register__email"];
+            $oUser->UserPass   = password_hash($_POST["register__password"], PASSWORD_DEFAULT);
+            $oUser->BirthDate  = $_POST["register__birth"];
+            $oUser->UserGender = EnumsUser::ToggleGender("POST", $_POST["register__gender"]);
+
+            $oUser->Register();
+            Login::Login(oUser: $oUser, atualPage: "home.php?type=". $pageType);
+        }
+        else {
+            header("location: ". $_SERVER["HTTP_REFERER"] ."?error");
+            exit;
+        }
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
     <head>
@@ -5,7 +81,7 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="color-scheme" content="dark" />
+        <meta name="theme-color" />
         <!-- CSS -->
         <link rel="icon"       href="./Resources/Image/Icon/icone_syber.png" />
         <link rel="stylesheet" href="./CSS/colors.css" />
@@ -22,7 +98,7 @@
             <!-- Voltar -->
             <i class="fa-solid fa-arrow-left" id="return"></i>
             <!-- Formulário de Registro -->
-            <form method="POST" id="register">
+            <form method="POST" id="register" enctype="multipart/form-data">
                 <!-- Lado Direito -->
                 <section id="register__left">
                     <video src="./Resources/Video/mylivewallpapers.com-Sasuke-Studying.mp4" autoplay muted loop></video>
@@ -36,12 +112,14 @@
                     <header id="register__header">
                         <!-- Logo -->
                         <img class="form__logo" src="https://cdn.discordapp.com/attachments/1000527265303642194/1006613565182054470/Logo-image.png" alt="Imagem da Logo" />
+                        <!-- Mensagem de Erro -->
+                        <span class="form__error"><?=$RegisterError?></span>
                     </header>
                     <main id="register__fields">
                         <!-- Campo da Foto -->
                         <label id="register__photo">
-                            <span id="photo__text">Escolha a Image</span>
-                            <input type="file" accept="image/*" id="photo__input" />
+                            <span id="photo__text"></span>
+                            <input type="file" name="photo__input" accept="image/*" id="photo__input" />
                         </label>
                         <!-- Campo do Nome -->
                         <div class="form__field" id="field__username">
@@ -122,11 +200,6 @@
                             </div>
                         </div>
                     </main>
-                    <!-- Botão tema -->
-                    <div class="color--wrapper">
-                        <div class="color__circle" id="circle__dark"></div>
-                        <div class="color__circle" id="circle__light"></div>
-                    </div>
                     <!-- Rodapé do Formulário -->
                     <footer id="register__footer">
                         <button type="submit" name="registrar" class="form__submit">Enviar</button>
@@ -134,6 +207,16 @@
                 </section>
             </form>
         </section>
+        <!-- Controles da Página -->
+        <div id="footer__control">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+        
+        <div id="footer__theme">
+            <i class="fa-solid fa-palette"></i>
+            <div class="theme__color" id="theme__dark"></div>
+            <div class="theme__color" id="theme__light"></div>
+        </div>
         <!-- Scripts -->
         <script type="module" src="./JS/scripts.js"></script>
     </body>

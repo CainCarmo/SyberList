@@ -1,16 +1,16 @@
 export const  objListsDOM = {
     // -> Button
-    buttonsAnime: document.querySelectorAll(".lists__tab.tab__anime"),
-    buttonsMovie: document.querySelectorAll(".lists__tab.tab__movie"),
-    buttonAnime: document.querySelector("#button__anime"),
-    buttonManga: document.querySelector("#button__manga"),
-    buttonMovie: document.querySelector("#button__movie"),
-    buttonSerie: document.querySelector("#button__serie"),
+    ButtonsAnime: document.querySelectorAll(".lists__tab.tab__anime"),
+    ButtonsMovie: document.querySelectorAll(".lists__tab.tab__movie"),
+    ButtonAnime:  document.querySelector("#button__anime"),
+    ButtonManga:  document.querySelector("#button__manga"),
+    ButtonMovie:  document.querySelector("#button__movie"),
+    ButtonSerie:  document.querySelector("#button__serie"),
     // -> Div
-    divListsAnime: document.querySelectorAll(".list__item.item__anime"),
-    divListsMovie: document.querySelectorAll(".list__item.item__movie"),
-    divListAnime: document.querySelector("#list__anime"),
-    divListManga: document.querySelector("#list__manga"),
-    divListMovie: document.querySelector("#list__movie"),
-    divListSerie: document.querySelector("#list__serie"),
+    DivListsAnime: document.querySelectorAll(".list__item.item__anime"),
+    DivListsMovie: document.querySelectorAll(".list__item.item__movie"),
+    DivListAnime:  document.querySelector("#list__anime"),
+    DivListManga:  document.querySelector("#list__manga"),
+    DivListMovie:  document.querySelector("#list__movie"),
+    DivListSerie:  document.querySelector("#list__serie"),
 }

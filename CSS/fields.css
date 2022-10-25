@@ -50,7 +50,6 @@
     font-size: 1em;
     padding: 0.5rem;
     background-color: transparent;
-    color: #000;
 }
 
 .form__input:focus ~ .underline::after {

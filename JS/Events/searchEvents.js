@@ -11,7 +11,7 @@ export class SearchEvents {
         this.oRequestsTmdb  = new RequestsTmdb()
     }
 
-    Find(pageType) { 
+    Search(pageType) { 
         
         switch(pageType) {
             case "anime":
@@ -61,7 +61,7 @@ export class SearchEvents {
                 case "tv":
                 case "movie":
 
-                    objHeaderDOM.SelectSearch.value === "anime"
+                    objHeaderDOM.SelectSearch.value === "tv"
                         ? this.oRequestsTmdb.GetTvSearch(query)
                         : this.oRequestsTmdb.GetMovieSearch(query)
                     break
@@ -88,7 +88,7 @@ export class SearchEvents {
                 case "tv":
                 case "movie":
 
-                    objHeaderDOM.SelectSearch.value === "anime"
+                    objHeaderDOM.SelectSearch.value === "tv"
                         ? this.oRequestsTmdb.GetTvSearch(query)
                         : this.oRequestsTmdb.GetMovieSearch(query)
                     break
@@ -104,13 +104,17 @@ export class SearchEvents {
         })
     }
 
-    Search(pageType) {
+    Find(pageType) {
         switch(pageType) {
             case "anime":
             case "manga":
 
                 objHeaderDOM.SelectSearch.appendChild(this.oFactoryDOM.CreateSelectOption("anime", "Anime"))
                 objHeaderDOM.SelectSearch.appendChild(this.oFactoryDOM.CreateSelectOption("manga", "Mangá"))
+
+                pageType === "anime"
+                    ? this.oRequestsJikan.GetAnimeFind("Naruto")
+                    : this.oRequestsJikan.GetMangaFind("Naruto")
                 break
 
             case "tv":
@@ -118,6 +122,10 @@ export class SearchEvents {
 
                 objHeaderDOM.SelectSearch.appendChild(this.oFactoryDOM.CreateSelectOption("tv", "Série"))
                 objHeaderDOM.SelectSearch.appendChild(this.oFactoryDOM.CreateSelectOption("movie", "Filme"))
+
+                pageType === "tv"
+                    ? this.oRequestsTmdb.GetTvFind("Batman")
+                    : this.oRequestsTmdb.GetMovieFind("Bad")
                 break
         }
 
@@ -148,7 +156,7 @@ export class SearchEvents {
                 case "tv":
                 case "movie":
 
-                    objHeaderDOM.SelectSearch.value === "anime"
+                    objHeaderDOM.SelectSearch.value === "tv"
                         ? this.oRequestsTmdb.GetTvFind(query)
                         : this.oRequestsTmdb.GetMovieFind(query)
                     break
@@ -165,16 +173,16 @@ export class SearchEvents {
                 case "manga":
 
                     objHeaderDOM.SelectSearch.value === "anime"
-                        ? this.oRequestsJikan.GetAnimeSearch(query)
-                        : this.oRequestsJikan.GetMangaSearch(query)
+                        ? this.oRequestsJikan.GetAnimeFind(query)
+                        : this.oRequestsJikan.GetMangaFind(query)
                     break
 
                 case "tv":
                 case "movie":
-
-                    objHeaderDOM.SelectSearch.value === "anime"
-                        ? this.oRequestsTmdb.GetTvSearch(query)
-                        : this.oRequestsTmdb.GetMovieSearch(query)
+                    console.log(objHeaderDOM.SelectSearch.value)
+                    objHeaderDOM.SelectSearch.value === "tv"
+                        ? this.oRequestsTmdb.GetTvFind(query)
+                        : this.oRequestsTmdb.GetMovieFind(query)
                     break
             }
         })
@@ -184,4 +192,4 @@ export class SearchEvents {
             objHeaderDOM.InputSearch.value = ""
         })
     }
-}
+}   

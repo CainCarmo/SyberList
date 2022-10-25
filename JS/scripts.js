@@ -39,7 +39,7 @@ const oSearchEvents   = new SearchEvents()
  * -> Verificando as Páginas para chamar os métodos de Eventos
  */
 
-async function VerifyPage() {
+function VerifyPage() {
     let itemID   = ""
     let itemType = ""
 
@@ -59,7 +59,7 @@ async function VerifyPage() {
                 : null
     
             objHeaderDOM.LinkHome.href = `${objURL.homePage}?type=${itemType}`
-            // objHeaderDOM.LinkList.href = `${objURL.listPage}?type=${itemType}`
+            objHeaderDOM.LinkList.href = `${objURL.listPage}?type=${itemType}`
             break
     }
 
@@ -73,29 +73,51 @@ async function VerifyPage() {
         case objURL.homePage:
 
             itemType === "anime" || itemType === "manga"
-                ? await oHomeEvents.HomeAnime()
-                : await oHomeEvents.HomeMovie()
+                ? oHomeEvents.HomeAnime()
+                : oHomeEvents.HomeMovie()
 
             oLoginEvents.Login()
             oPasswordEvents.Login()
-            oControlsEvents.Controls()
-            oSearchEvents.Find(itemType)
+            oControlsEvents.ControlsError()
+            oControlsEvents.Controls(objURL.atualPage)
+            oSearchEvents.Search(itemType)
             break
 
         case objURL.detailsPage:
 
+            itemType === "anime" || itemType === "manga"
+                ? oDetailsEvents.DetailsAnime(itemID, itemType)
+                : oDetailsEvents.DetailsMovie(itemID, itemType)
+
+            oLoginEvents.Login()
+            oPasswordEvents.Login()
+            oFavoriteEvents.StarButton()
+            oControlsEvents.ControlsError()
+            oControlsEvents.Controls(objURL.atualPage)
+            oSearchEvents.Search(itemType)
             break
 
         case objURL.listPage:
 
+            oListsEvents.List()
+            oControlsEvents.Controls(objURL.atualPage)
+            oSearchEvents.Search(itemType)
             break
 
-        case objURL.searchPage:
+        case objURL.findPage:
 
+            oLoginEvents.Login()
+            oPasswordEvents.Login()
+            oControlsEvents.ControlsError()
+            oControlsEvents.Controls(objURL.atualPage)
+            oSearchEvents.Find(itemType)
             break
 
         case objURL.registerPage:
 
+            oRegisterEvents.Register()
+            oPasswordEvents.Register()
+            oControlsEvents.Controls(objURL.atualPage)
             break
     }
 }

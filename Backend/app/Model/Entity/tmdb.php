@@ -22,7 +22,7 @@ namespace App\Model\Entity {
 
         public function Register(): void {
             $timezone = new DateTimeZone("America/Sao_Paulo");
-            $this->RegisDate = date_format(new DateTime("now", $timezone), "Y-m-d H:i:s");
+            $this->Add_Time = date_format(new DateTime("now", $timezone), "Y-m-d H:i:s");
 
             $oQueryBuilder = new QueryBuilder(table: "TMDB");
 
