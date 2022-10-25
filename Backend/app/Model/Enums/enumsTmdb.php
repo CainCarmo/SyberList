@@ -9,30 +9,19 @@ namespace App\Model\Enums {
 
     class EnumsTmdb {
 
-        public static function ToggleType(string $method, mixed $type): string|int {
+        public static function ToggleType(string $method, mixed $type): int|string {
+            switch ($method) {
+                case "GET":
+                    if ($type === 1) return TmdbType::from(1)->name;
+                    if ($type === 2)    return TmdbType::from(2)->name;
+                    
+                    break;
+                    
+                case "POST":
+                    if ($type === "Movie") return TmdbType::from(1)->value;
+                    if ($type === "Tv") return TmdbType::from(2)->value;
 
-            if ($method === "GET") {
-
-                switch($type) {
-                    case 1:
-                        return TmdbType::from(1)->name;
-                        break;
-                    case 2:
-                        return TmdbType::from(2)->name;
-                        break;
-                }
-            }
-
-            if ($method === "POST") {
-
-                switch($type) {
-                    case "Movie":
-                        return TmdbType::from(1)->value;
-                        break;
-                    case "Tv":
-                        return TmdbType::from(2)->value;
-                        break;
-                }
+                    break;
             }
         }
     }

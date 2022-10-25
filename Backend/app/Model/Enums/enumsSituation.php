@@ -11,42 +11,11 @@ namespace App\Model\Enums {
 
     class EnumsSituation {
 
-        public static function ToggleSituation(string $method, mixed $situation): string|int {
-            
-            if ($method === "GET") {
-                
-                switch($situation) {
-                    case 1:
-                        return "Para assistir";
-                        break;
-                    case 2:
-                        return "Assistindo";
-                        break;
-                    case 3:
-                        return "Completo";
-                        break;
-                    case 4:
-                        return "Dropado";
-                }
-            }
-
-            if ($method === "POST") {
-                
-                switch($situation) {
-                    case 1:
-                        return Situation::from(1)->value;
-                        break;
-                    case 2:
-                        return Situation::from(2)->value;
-                        break;
-                    case 3:
-                        return Situation::from(3)->value;
-                        break;
-                    case 4:
-                        return Situation::from(4)->value;
-                        break;
-                }
-            }
+        public static function ToggleSituation(mixed $situation): string {
+            if ($situation === 1) return "Para Assistir";
+            if ($situation === 2) return "Assistindo";
+            if ($situation === 3) return "Completo";
+            if ($situation === 4) return "Dropado";
         }
     }
 }

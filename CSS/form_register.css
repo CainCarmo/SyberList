@@ -37,14 +37,6 @@ button {
     cursor: pointer;
 }
 
-i {
-    color: #000;
-}
-
-select > option{
-    color: #000;
-}
-
 /* === Scroll Bar === */
 
 ::-webkit-scrollbar {
@@ -61,6 +53,12 @@ select > option{
     background-color: #000;
 }
 
+/* --- Reset --- */
+
+body {
+    position: relative;
+}
+
 /* --- Background --- */
 
 #register--background {
@@ -72,7 +70,6 @@ select > option{
     justify-content: center;
     perspective: 1000px;
     perspective-origin: 50% 50%;
-    background: url("https://images.unsplash.com/photo-1465146633011-14f8e0781093?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3450&q=80"), #101010;
     animation: scroll 70s linear infinite;
 }
 
@@ -89,7 +86,6 @@ select > option{
 #return:hover {
     padding: .5rem;
     border-radius: 50%;
-    background-color: #808080;
 }
 
 /* --- Form --- */
@@ -101,7 +97,6 @@ select > option{
     display: flex;
     overflow: hidden;
     border-radius: 15px;
-    background-color: #EDEDED;
 }
 
 /* === Register Left === */
@@ -124,7 +119,7 @@ select > option{
     position: absolute;
     left: -221px;
     transform: rotate(-90deg);
-    z-index: 998;
+    z-index: 999;
 }
 
 /* === Register Right === */
@@ -163,7 +158,7 @@ select > option{
     padding: 1.5rem;
 }
 
-#form__photo--wrapper {
+#register__photo {
     height: 100px;
     width: 100px;
     position: absolute;
@@ -172,14 +167,60 @@ select > option{
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 2px solid #D3AD7F;
+    overflow: hidden;
     border-radius: 50%;
-    background-color: #5C6664;
+    cursor: pointer;
 }
 
-#form__photo--wrapper > label { 
-    font-size: .8em; 
+#photo__text {
+    font-size: .7em;
+}
+
+#photo__image {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+#photo__input {
+    display: none;
+}
+
+/* --- Controles --- */
+
+#footer__control, #footer__above, #footer__theme {
+    height: 50px;
+    width: 50px;
+    position: fixed;
+    top: 90vh;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: .3s;
+    border-radius: 50%;
     cursor: pointer;
+}
+
+#footer__control {
+    z-index: 3;
+}
+
+#footer__above, #footer__theme {
+    z-index: 2;
+}
+
+.theme__color {
+    height: 20px;
+    width: 20px;
+    position: absolute;
+    right: 60px;
+    display: none;
+    border-radius: 50%;
+}
+
+#theme__dark {
+    right: 90px;
 }
 
 /* --- Grid Areas --- */
@@ -191,6 +232,16 @@ select > option{
 #field__password { grid-area: PASSWORD; }
 #field__birth { grid-area: DATE; }
 #field__gender { grid-area: GENDER; }
+
+/* --- Events JS --- */
+
+#footer__control.clicked ~ #footer__theme {
+    top: 80vh;
+}
+
+.theme__color.clicked {
+    display: flex;
+}
 
 /* --- Animation --- */
 
@@ -204,6 +255,5 @@ select > option{
 
 .fa-arrow-left {
     font-size: 1.5em;
-    color: #EDEDED;
     cursor: pointer;
 }

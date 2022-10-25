@@ -1,0 +1,59 @@
+:root {
+    --text-color: #FFF;
+    --bg-header: #222831;
+}
+
+.light:root {
+    --text-color: #000;
+    --bg-header: #FCECDD;
+}
+
+/* --- Reset --- */
+
+#search__select, #search__select > option, #search__controls i {
+    color: #FFF;
+}
+
+/* --- Header --- */
+
+#header__page {
+    position: relative;
+    background-color: var(--bg-header);
+}
+
+.header__link > a, #header__button {
+    color: var(--text-color);
+}
+
+#header__button {
+    border: 1px solid var(--text-color);
+}
+
+/* === Header Logo === */
+
+#header__left > img {
+    position: absolute;
+}
+
+/* --- Search --- */
+
+#search {
+    background-color: var(--bg-header);
+}
+
+/* --- Main --- */
+
+#find__main {
+    min-height: 20.5rem;
+    height: auto;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    padding: 0 2rem;
+}
+
+/* --- Icons --- */
+
+#header__right > .fa-search {
+    color: var(--text-color);
+}

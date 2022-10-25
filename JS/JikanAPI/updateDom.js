@@ -1,14 +1,14 @@
-import { FactoryDom }    from "../DOM/factoryDom.js"
-import { objHeaderDom }  from "../Collections/headerCollection.js"
-import { objHomeDom }    from "../Collections/homeCollection.js"
-import { objDetailsDom } from "../Collections/detailsCollection.js"
-import { objBrowse }     from "../Collections/browseCollection.js"
+import { FactoryDOM }    from "../DOM/factoryDom.js"
+import { objHeaderDOM }  from "../Collections/headerCollection.js"
+import { objHomeDOM }    from "../Collections/homeCollection.js"
+import { objDetailsDOM } from "../Collections/detailsCollection.js"
+import { objFindDOM }    from "../Collections/findCollection.js"
 import { VanillaTilt }   from "../Vanilla-Tilt/vanilla-tilt.js"
 
-export class updateDomJikan {
+export class UpdateDomJikan {
 
     constructor() {
-        this.oFactoryDom = new FactoryDom()
+        this.oFactoryDom  = new FactoryDOM()
     }
 
     SetAnimeSearch(data) {
@@ -17,23 +17,23 @@ export class updateDomJikan {
 
         divAnimeItemsWrapper.innerHTML = informationAnimes.map(anime => {
             return `
-            <div class="search__item">
-                <div class="item__description">
-                    <img src="${anime.images.webp.image_url}" alt="Image Result">
-                    <div class="item__information">
-                        <div class="item__title--wrapper">
-                            <h3 class="item__title">
-                                <a href="./details.php?type=anime&id=${anime.mal_id}">${anime.title}</a>
-                            </h3>
-                        </div>
-                        <div class="item__extra--wrapper">
-                            <span class="item__episodes">${anime.episodes} episódios</span>
-                            <span class="item__year">${anime.year}</span>
-                            <span class="item__type">${anime.type}</span>
+                <div class="search__item">
+                    <div class="item__description">
+                        <img src="${anime.images.webp.image_url}" alt="Image Result">
+                        <div class="item__information">
+                            <div class="item__title--wrapper">
+                                <h3 class="item__title">
+                                    <a href="./details.php?type=anime&id=${anime.mal_id}">${anime.title}</a>
+                                </h3>
+                            </div>
+                            <div class="item__extra--wrapper">
+                                <span class="item__episodes">${anime.episodes} episódios</span>
+                                <span class="item__year">${anime.year}</span>
+                                <span class="item__type">${anime.type}</span>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
             `
         }).join("")
 
@@ -59,13 +59,13 @@ export class updateDomJikan {
                 : ""
         })
 
-        objHeaderDom.divSearchResults.appendChild(divAnimeItemsWrapper)
+        objHeaderDOM.DivSearchResults.appendChild(divAnimeItemsWrapper)
     }
 
-    SetAnimeBrowse(data) {
+    SetAnimeFind(data) {
         const informationAnimes = data.data
-        
-        objBrowse.mainResults.innerHTML = informationAnimes.map(anime => {
+
+        objFindDOM.MainResults.innerHTML = informationAnimes.map(anime => {
             return `
                 <div class="section__card">
                     <!-- Imagem do Card -->
@@ -125,10 +125,24 @@ export class updateDomJikan {
             max: "25",
             speed: 400,
             glare: true,
-            "max-glare": 1
+            "max-glare": 2
         })
 
-        objHomeDom.sectionBanner.appendChild(bannerInfoWrapper)
+        objHomeDOM.SectionBanner.appendChild(bannerInfoWrapper)
+
+        window.sr = ScrollReveal({ reset: true })
+
+        sr.reveal("#banner__info", {
+            distance: "100px",
+            origin: "left",
+            duration: 3000
+        })
+
+        sr.reveal("#banner__image", {
+            distance: "100px",
+            origin: "right",
+            duration: 3000
+        })
     }
 
     SetRankingAnime(data) {
@@ -200,7 +214,8 @@ export class updateDomJikan {
                 ? element.innerHTML = null
                 : ""
         })
-        objHomeDom.mainPage.appendChild(sectionRank)
+        
+        objHomeDOM.MainPage.appendChild(sectionRank)
     }
 
     SetSeasonNow(data) {
@@ -217,10 +232,10 @@ export class updateDomJikan {
             </h2>
             <div class="section__arrows">
                 <button type="button" class="section__arrow" id="arrow__backSN">
-                    <i class="fa-solid fa-circle-chevron-left"></i>
+                    <i class="fa-solid  fa-chevron-left"></i>
                 </button>
                 <button type="button" class="section__arrow" id="arrow__nextSN">
-                    <i class="fa-solid fa-circle-chevron-right"></i>
+                    <i class="fa-solid fa-chevron-right"></i>
                 </button>
             </div>
         `
@@ -260,7 +275,7 @@ export class updateDomJikan {
                 : ""
         })
 
-        objHomeDom.mainPage.appendChild(sectionSliders)
+        objHomeDOM.MainPage .appendChild(sectionSliders)
         
         new Glider(sectionSlider, {
             slidesToShow: 5,
@@ -288,10 +303,10 @@ export class updateDomJikan {
             </h2>
             <div class="section__arrows">
                 <button type="button" class="section__arrow" id="arrow__backSU">
-                    <i class="fa-solid fa-circle-chevron-left"></i>
+                    <i class="fa-solid  fa-chevron-left"></i>
                 </button>
                 <button type="button" class="section__arrow" id="arrow__nextSU">
-                    <i class="fa-solid fa-circle-chevron-right"></i>
+                    <i class="fa-solid fa-chevron-right"></i>
                 </button>
             </div>
         `
@@ -331,7 +346,7 @@ export class updateDomJikan {
                 : ""
         })
 
-        objHomeDom.mainPage.appendChild(sectionSliders)
+        objHomeDOM.MainPage.appendChild(sectionSliders)
         
         new Glider(sectionSlider, {
             slidesToShow: 5,
@@ -359,10 +374,10 @@ export class updateDomJikan {
             </h2>
             <div class="section__arrows">
                 <button type="button" class="section__arrow" id="arrow__backRA">
-                    <i class="fa-solid fa-circle-chevron-left"></i>
+                    <i class="fa-solid fa-chevron-left"></i>
                 </button>
                 <button type="button" class="section__arrow" id="arrow__nextRA">
-                    <i class="fa-solid fa-circle-chevron-right"></i>
+                    <i class="fa-solid fa-chevron-right"></i>
                 </button>
             </div>
         `
@@ -387,7 +402,8 @@ export class updateDomJikan {
         sectionSliders.appendChild(sectionHeader)
         sectionSliders.appendChild(sectionSlider)
         sectionSliders.appendChild(sectionDots)
-        objHomeDom.mainPage.appendChild(sectionSliders)
+        
+        objHomeDOM.MainPage.appendChild(sectionSliders)
         
         new Glider(sectionSlider, {
             slidesToShow: 5,
@@ -401,7 +417,7 @@ export class updateDomJikan {
         })
     }
 
-    SetAnimeFullByID(data) {    
+    SetAnimeFullByID(data) {
         const bannerInfoWrapper = this.oFactoryDom.CreateBlockElement("div", [], ["banner__info--wrapper"])
         const informationAnime  = data.data
 
@@ -449,7 +465,21 @@ export class updateDomJikan {
 
         bannerGenres.insertBefore(bannerGenre, bannerGenres.children[0])
         bannerInfo.appendChild(bannerGenres)
-        objDetailsDom.sectionBanner.appendChild(bannerInfoWrapper)
+        objDetailsDOM.SectionBanner.appendChild(bannerInfoWrapper)
+
+        window.sr = ScrollReveal({ reset: true })
+
+        sr.reveal("#banner__info", {
+            distance: "100px",
+            origin: "left",
+            duration: 3000
+        })
+
+        sr.reveal("#banner__image", {
+            distance: "100px",
+            origin: "right",
+            duration: 3000
+        })
 
         const sectionTrailer      = this.oFactoryDom.CreateBlockElement("section", [], ["section__trailer"])
         const sectionHeader       = this.oFactoryDom.CreateBlockElement("header", ["section__header"])
@@ -466,14 +496,14 @@ export class updateDomJikan {
             <iframe id="trailer__video" src="${informationAnime.trailer.embed_url}" title="YouTube video player" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         `
 
-        objHeaderDom.title.innerHTML = `${informationAnime.title} | SyberList`
+        objHeaderDOM.Title.innerHTML = `${informationAnime.title} | SyberList`
 
         sectionTrailer.appendChild(sectionHeader)
         sectionTrailer.appendChild(trailerVideoWrapper)
         
         informationAnime.trailer.embed_url == null
             ? ""
-            : objDetailsDom.mainDetails.appendChild(sectionTrailer)
+            : objDetailsDOM.MainDetails.appendChild(sectionTrailer)
     }
 
     SetAnimeCharacters(data) {
@@ -490,10 +520,10 @@ export class updateDomJikan {
             </h2>
             <div class="section__arrows">
                 <button type="button" class="section__arrow" id="arrow__backCH">
-                    <i class="fa-solid fa-circle-chevron-left"></i>
+                    <i class="fa-solid fa-chevron-left"></i>
                 </button>
                 <button type="button" class="section__arrow" id="arrow__nextCH">
-                    <i class="fa-solid fa-circle-chevron-right"></i>
+                    <i class="fa-solid fa-chevron-right"></i>
                 </button>
             </div>
         `
@@ -516,7 +546,7 @@ export class updateDomJikan {
         sectionSliders.appendChild(sectionDots)
 
         informationCharacters.length !== 0
-            ? objDetailsDom.mainDetails.appendChild(sectionSliders)
+            ? objDetailsDOM.MainDetails.appendChild(sectionSliders)
             : null
 
         new Glider(sectionSlider, {
@@ -545,10 +575,10 @@ export class updateDomJikan {
             </h2>
             <div class="section__arrows">
                 <button type="button" class="section__arrow" id="arrow__backSF">
-                    <i class="fa-solid fa-circle-chevron-left"></i>
+                    <i class="fa-solid fa-chevron-left"></i>
                 </button>
                 <button type="button" class="section__arrow" id="arrow__nextSF">
-                    <i class="fa-solid fa-circle-chevron-right"></i>
+                    <i class="fa-solid fa-chevron-right"></i>
                 </button>
             </div>
         `
@@ -575,7 +605,7 @@ export class updateDomJikan {
         sectionSliders.appendChild(sectionDots)
 
         informationStaff.length !== 0
-                ? objDetailsDom.mainDetails.appendChild(sectionSliders)
+                ? objDetailsDOM.MainDetails.appendChild(sectionSliders)
                 : null    
 
         new Glider(sectionSlider, {
@@ -604,10 +634,10 @@ export class updateDomJikan {
             </h2>
             <div class="section__arrows">
                 <button type="button" class="section__arrow" id="arrow__backRE">
-                    <i class="fa-solid fa-circle-chevron-left"></i>
+                    <i class="fa-solid fa-chevron-left"></i>
                 </button>
                 <button type="button" class="section__arrow" id="arrow__nextRE">
-                    <i class="fa-solid fa-circle-chevron-right"></i>
+                    <i class="fa-solid fa-chevron-right"></i>
                 </button>
             </div>
         `
@@ -621,7 +651,7 @@ export class updateDomJikan {
                     <div class="card__information">
                         <h3 class="card__title">${anime.entry.title}</h3>
                         <button type="button" class="card__button">
-                            <a href="./details.php?type=anime&id=${anime.mal_id}">Saiba Mais</a>
+                            <a href="./details.php?type=anime&id=${anime.entry.mal_id}">Saiba Mais</a>
                         </button>
                         <span class="card__extra"></span>
                     </div>
@@ -634,7 +664,7 @@ export class updateDomJikan {
         sectionSliders.appendChild(sectionDots)
 
         informationAnimes.length !== 0
-            ? objDetailsDom.mainDetails.appendChild(sectionSliders)
+            ? objDetailsDOM.MainDetails.appendChild(sectionSliders)
             : null
             
         new Glider(sectionSlider, {
@@ -697,25 +727,25 @@ export class updateDomJikan {
                 : ""
         })
 
-        objHeaderDom.divSearchResults.appendChild(divMangaItemsWrapper)
+        objHeaderDOM.DivSearchResults.appendChild(divMangaItemsWrapper)
     }
 
-    SetMangaBrowse(data) {
+    SetMangaFind(data) {
         const informationMangas = data.data
         
-        objBrowse.mainResults.innerHTML = informationMangas.map(anime => {
+        objFindDOM.MainResults.innerHTML = informationMangas.map(manga => {
             return `
                 <div class="section__card">
                     <!-- Imagem do Card -->
-                    <img src="${anime.images.webp.large_image_url}" alt="Card Image">
+                    <img src="${manga.images.webp.large_image_url}" alt="Card Image">
                     <!-- Informações do Card -->
                     <div class="card__information">
-                        <h3 class="card__title">${anime.title}</h3>
+                        <h3 class="card__title">${manga.title}</h3>
                         <button type="button" class="card__button">
-                            <a href="./details.php?type=anime&id=${anime.mal_id}">Saiba Mais</a>
+                            <a href="./details.php?type=manga&id=${manga.mal_id}">Saiba Mais</a>
                         </button>
                         <span class="card__extra">
-                            ${anime.type}<br/>${anime.published.prop.from.year}
+                            ${manga.type}<br/>${manga.published.prop.from.year}
                         </span>
                     </div>
                 </div>   
@@ -725,8 +755,8 @@ export class updateDomJikan {
         const itemYear = document.querySelectorAll(".card__extra")
 
         itemYear.forEach((e, i) => {
-            if (informationAnimes[i].published.prop.from.year === null)
-                e.innerHTML = informationAnimes[i].type
+            if (informationMangas[i].published.prop.from.year === null)
+                e.innerHTML = informationMangas[i].type
         })
     }
 
@@ -796,7 +826,8 @@ export class updateDomJikan {
 
         sectionRank.appendChild(sectionHeader)
         sectionRank.appendChild(sectionRankList)
-        objHomeDom.mainPage.appendChild(sectionRank)
+
+        objHomeDOM.MainPage.appendChild(sectionRank)
     }
 
     SetRecentMangaRecommendations(data) {
@@ -813,10 +844,10 @@ export class updateDomJikan {
             </h2>
             <div class="section__arrows">
                 <button type="button" class="section__arrow" id="arrow__backRM">
-                    <i class="fa-solid fa-circle-chevron-left"></i>
+                    <i class="fa-solid fa-chevron-left"></i>
                 </button>
                 <button type="button" class="section__arrow" id="arrow__nextRM">
-                    <i class="fa-solid fa-circle-chevron-right"></i>
+                    <i class="fa-solid fa-chevron-right"></i>
                 </button>
             </div>
         `
@@ -841,7 +872,7 @@ export class updateDomJikan {
         sectionSliders.appendChild(sectionHeader)
         sectionSliders.appendChild(sectionSlider)
         sectionSliders.appendChild(sectionDots)
-        objHomeDom.mainPage.appendChild(sectionSliders)
+        objHomeDOM.MainPage.appendChild(sectionSliders)
         
         new Glider(sectionSlider, {
             slidesToShow: 5,
@@ -849,8 +880,8 @@ export class updateDomJikan {
             dots: `#${sectionDots.id}`,
             draggable: true,
             arrows: {
-                prev: "#arrow__backRRM",
-                next: "#arrow__nextRRM"
+                prev: "#arrow__backRM",
+                next: "#arrow__nextRM"
             }
         })
     }
@@ -893,12 +924,27 @@ export class updateDomJikan {
             max: "25",
             speed: 400,
             glare: true,
-            "max-glare": 1
+            "max-glare": 2
         })
 
         bannerGenres.insertBefore(bannerGenre, bannerGenres.children[0])
         bannerInfo.appendChild(bannerGenres)
-        objDetailsDom.sectionBanner.appendChild(bannerInfoWrapper)
+
+        objDetailsDOM.SectionBanner.appendChild(bannerInfoWrapper)
+
+        window.sr = ScrollReveal({ reset: true })
+
+        sr.reveal("#banner__info", {
+            distance: "100px",
+            origin: "left",
+            duration: 3000
+        })
+
+        sr.reveal("#banner__image", {
+            distance: "100px",
+            origin: "right",
+            duration: 3000
+        })
     }
 
     SetMangaCharacters(data) {
@@ -915,10 +961,10 @@ export class updateDomJikan {
             </h2>
             <div class="section__arrows">
                 <button type="button" class="section__arrow" id="arrow__backCH">
-                    <i class="fa-solid fa-circle-chevron-left"></i>
+                    <i class="fa-solid fa-chevron-left"></i>
                 </button>
                 <button type="button" class="section__arrow" id="arrow__nextCH">
-                    <i class="fa-solid fa-circle-chevron-right"></i>
+                    <i class="fa-solid fa-chevron-right"></i>
                 </button>
             </div>
         `
@@ -941,7 +987,8 @@ export class updateDomJikan {
             sectionSliders.appendChild(sectionHeader)
             sectionSliders.appendChild(sectionSlider)
             sectionSliders.appendChild(sectionDots)
-            objDetailsDom.mainDetails.appendChild(sectionSliders)
+
+            objDetailsDOM.MainDetails.appendChild(sectionSliders)
 
             new Glider(sectionSlider, {
                 slidesToShow: 5,
@@ -970,10 +1017,10 @@ export class updateDomJikan {
             </h2>
             <div class="section__arrows">
                 <button type="button" class="section__arrow" id="arrow__backPC">
-                    <i class="fa-solid fa-circle-chevron-left"></i>
+                    <i class="fa-solid fa-chevron-left"></i>
                 </button>
                 <button type="button" class="section__arrow" id="arrow__nextPC">
-                    <i class="fa-solid fa-circle-chevron-right"></i>
+                    <i class="fa-solid fa-chevron-right"></i>
                 </button>
             </div>
         `
@@ -991,7 +1038,8 @@ export class updateDomJikan {
             sectionSliders.appendChild(sectionHeader)
             sectionSliders.appendChild(sectionSlider)
             sectionSliders.appendChild(sectionDots)
-            objDetailsDom.mainDetails.appendChild(sectionSliders)
+
+            objDetailsDOM.MainDetails.appendChild(sectionSliders)
 
             new Glider(sectionSlider, {
                 slidesToShow: 5,
@@ -1020,10 +1068,10 @@ export class updateDomJikan {
             </h2>
             <div class="section__arrows">
                 <button type="button" class="section__arrow" id="arrow__backRE">
-                    <i class="fa-solid fa-circle-chevron-left"></i>
+                    <i class="fa-solid fa-chevron-left"></i>
                 </button>
                 <button type="button" class="section__arrow" id="arrow__nextRE">
-                    <i class="fa-solid fa-circle-chevron-right"></i>
+                    <i class="fa-solid fa-chevron-right"></i>
                 </button>
             </div>
         `
@@ -1037,7 +1085,7 @@ export class updateDomJikan {
                     <div class="card__information">
                         <h3 class="card__title">${anime.entry.title}</h3>
                         <button type="button" class="card__button">
-                            <a href="./details.php?type=manga&id=${anime.mal_id}">Saiba Mais</a>
+                            <a href="./details.php?type=manga&id=${anime.entry.mal_id}">Saiba Mais</a>
                         </button>
                         <span class="card__extra"></span>
                     </div>
@@ -1050,7 +1098,8 @@ export class updateDomJikan {
             sectionSliders.appendChild(sectionHeader)
             sectionSliders.appendChild(sectionSlider)
             sectionSliders.appendChild(sectionDots)
-            objDetailsDom.mainDetails.appendChild(sectionSliders)
+
+            objDetailsDOM.MainDetails.appendChild(sectionSliders)
             
             new Glider(sectionSlider, {
                 slidesToShow: 5,
@@ -1062,6 +1111,6 @@ export class updateDomJikan {
                     next: "#arrow__nextRE"
                 }
             })
-        }re
+        }
     }
 }

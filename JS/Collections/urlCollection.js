@@ -1,9 +1,9 @@
 export const objURL = {
-    atualPage: location.href.split("/")[3].split("?")[0],
-    indexPage: "index.php",
-    homePage: "home.php",
-    detailsPage: "details.php",
-    searchPage: "search.php",
+    atualPage:    location.href.split("/")[3].split("?")[0],
+    indexPage:    "index.php",
+    homePage:     "home.php",
+    detailsPage:  "details.php",
+    findPage:     "find.php",
     registerPage: "register.php",
-    listPage: "lists.php"
+    listPage:     "lists.php"
 }

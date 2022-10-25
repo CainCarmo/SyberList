@@ -8,7 +8,7 @@
     include __DIR__."/Backend/app/View/home.php";
 
     is_null(Login::GetUserLogged())
-        ? include __DIR__."/Backend/app/View/form_login.php" 
+        ? include __DIR__."/Backend/app/View/form_login.php"
         : null;
-
+    
     include __DIR__."/Backend/app/View/footer.php";

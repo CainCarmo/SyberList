@@ -1,16 +1,14 @@
         <!-- Background do Formulário -->
-        <section class="form--hidden" id=login--hidden>
-            <!-- Fórmulário de Login -->
+        <section class="form--hidden" id="login--hidden">
+            <!-- Formulário de Login -->
             <form method="POST" class="form" id="login">
-                <i class="fas fa-times form__times"></i>
+                <i class="fas fa-times" id="login__times"></i>
                 <header id="login__header">
                     <!-- Logo -->
                     <img src="https://cdn.discordapp.com/attachments/1000527265303642194/1006613565182054470/Logo-image.png" alt="Imagem da Logo" />
-                    <!-- Mensagem de Erro -->
-                    <span class="form__error"></span>
                 </header>
                 <main id="login__fields">
-                    <!-- Campo do Email -->
+                    <!-- Campo Email -->
                     <div class="form__field">
                         <div class="form__icon--wrapper">
                             <i class="fa-solid fa-user"></i>

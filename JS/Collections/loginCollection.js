@@ -1,13 +1,12 @@
-export const objLoginDom = {
+export const objLoginDOM = {
     // -> Div
-    divLineEyeLogin: document.querySelector("#password__line"),
-    // -> Background Form
-    backgroundFormLogin: document.querySelector("#login--hidden"),
+    DivBackgroundForm: document.querySelector("#login--hidden"),
+    DivLineEye: document.querySelector("#password__line"),
     // -> Form
-    formLogin: document.querySelector("#login"),
+    FormLogin: document.querySelector("#login"),
     // -> Input
-    inputPasswordLogin: document.querySelector("#login__password"),
+    InputPassword: document.querySelector("#login__password"),
     // -> Icon
-    iconTimesLogin: document.querySelectorAll(".form__times")[0],
-    iconEyeLogin: document.querySelectorAll(".fa-eye")[0]
+    IconTimes: document.querySelector("login__times"),
+    IconEye:  document.querySelectorAll(".fa-eye")[0]
 }

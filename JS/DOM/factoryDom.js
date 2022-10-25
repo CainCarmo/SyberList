@@ -1,4 +1,4 @@
-export class FactoryDom {
+export class FactoryDOM {
 
     constructor() {
         this.defaultID        = []
@@ -15,9 +15,9 @@ export class FactoryDom {
         if (Class !== this.defaultClass)
             Class.map(Class => element.classList.add(Class))
         if (ID !== this.defaultID)
-            ID.map(ID => element.id += `${ID}`)
+            ID.map((ID, index) => index === 0 ? element.id = `${ID}` : element.id += ` ${ID}`)
         if (Role !== this.defaultRole)
-            Role.map(Role => element.role += Role)
+            Role.map((Role, index) =>  index === 0 ? element.role = `${Role}` : element.role += ` ${Role}`)
         
         return element
     }

@@ -1,9 +1,9 @@
-import { updateDomJikan } from "./updateDom.js";
+import { UpdateDomJikan } from "./updateDOM.js";
 
 export class RequestsJikan {
 
     constructor() {
-        this.oUpdateDomJikan = new updateDomJikan()
+        this.oUpdateDomJikan = new UpdateDomJikan()
         this.BaseURL         = "https://api.jikan.moe/v4";
     }
 
@@ -14,10 +14,10 @@ export class RequestsJikan {
                 .catch(err => console.warn(err.message))
     }
     
-    async GetAnimeBrowse(query) {
+    async GetAnimeFind(query) {
         await fetch(`${this.BaseURL}/anime?q=${query}`)
                 .then(res => res.json())
-                .then(data => this.oUpdateDomJikan.SetAnimeBrowse(data))
+                .then(data => this.oUpdateDomJikan.SetAnimeFind(data))
                 .catch(err => console.warn(err.message))
     }
     
@@ -91,10 +91,10 @@ export class RequestsJikan {
                 .catch(err => console.warn(err.message))
     }
 
-    async GetMangaBrowse(query) {
+    async GetMangaFind(query) {
         await fetch(`${this.BaseURL}/manga?q=${query}`)
                 .then(res => res.json())
-                .then(data => this.oUpdateDomJikan.SetMangaBrowse(data))
+                .then(data => this.oUpdateDomJikan.SetMangaFind(data))
                 .catch(err => console.warn(err.message))
     }
 

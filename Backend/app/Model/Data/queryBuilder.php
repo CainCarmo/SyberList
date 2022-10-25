@@ -18,11 +18,11 @@ namespace App\Model\Data {
             try {
                 $statement = $this->_connection->prepare($query);
                 $statement->execute($params);
-
+                
                 return $statement;
             }
             catch (PDOException $ex) {
-                die("ERROR: ".$ex->getMessage());
+                die("ERRO AO EXECUTAR A QUERY: ".$ex->getMessage());
             }
         }
 
@@ -47,22 +47,18 @@ namespace App\Model\Data {
             return $this->Execute($query);
         }
 
-        public function Update(string $where, array $values) {
+        public function Update(string $where, array $values): PDOStatement|bool {
             $fields = array_keys($values);
 
             $query = "UPDATE ". $this->_table ." SET ". implode("=?,", $fields) ."=? WHERE ". $where;
 
-            $this->Execute($query, array_values($values));
-
-            return true;
+            return $this->Execute($query, array_values($values));
         }
 
-        public function Delete(string $where): bool {
+        public function Delete(string $where): PDOStatement|bool {
             $query = "DELETE FROM ".$this->_table." WHERE ".$where;
         
-            $this->Execute($query);
-
-            return true;
+            return $this->Execute($query);
         }
     }
 }

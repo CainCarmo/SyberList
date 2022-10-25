@@ -1,11 +1,11 @@
-export const objIntroDom = {
+export const objIntroDOM = {
     // -> Box Sides
-    boxAnime: document.querySelector("#box__left"),
-    boxFilms: document.querySelector("#box__right"),
+    BoxAnime: document.querySelector("#box__left"),
+    BoxFilms: document.querySelector("#box__right"),
     // -> Buttons
-    btnAnime: document.querySelectorAll(".box__button")[0],
-    btnFilms: document.querySelectorAll(".box__button")[1],
-    // -> Videos tags
-    videoAnime: document.querySelector("#box__video--anime"),
-    videoFilms: document.querySelector("#box__video--films")
+    BtnAnime: document.querySelectorAll(".box__button")[0],
+    BtnFilms: document.querySelectorAll(".box__button")[1],
+    // -> Videos
+    VideoAnime: document.querySelector("#video__anime"),
+    VideoFilms: document.querySelector("#video__movie")
 }

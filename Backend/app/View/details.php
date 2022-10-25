@@ -17,10 +17,10 @@
     
         case "anime":
         case "manga":
-            
+
             $saved = is_null($userID)
                 ? false
-                : key_exists(0, $oJikan->VerifyItemSaved($itemID, ucfirst($pageType), $userID));
+                : $oJikan->VerifyItemSaved($itemID, ucfirst($pageType), $userID);
 
             $saved
                 ? $state = "fa-solid fa-checked"
@@ -29,10 +29,10 @@
         
         case "tv":
         case "movie":
-            
+
             $saved = is_null($userID)
                 ? false
-                : key_exists(0, $oTmdb->VerifyItemSaved($itemID, ucfirst($pageType), $userID));
+                : $oTmdb->VerifyItemSaved($itemID, ucfirst($pageType), $userID);
 
             $saved
                 ? $state = "fa-solid fa-checked"
@@ -89,38 +89,27 @@
             ? $oJikan->UpdateSituation(itemID: $itemID, itemType: ucfirst($pageType), situationID: $_POST["situation__select"], oUserID: $_SESSION["User"]["ID"])
             : $oTmdb->UpdateSituation(itemID: $itemID, itemType: ucfirst($pageType), situationID: $_POST["situation__select"], oUserID: $_SESSION["User"]["ID"]);
     }
-
 ?>
-
+        
         <!-- Banner de Destaque -->
         <section id="banner">
-            <form method="POST" id="banner__form">
-                <button type="submit" id="form__submit" name="salvar" title="Favoritar">
-                    <i class="fa-star <?=$state?>" id="star-details"></i>
+            <form method="POST" id="banner__save">
+                <button type="submit" id="save__submit" name="salvar" title="Favoritar">
+                    <i class="fa-star <?=$state?>" id="save__star"></i>
                 </button>
             </form>
             <?=$situationDOM?>
-            <video src="./Resources/Video/mylivewallpapers.com-KonoSuba-Magic-Spells-Megumin.mp4" id="banner__video" autoplay muted loop></video>
+            <video src="" id="banner__video" autoplay muted loop></video>
         </section>
 
         <!-- Corpo da Página -->
         <main class="container" id="container__details"></main>
 
-        <!-- Sessão de Comentários -->
+        <!-- Seção de Comentários -->
         <section id="comments">
             <div id="disqus_thread"></div>
             <script>
-                /**
-                 *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-                 *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
-                 */
-                /*
-                var disqus_config = function () {
-                    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-                    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-                };
-                */
-                (function() {  // DON'T EDIT BELOW THIS LINE
+                (function() {
                     var d = document, s = d.createElement('script');
                     
                     s.src = 'https://syberlist.disqus.com/embed.js';

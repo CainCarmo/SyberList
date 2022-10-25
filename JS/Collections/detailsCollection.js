@@ -1,10 +1,10 @@
-export const objDetailsDom = {
-    // -> Section
-    sectionBanner: document.querySelector("#banner"),
-    // -> Video
-    videoBanner: document.querySelector("#banner__video"),
+export const objDetailsDOM = {
     // -> Main
-    mainDetails: document.querySelector("#container__details"),
+    MainDetails: document.querySelector("#container__details"),
+    // -> Section
+    SectionBanner: document.querySelector("#banner"),
+    // -> Video
+    VideoBanner: document.querySelector("#banner__video"),
     // -> Icon
-    iconStar: document.querySelector("#star-details")
+    IconStar: document.querySelector("#save__star")
 }
