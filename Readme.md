@@ -26,5 +26,3 @@
 
 ---
 <cite>- by <em>Cainã_Carmo</em></cite>
-
-star.classList.add("fa-checked")
